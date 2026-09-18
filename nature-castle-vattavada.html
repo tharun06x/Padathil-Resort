@@ -22,47 +22,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Prompt:wght@200;300;400;500&family=Yeseva+One&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          nandor: '#4d584f',
-          isabelline: '#F4F2EA',
-          cream: '#fbfaf7',
-          creamalt: '#f8f7f0',
-          panel: '#f5f3e9',
-          greyt: '#7f7f7f',
-          gold: '#cd9f58',
-          hairline: '#dbd8ce',
-          footerbg: '#262f27',
-          footertext: '#8a8f8a',
-          footerline: '#434e43',
-        },
-        fontFamily: {
-          display: ['"Yeseva One"', 'Georgia', 'serif'],
-          sans: ['Prompt', 'system-ui', 'sans-serif'],
-          poppins: ['Poppins', 'sans-serif'],
-        },
-      },
-    },
-  };
-</script>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
 <style>
   html { scroll-behavior: smooth; }
   body { font-family: 'Prompt', system-ui, sans-serif; color: #4d584f; -webkit-font-smoothing: antialiased; }
   h1, h2, h3, h4 { font-family: 'Yeseva One', Georgia, serif; color: #4d584f; text-transform: uppercase; font-weight: 400; }
   .wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-  .body-copy { color: #7f7f7f; font-size: 13px; line-height: 2.05; font-weight: 300; }
+  .body-copy { color: #5f5f5f; font-size: 13px; line-height: 2.05; font-weight: 300; }
   .vbtn { display:inline-block; padding:10px 28px; text-align:center; background:#535353; color:#fff;
           font-size:11px; letter-spacing:.14em; text-transform:uppercase; transition:background .25s ease; }
-  .vbtn:hover { background:#cd9f58; }
-  .tag { display:inline-block; padding:6px 14px; margin:0 6px 10px 0; border:1px solid #dbd8ce; color:#7f7f7f;
+  .vbtn:hover { background:#8a5518; }
+  .tag { display:inline-block; padding:6px 14px; margin:0 6px 10px 0; border:1px solid #dbd8ce; color:#5f5f5f;
          font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
 </style>
 </head>
 <body class="bg-cream">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- ================= HEADER ================= -->
   <header class="bg-white/95 backdrop-blur border-b border-hairline sticky top-0 z-50">
@@ -91,14 +67,15 @@
             <a href="contact.html" class="block py-2 hover:text-gold">Contact</a>
           </nav>
         </details>
-        <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20book%20Nature%20Castle." target="_blank" rel="noopener" class="font-poppins text-[10px] font-medium tracking-[.16em] uppercase border border-nandor text-nandor px-4 sm:px-5 py-2.5 hover:bg-nandor hover:text-white transition-colors">Book Now</a>
+        <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Nature%20Castle.%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener" class="font-poppins text-[10px] font-medium tracking-[.16em] uppercase border border-nandor text-nandor px-4 sm:px-5 py-2.5 hover:bg-nandor hover:text-white transition-colors">Book Now</a>
       </div>
     </div>
   </header>
 
+  <main id="main-content">
   <!-- ================= HERO ================= -->
   <section class="relative h-[70vh] min-h-[440px] w-full overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1742107939655-4f8af7484dfa?fm=jpg&q=80&w=1920&auto=format&fit=crop" alt="Misty hills and tea gardens near Vattavada, Kerala" width="1920" height="1080" class="absolute inset-0 h-full w-full object-cover" />
+    <img src="https://images.unsplash.com/photo-1742107939655-4f8af7484dfa?fm=jpg&q=80&w=1920&auto=format&fit=crop" alt="Misty hills and tea gardens near Vattavada, Kerala" width="1920" height="1080" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/20"></div>
     <div class="absolute left-0 bottom-[50px] w-full text-center px-6">
       <h1 class="text-white text-[34px] md:text-[46px] leading-tight">Nature Castle Resort Vattavada</h1>
@@ -114,7 +91,7 @@
         set on a forested hilltop, offering beautiful views of the surrounding highlands and Pambadum Shola Mountain.
         The property features wooden villa-style accommodation designed to complement its natural surroundings.
       </p>
-      <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20book%20Nature%20Castle." target="_blank" rel="noopener" class="vbtn mt-8">Book Nature Castle</a>
+      <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Nature%20Castle.%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener" class="vbtn mt-8">Book Nature Castle</a>
       <a href="https://maps.app.goo.gl/cKTuRyP6zCRN7T1Q8?g_st=ic" target="_blank" rel="noopener" class="mt-5 block text-[11px] uppercase tracking-[.14em] text-nandor underline underline-offset-4">Get Directions</a>
     </div>
   </section>
@@ -139,6 +116,18 @@
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="bg-cream py-[50px]" aria-labelledby="nature-castle-at-a-glance">
+    <div class="wrap max-w-[900px]">
+      <h2 id="nature-castle-at-a-glance" class="text-[26px] md:text-[32px] tracking-[.04em] text-center pb-8">At a Glance</h2>
+      <dl class="grid gap-6 sm:grid-cols-2 property-facts">
+        <div><dt>Location</dt><dd>Vattavada highlands, near Pambadum Shola mountain landscapes.</dd></div>
+        <div><dt>Stay style</dt><dd>Wooden villa-style accommodation in a peaceful hilltop setting.</dd></div>
+        <div><dt>Best for</dt><dd>Mountain breaks, quiet family holidays and slower nature escapes.</dd></div>
+        <div><dt>Before you book</dt><dd>Send your dates, guest count, meal needs and accessibility requirements for current options.</dd></div>
+      </dl>
     </div>
   </section>
 
@@ -179,6 +168,7 @@
     </div>
   </section>
 
+  </main>
   <!-- ================= FOOTER ================= -->
   <footer id="footer" class="bg-footerbg text-footertext">
     <div class="wrap max-w-[1140px] py-12 text-center">

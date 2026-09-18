@@ -38,43 +38,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Prompt:wght@200;300;400;500&family=Yeseva+One&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          nandor: '#4d584f',
-          isabelline: '#F4F2EA',
-          cream: '#fbfaf7',
-          creamalt: '#f8f7f0',
-          panel: '#f5f3e9',
-          greyt: '#7f7f7f',
-          greyolive: '#7c765e',
-          gold: '#cd9f58',
-          hairline: '#dbd8ce',
-          footerbg: '#262f27',
-          footertext: '#8a8f8a',
-          footerline: '#434e43',
-        },
-        fontFamily: {
-          display: ['"Yeseva One"', 'Georgia', 'serif'],
-          sans: ['Prompt', 'system-ui', 'sans-serif'],
-          poppins: ['Poppins', 'sans-serif'],
-        },
-      },
-    },
-  };
-</script>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
 <style>
   html { scroll-behavior: smooth; }
   body { font-family: 'Prompt', system-ui, sans-serif; color: #4d584f; -webkit-font-smoothing: antialiased; }
   h1, h2, h3, h4, h5, h6 { font-family: 'Yeseva One', Georgia, serif; color: #4d584f; text-transform: uppercase; font-weight: 400; }
   .wrap { max-width: 1200px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
-  .body-copy { color: #7f7f7f; font-size: 13px; line-height: 2.05; font-weight: 300; }
+  .body-copy { color: #5f5f5f; font-size: 13px; line-height: 2.05; font-weight: 300; }
   .vbtn { display:inline-block; padding:8px 0; width:150px; text-align:center; background:#535353; color:#fff;
           font-size:11px; letter-spacing:.14em; text-transform:uppercase; transition:background .25s ease; }
-  .vbtn:hover { background:#cd9f58; }
+  .vbtn:hover { background:#8a5518; }
 
   /* hero scroll cue */
   .scroll-cue { width:16px; height:16px; border-left:1px solid rgba(255,255,255,.85); border-bottom:1px solid rgba(255,255,255,.85);
@@ -93,25 +67,26 @@
 </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- ================= FIXED HEADER (fades in after scroll) ================= -->
   <header id="siteHeader" class="hidden-top fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-hairline">
-    <div class="wrap flex items-center justify-between h-[70px]">
+    <div class="wrap compact-header flex items-center justify-between h-[70px]">
       <a href="#top" class="flex items-center gap-3">
         <img src="images/emblem-rotating.svg" alt="" aria-hidden="true" class="h-14 w-14" />
         <img src="images/logo-padathil-stays.svg" alt="Padathil Stays" class="h-9 w-auto" />
       </a>
-      <nav class="hidden lg:flex items-center gap-9 font-sans text-[11px] font-light tracking-[.22em] uppercase text-nandor">
-        <div class="relative group">
-          <a href="#properties" class="hover:text-gold transition-colors">Stay</a>
-          <div class="absolute left-0 top-full pt-3 hidden group-hover:block">
+      <nav class="hidden lg:flex items-center gap-9 font-sans text-[11px] font-light tracking-[.22em] uppercase text-nandor" aria-label="Primary navigation">
+        <details class="relative stay-menu-toggle">
+          <summary class="cursor-pointer hover:text-gold transition-colors">Stay</summary>
+          <div class="stay-menu absolute left-0 top-full pt-3">
             <div class="bg-white border border-hairline shadow-lg py-2 w-[220px] normal-case tracking-normal text-[12px]">
               <a href="nature-castle-vattavada.html" class="block px-5 py-2.5 hover:bg-creamalt hover:text-gold transition-colors">Nature Castle Vattavada</a>
               <a href="niva-waterways.html" class="block px-5 py-2.5 hover:bg-creamalt hover:text-gold transition-colors">Niva Waterways</a>
               <a href="riparian-ayur-resorts.html" class="block px-5 py-2.5 hover:bg-creamalt hover:text-gold transition-colors">Riparian Ayur Resorts</a>
             </div>
           </div>
-        </div>
+        </details>
         <a href="#dining" class="hover:text-gold transition-colors">Dining</a>
         <a href="experiences.html" class="hover:text-gold transition-colors">Experiences</a>
         <a href="blog.html" class="hover:text-gold transition-colors">Blog</a>
@@ -135,25 +110,26 @@
             <a href="contact.html" class="block py-2 hover:text-gold">Contact</a>
           </nav>
         </details>
-        <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20make%20a%20booking." target="_blank" rel="noopener"
+        <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire.%0AProperty%3A%20%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener"
            class="font-poppins text-[10px] font-medium tracking-[.18em] uppercase border border-nandor text-nandor px-4 sm:px-6 py-2.5 hover:bg-nandor hover:text-white transition-colors">Book Now</a>
       </div>
     </div>
   </header>
 
+  <main id="main-content">
   <!-- ================= HERO ================= -->
   <section id="top" class="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
-    <img src="images/banner/banner-slide.webp" alt="Aerial view of Padathil Stays Resort &amp; Spa, Kumarakom" class="absolute inset-0 h-full w-full object-cover" />
+    <img src="images/banner/banner-slide.webp" alt="Kerala landscape representing Padathil Stays destinations" width="1920" height="1080" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20"></div>
 
     <!-- centred logo -->
-    <figure class="absolute left-1/2 -translate-x-1/2 top-[50px] w-[420px] text-center">
+    <figure class="home-hero-brand absolute left-1/2 -translate-x-1/2 top-[50px] w-[420px] text-center">
       <img src="images/emblem-rotating.svg" alt="" aria-hidden="true" class="mx-auto w-24 h-24" />
       <img src="images/logo-padathil-stays-white.svg" alt="Padathil Stays" class="mx-auto mt-2 w-full h-auto" />
     </figure>
 
     <!-- top-right book -->
-    <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20make%20a%20booking." target="_blank" rel="noopener"
+    <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire.%0AProperty%3A%20%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener"
        class="absolute right-6 top-7 font-poppins text-[10px] font-medium tracking-[.24em] uppercase text-white border border-white/70 px-6 py-2.5 hover:bg-white hover:text-nandor transition-colors">Book Now</a>
 
     <!-- caption -->
@@ -169,7 +145,7 @@
   </section>
 
   <!-- floating whatsapp -->
-  <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20make%20a%20booking." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+  <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire.%0AProperty%3A%20%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
      class="fixed bottom-6 right-6 z-50 h-[50px] w-[50px] rounded-full bg-[#25D366] shadow-lg flex items-center justify-center hover:scale-105 transition-transform">
     <svg width="27" height="27" viewBox="0 0 32 32" fill="#fff"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.2 1.1 1.1-4-.3-.4a10.2 10.2 0 01-1.6-5.6c0-5.7 4.6-10.3 10.3-10.3S26.3 9.8 26.3 15.5 21.7 25.7 16 25.7zm5.7-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2c-.2.3-.8 1-1 1.2s-.4.2-.7.1c-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
   </a>
@@ -198,7 +174,7 @@
       <div class="grid md:grid-cols-3 gap-8">
         <a href="nature-castle-vattavada.html" class="group block bg-white">
           <figure class="overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1742107939655-4f8af7484dfa?fm=jpg&q=75&w=900&auto=format&fit=crop" alt="Nature Castle Resort Vattavada" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src="https://images.unsplash.com/photo-1742107939655-4f8af7484dfa?fm=jpg&q=75&w=900&auto=format&fit=crop" alt="Representative mountain landscape near Vattavada, Kerala" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
           </figure>
           <div class="p-6">
             <h3 class="text-[18px] tracking-[.03em] pb-2">Nature Castle Resort Vattavada</h3>
@@ -208,7 +184,7 @@
         </a>
         <a href="niva-waterways.html" class="group block bg-white">
           <figure class="overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1785932413547-cdd1159e1f1e?fm=jpg&q=75&w=900&auto=format&fit=crop" alt="Niva Waterways" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src="https://images.unsplash.com/photo-1785932413547-cdd1159e1f1e?fm=jpg&q=75&w=900&auto=format&fit=crop" alt="Representative backwater landscape in Kerala" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
           </figure>
           <div class="p-6">
             <h3 class="text-[18px] tracking-[.03em] pb-2">Niva Waterways</h3>
@@ -218,7 +194,7 @@
         </a>
         <a href="riparian-ayur-resorts.html" class="group block bg-white">
           <figure class="overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1642521080342-4de27e5f8005?fm=jpg&q=75&w=900&auto=format&fit=crop" alt="Riparian Ayur Resorts" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src="https://images.unsplash.com/photo-1642521080342-4de27e5f8005?fm=jpg&q=75&w=900&auto=format&fit=crop" alt="Representative forest landscape near Bhoothathankettu, Kerala" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
           </figure>
           <div class="p-6">
             <h3 class="text-[18px] tracking-[.03em] pb-2">Riparian Ayur Resorts</h3>
@@ -238,6 +214,15 @@
           <span class="block text-[30px] md:text-[44px] tracking-[.04em]">Padathil Stays</span>
         </h2>
       </div>
+      <section class="mt-10 border border-hairline bg-white p-6 md:p-8" aria-labelledby="compare-stays">
+        <h3 id="compare-stays" class="text-center text-[22px] md:text-[26px]">Choose the Stay That Fits Your Trip</h3>
+        <div class="mt-6 grid gap-6 md:grid-cols-3 property-facts">
+          <dl><dt>Nature Castle</dt><dd>Vattavada highlands<br />Best for cool-weather mountain breaks, couples and families.</dd></dl>
+          <dl><dt>Niva Waterways</dt><dd>Near Vembanad Lake, Cherthala<br />Four-bedroom villa for lake escapes, families and groups.</dd></dl>
+          <dl><dt>Riparian Ayur Resorts</dt><dd>Bhoothathankettu, Kothamangalam<br />Best for nature-focused stays near Thattekad and forest landscapes.</dd></dl>
+        </div>
+        <p class="body-copy mt-6 text-center">For current room options, meals, accessibility needs and availability, send us your dates and group size on WhatsApp.</p>
+      </section>
     </div>
 
     <figure class="relative">
@@ -269,10 +254,7 @@
         <div class="lg:pl-[45px]">
           <div class="lg:pr-[120px]">
             <h3 class="text-[24px] md:text-[27px] tracking-[.06em] pb-5">Dining</h3>
-            <p class="body-copy text-left">
-              A multi-cuisine restaurant set beside a stylishly appointed lounge offers a delectable range of
-              pan-Indian, Chinese and Continental cuisine.
-            </p>
+            <p class="body-copy text-left">Dining arrangements, menus and availability vary by property and stay plan. Tell us your preferred property, dates and dietary requirements so we can guide you to the right option.</p>
             <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20dining." target="_blank" rel="noopener" class="vbtn mt-6">enquire now</a>
           </div>
           <img src="images/dining-th.webp" alt="Restaurant interior" class="mt-9 w-full max-w-[420px] h-auto" />
@@ -285,11 +267,12 @@
   <section class="bg-cream">
     <div class="grid md:grid-cols-2">
       <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20a%20destination%20wedding." target="_blank" rel="noopener" class="group relative block h-[320px] md:h-[430px] overflow-hidden">
-        <img src="images/destination-wedding-th.webp" alt="Destination Wedding"
+        <img src="images/destination-wedding-th.webp" alt="Private celebration in a Kerala setting"
              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
         <span class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></span>
         <span class="absolute left-0 bottom-0 w-full p-8">
-          <span class="block font-display uppercase text-white text-[28px] md:text-[36px] leading-[1.05]">Destination<br />Wedding</span>
+          <span class="block font-display uppercase text-white text-[28px] md:text-[36px] leading-[1.05]">Private<br />Celebrations</span>
+          <span class="mt-2 block text-[12px] tracking-[.08em] text-white/90">Available at selected stays by enquiry</span>
           <span class="mt-4 flex items-center text-white/85">
           <span class="h-px w-[70px] bg-white/70"></span>
           <svg width="26" height="12" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 6h24M24 6l-5-4M24 6l-5 4"/></svg>
@@ -297,11 +280,12 @@
         </span>
       </a>
       <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Ayurveda%20and%20wellness." target="_blank" rel="noopener" class="group relative block h-[320px] md:h-[430px] overflow-hidden">
-        <img src="images/ayur-wellness-th.webp" alt="Ayurveda &amp; Wellness"
+        <img src="images/ayur-wellness-th.webp" alt="Wellness experience in a Kerala setting"
              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
         <span class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent"></span>
         <span class="absolute left-0 bottom-0 w-full p-8">
-          <span class="block font-display uppercase text-white text-[28px] md:text-[36px] leading-[1.05]">Ayurveda &amp;<br />Wellness</span>
+          <span class="block font-display uppercase text-white text-[28px] md:text-[36px] leading-[1.05]">Wellness<br />Experiences</span>
+          <span class="mt-2 block text-[12px] tracking-[.08em] text-white/90">Availability varies by property and stay plan</span>
           <span class="mt-4 flex items-center text-white/85">
           <span class="h-px w-[70px] bg-white/70"></span>
           <svg width="26" height="12" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M0 6h24M24 6l-5-4M24 6l-5 4"/></svg>
@@ -336,6 +320,8 @@
       <p class="body-copy text-center mt-4">Padathil Stays is led by Managing Director Mr. Biju James, with Ms. Jisha Biju, Mr. Williams B. Padam and Ms. Merin B. Padam.</p>
     </div>
   </section>
+
+  </main>
 
   <!-- ================= FOOTER ================= -->
   <footer id="footer" class="bg-footerbg text-footertext">

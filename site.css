@@ -1,0 +1,77 @@
+/* Shared usability and accessibility refinements for every Padathil Stays page. */
+:root {
+  --padathil-focus: #8a5518;
+  --padathil-body: #5f5f5f;
+}
+
+html { scroll-padding-top: 88px; }
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: #fff;
+  color: #263026;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .18);
+  transform: translateY(-160%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid var(--padathil-focus) !important;
+  outline-offset: 3px;
+}
+
+.body-copy {
+  color: var(--padathil-body) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+.text-gold,
+.hover\:text-gold:hover { color: #8a5518 !important; }
+
+.vbtn {
+  min-height: 44px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.stay-menu { display: none; }
+.stay-menu-toggle[open] .stay-menu { display: block; }
+.stay-menu-toggle > summary { list-style: none; }
+.stay-menu-toggle > summary::-webkit-details-marker { display: none; }
+
+.property-facts dt {
+  color: #4d584f;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.property-facts dd { margin-top: 4px; color: var(--padathil-body); font-size: 14px; line-height: 1.65; }
+
+@media (max-width: 420px) {
+  .home-hero-brand { width: calc(100% - 48px) !important; }
+  header .wrap { padding-left: 16px !important; padding-right: 16px !important; }
+  header .wrap > a:first-child { font-size: 17px !important; min-width: 0; }
+  header .wrap > a:first-child img { width: 40px !important; height: 40px !important; flex: 0 0 auto; }
+  .compact-header { padding-left: 16px !important; padding-right: 16px !important; }
+  .compact-header .site-brand { font-size: 17px !important; }
+  .compact-header .site-brand img { width: 40px !important; height: 40px !important; }
+  .compact-header .vbtn { padding-left: 12px !important; padding-right: 12px !important; letter-spacing: .1em !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
