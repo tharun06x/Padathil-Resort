@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "open http://localhost:8080/index.html 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}
