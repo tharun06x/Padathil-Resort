@@ -54,6 +54,13 @@ html { scroll-padding-top: 88px; }
   text-transform: uppercase;
 }
 
+.property-facts > *,
+.property-facts dl {
+  align-self: start;
+}
+
+.property-facts dd { min-height: 3.3em; }
+
 .property-facts dd { margin-top: 4px; color: var(--padathil-body); font-size: 14px; line-height: 1.65; }
 
 @media (max-width: 420px) {
