@@ -1,0 +1,16 @@
+Padathil Stays premium redesign direction
+
+Purpose: Help guests feel the character of the three Kerala stays, choose the right destination, and begin a personal enquiry.
+Tone: Warm, reverent, calm, and quietly assured.
+Differentiation: A contemporary Kerala field journal: oversized editorial typography, deep forest tones, paper-like surfaces, and destination-led compositions instead of generic resort cards.
+
+System
+- Forest: #18372d
+- Leaf: #55705a
+- Paper: #f4f0e7
+- Ink: #263028
+- Brass accent: #9d6a32
+- Display: Cormorant Garamond
+- Body: Manrope
+
+Motion is limited to the hero entrance, the header transition, and restrained image/card movement. All motion respects reduced-motion preferences.

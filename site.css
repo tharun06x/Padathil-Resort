@@ -1,84 +1,297 @@
-/* Shared usability and accessibility refinements for every Padathil Stays page. */
+/* Padathil Stays — premium editorial system: contemporary Kerala field journal. */
 :root {
-  --padathil-focus: #8a5518;
-  --padathil-body: #5f5f5f;
+  --forest: #18372d;
+  --forest-deep: #102820;
+  --leaf: #55705a;
+  --paper: #f4f0e7;
+  --paper-deep: #e8e0d0;
+  --ink: #263028;
+  --body: #4f544c;
+  --brass: #9d6a32;
+  --line: rgba(24, 55, 45, .17);
+  --padathil-focus: #9d6a32;
+  --padathil-body: #4f544c;
 }
 
-html { scroll-padding-top: 88px; }
+html { scroll-padding-top: 92px; background: var(--paper); }
+body {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  font-family: 'Manrope', sans-serif !important;
+  letter-spacing: -.01em;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  opacity: .34;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(24,55,45,.11) .55px, transparent .55px);
+  background-size: 8px 8px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  color: var(--forest) !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -.035em !important;
+  text-transform: none !important;
+}
+
+h1 { font-size: clamp(2.85rem, 6vw, 6.7rem) !important; line-height: .88 !important; }
+h2 { font-size: clamp(2.1rem, 4.1vw, 4.35rem) !important; line-height: .95 !important; }
+h3 { line-height: 1 !important; }
+main > section.relative h1.text-white,
+#top h1 { color: #fff !important; }
 
 .skip-link {
   position: fixed;
   top: 12px;
   left: 12px;
   z-index: 100;
-  padding: 10px 14px;
-  background: #fff;
-  color: #263026;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, .18);
-  transform: translateY(-160%);
+  padding: 12px 16px;
+  color: #fff;
+  background: var(--forest);
+  box-shadow: 0 10px 30px rgba(16, 40, 32, .26);
+  transform: translateY(-170%);
 }
-
 .skip-link:focus { transform: translateY(0); }
 
-:focus-visible {
-  outline: 3px solid var(--padathil-focus) !important;
-  outline-offset: 3px;
-}
+:focus-visible { outline: 3px solid var(--brass) !important; outline-offset: 4px; }
+
+.wrap { max-width: 1280px !important; padding-right: clamp(20px, 4vw, 56px) !important; padding-left: clamp(20px, 4vw, 56px) !important; }
 
 .body-copy {
+  max-width: 67ch;
   color: var(--padathil-body) !important;
-  font-size: 14px !important;
+  font-size: clamp(.88rem, 1.15vw, 1rem) !important;
   font-weight: 400 !important;
+  letter-spacing: -.01em;
+  line-height: 1.85 !important;
 }
 
-.text-gold,
-.hover\:text-gold:hover { color: #8a5518 !important; }
+.text-gold, .hover\:text-gold:hover { color: var(--brass) !important; }
+
+header {
+  border-color: var(--line) !important;
+  background: rgba(244, 240, 231, .92) !important;
+  box-shadow: 0 1px 0 rgba(24,55,45,.04);
+}
+#siteHeader { background: rgba(244, 240, 231, .9) !important; }
+header nav { letter-spacing: .15em !important; }
+header nav a, header summary { position: relative; }
+header nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: -7px;
+  left: 0;
+  height: 1px;
+  content: '';
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+header nav a:hover::after, header nav a[aria-current='page']::after { transform: scaleX(1); }
+
+.stay-menu {
+  overflow: hidden;
+  border: 1px solid var(--line) !important;
+  background: rgba(244,240,231,.98) !important;
+  box-shadow: 0 18px 40px rgba(16,40,32,.14) !important;
+}
+.stay-menu a { border-bottom: 1px solid rgba(24,55,45,.09); }
+.stay-menu a:last-child { border-bottom: 0; }
 
 .vbtn {
-  min-height: 44px;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
+  min-height: 46px;
+  width: auto !important;
+  padding: 0 21px !important;
+  border: 1px solid var(--forest) !important;
+  color: #fff !important;
+  background: var(--forest) !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .16em !important;
+  line-height: 1.1 !important;
+  text-transform: uppercase !important;
+  transition: background .25s ease, color .25s ease, transform .25s ease !important;
 }
+.vbtn:hover { color: var(--forest) !important; background: transparent !important; transform: translateY(-2px); }
 
-.stay-menu { display: none; }
-.stay-menu-toggle[open] .stay-menu { display: block; }
-.stay-menu-toggle > summary { list-style: none; }
-.stay-menu-toggle > summary::-webkit-details-marker { display: none; }
-
-.property-facts dt {
-  color: #4d584f;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .12em;
+.section-kicker, .hero-kicker, .property-index, .property-meta {
+  display: block;
+  color: var(--brass);
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  line-height: 1.4;
   text-transform: uppercase;
 }
+.section-kicker { margin-bottom: 16px; }
 
-.property-facts > *,
-.property-facts dl {
-  align-self: start;
+/* The first view: darkened landscape, restrained type motion, clear enquiry path. */
+#top { min-height: 680px !important; isolation: isolate; }
+#top::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 34%;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(16,40,32,.58));
+}
+#top > img { animation: hero-scale 1.4s cubic-bezier(.22,.61,.36,1) both; filter: saturate(.78) contrast(1.04); }
+.home-hero-brand { z-index: 3; animation: hero-reveal 1s .15s both; }
+.hero-copy { z-index: 3; animation: hero-reveal 1s .38s both; }
+.hero-kicker { margin-bottom: 20px; color: rgba(255,255,255,.88); }
+.hero-copy h1 { max-width: 16ch; margin: 0 auto; color: #fff !important; font-size: clamp(3.35rem, 7.5vw, 8rem) !important; }
+.hero-copy > p:last-child { max-width: 570px; margin-right: auto; margin-left: auto; line-height: 1.7; }
+
+/* Destination cards are structured as an editorial collection, not generic boxes. */
+#welcome { padding-top: clamp(86px, 11vw, 158px) !important; padding-bottom: clamp(86px, 11vw, 158px) !important; }
+#welcome h2 { max-width: 12ch; margin-right: auto; margin-left: auto; }
+#properties { background: linear-gradient(180deg, var(--paper-deep), var(--paper)) !important; padding-top: clamp(80px, 10vw, 140px) !important; padding-bottom: clamp(80px, 10vw, 140px) !important; }
+#properties > .wrap > .grid { gap: clamp(18px, 2.4vw, 36px) !important; }
+.property-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(24,55,45,.1);
+  background: rgba(255,255,255,.52) !important;
+  box-shadow: 0 16px 34px rgba(35,44,34,.05);
+  transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s ease;
+}
+.property-card:hover { box-shadow: 0 28px 54px rgba(35,44,34,.14); transform: translateY(-8px); }
+.property-card figure { aspect-ratio: 4 / 4.8; }
+.property-card figure img { height: 100%; filter: saturate(.84) contrast(1.04); transition: transform .8s cubic-bezier(.22,.61,.36,1), filter .5s ease !important; }
+.property-card:hover figure img { filter: saturate(1) contrast(1.08); transform: scale(1.06) !important; }
+.property-card h3 { margin-top: 12px; font-size: clamp(1.75rem, 2.2vw, 2.3rem) !important; }
+.property-meta { margin-top: 18px; color: var(--leaf); letter-spacing: .12em; }
+.property-card .vbtn { margin-top: 24px !important; }
+
+.property-compass {
+  display: grid;
+  grid-template-columns: minmax(220px, .85fr) minmax(0, 1.9fr);
+  gap: clamp(30px, 6vw, 90px);
+  align-items: start;
+  padding: clamp(30px, 5vw, 64px) 0 0;
+  border-top: 1px solid var(--line);
+}
+.property-compass h3 { font-size: clamp(2.35rem, 3.8vw, 4.1rem) !important; }
+.property-compass .property-facts { margin-top: 8px; }
+.property-facts dt { color: var(--brass); font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.property-facts dd { min-height: 0; margin-top: 10px; color: var(--forest); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.45rem; font-weight: 600; line-height: 1.17; }
+.property-compass-note { grid-column: 2; margin: -5px 0 0; color: var(--body); font-size: .87rem; line-height: 1.65; }
+
+#why-padathil { padding-bottom: 0 !important; background: var(--forest-deep) !important; }
+#why-padathil figure { overflow: hidden; }
+#why-padathil figure img { min-height: 650px; opacity: .78; filter: saturate(.74) contrast(1.08); }
+#why-padathil h2 { font-size: clamp(3.25rem, 6vw, 6.5rem) !important; letter-spacing: -.045em !important; }
+#why-padathil h2, #why-padathil h2 span { color: #fff !important; }
+#why-padathil .bg-panel { border-top: 1px solid rgba(255,255,255,.42); background: var(--paper) !important; }
+#why-padathil h4 { font-size: 1.35rem !important; }
+
+#dining { padding-top: clamp(86px, 10vw, 150px) !important; padding-bottom: clamp(86px, 10vw, 150px) !important; }
+#dining figure { position: relative; }
+#dining figure::after { position: absolute; inset: 18px -18px -18px 18px; z-index: -1; content: ''; border: 1px solid var(--line); }
+#dining h3 { font-size: clamp(2.7rem, 4vw, 4.4rem) !important; }
+
+#experience { padding-top: clamp(86px, 10vw, 148px) !important; }
+#experience figure { overflow: hidden; }
+#experience figure:nth-child(2) { transform: translateY(42px); }
+#experience img { filter: saturate(.78); transition: transform .7s ease, filter .4s ease; }
+#experience figure:hover img { filter: saturate(1); transform: scale(1.04); }
+
+#our-story { background-color: var(--paper-deep) !important; }
+#our-story h2 { font-size: clamp(2.8rem, 4.3vw, 4.8rem) !important; }
+
+/* Shared interiors: preserve content, shift every page from utilitarian to composed. */
+main > section { position: relative; }
+main > section.bg-white { background: rgba(255,255,255,.56) !important; }
+main > section.bg-creamalt { background: var(--paper-deep) !important; }
+main > section.bg-cream { background: var(--paper) !important; }
+main > section > .wrap > h2:first-child,
+main > section > .wrap > .text-center > h1:first-child { max-width: 18ch; }
+main > section:first-child:not(#top) { overflow: hidden; }
+main > section:first-child:not(#top) h1::before {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--brass);
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  line-height: 1;
+  text-transform: uppercase;
+  content: 'Padathil Stays';
+}
+main > section.relative h1.text-white::before { color: rgba(255,255,255,.78); }
+
+main article { transition: transform .35s ease, box-shadow .35s ease; }
+main article:hover { transform: translateY(-4px); }
+main article img { filter: saturate(.84); transition: transform .6s ease, filter .4s ease; }
+main article:hover img { filter: saturate(1); transform: scale(1.025); }
+
+details { border-color: var(--line) !important; }
+details summary { min-height: 44px; }
+details summary::marker { color: var(--brass); }
+
+footer { color: #d7dbd1 !important; background: var(--forest-deep) !important; }
+footer .font-display { color: #fff !important; }
+footer a { transition: color .2s ease; }
+footer a:hover { color: #dfb97a !important; }
+
+#toTop { border: 1px solid rgba(255,255,255,.24); background: var(--forest) !important; }
+
+@keyframes hero-scale { from { opacity: .75; transform: scale(1.08); } to { opacity: 1; transform: scale(1); } }
+@keyframes hero-reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes section-reveal { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+@supports (animation-timeline: view()) {
+  .property-card,
+  .property-compass,
+  #dining .wrap,
+  #experience .wrap,
+  main article {
+    animation: section-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 8% cover 28%;
+  }
 }
 
-.property-facts dd { min-height: 3.3em; }
-
-.property-facts dd { margin-top: 4px; color: var(--padathil-body); font-size: 14px; line-height: 1.65; }
+@media (max-width: 767px) {
+  #top { min-height: 660px !important; }
+  .home-hero-brand { top: 32px !important; }
+  .hero-copy { bottom: 90px !important; }
+  .hero-copy h1 { font-size: clamp(3.1rem, 15vw, 4.45rem) !important; }
+  #properties > .wrap > .grid { grid-template-columns: 1fr !important; }
+  .property-card figure { aspect-ratio: 4 / 3.2; }
+  .property-compass { grid-template-columns: 1fr; }
+  .property-compass-note { grid-column: auto; }
+  #why-padathil figure img { min-height: 500px; }
+  #experience figure:nth-child(2) { transform: none; }
+  #dining figure::after { inset: 10px -10px -10px 10px; }
+}
 
 @media (max-width: 420px) {
   .home-hero-brand { width: calc(100% - 48px) !important; }
-  header .wrap { padding-left: 16px !important; padding-right: 16px !important; }
-  header .wrap > a:first-child { font-size: 17px !important; min-width: 0; }
-  header .wrap > a:first-child img { width: 40px !important; height: 40px !important; flex: 0 0 auto; }
-  .compact-header { padding-left: 16px !important; padding-right: 16px !important; }
+  header .wrap { padding-right: 16px !important; padding-left: 16px !important; }
+  header .wrap > a:first-child { min-width: 0; font-size: 17px !important; }
+  header .wrap > a:first-child img { flex: 0 0 auto; width: 40px !important; height: 40px !important; }
+  .compact-header { padding-right: 16px !important; padding-left: 16px !important; }
   .compact-header .site-brand { font-size: 17px !important; }
   .compact-header .site-brand img { width: 40px !important; height: 40px !important; }
-  .compact-header .vbtn { padding-left: 12px !important; padding-right: 12px !important; letter-spacing: .1em !important; }
+  .compact-header .vbtn { padding-right: 12px !important; padding-left: 12px !important; letter-spacing: .1em !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
