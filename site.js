@@ -62,6 +62,78 @@
     document.querySelector('.stay-menu-toggle > summary')?.setAttribute('aria-current', 'page');
   }
 
+  const nearbyExplorer = document.querySelector('[data-nearby-explorer]');
+  if (nearbyExplorer) {
+    const places = {
+      bhoothathankettu: {
+        number: '01 / 04', title: 'Bhoothathankettu',
+        description: 'Explore the scenic surroundings and enjoy the natural beauty of the region.',
+        distance: 'A short drive away', best: 'Water views & an unhurried outing', pace: 'A relaxed half-day',
+        image: 'images/bhoothathankettu.webp', alt: 'Boat cruise on the Bhoothathankettu reservoir surrounded by forest',
+        link: 'https://www.google.com/maps/search/?api=1&query=Bhoothathankettu%2C%20Kerala'
+      },
+      thattekad: {
+        number: '02 / 04', title: 'Thattekad Bird Sanctuary',
+        description: 'A destination known for its diverse birdlife and peaceful forest environment.',
+        distance: 'A nearby nature outing', best: 'Birdwatching & quiet forest time', pace: 'Start early and move slowly',
+        image: 'images/thattekad.webp', alt: 'River and forested hills at Thattekad Bird Sanctuary',
+        link: 'https://www.google.com/maps/search/?api=1&query=Thattekad%20Bird%20Sanctuary%2C%20Kerala'
+      },
+      inchathotty: {
+        number: '03 / 04', title: 'Inchathotty Suspension Bridge',
+        description: 'Experience one of the region’s scenic attractions surrounded by nature.',
+        distance: 'Plan as a day outing', best: 'Views, riverside air & a change of pace', pace: 'Leave room to linger',
+        image: 'images/inchathotty-bridge.webp', alt: 'Suspension bridge over a forest river near Inchathotty',
+        link: 'https://www.google.com/maps/search/?api=1&query=Inchathotty%20Suspension%20Bridge%2C%20Kerala'
+      },
+      paniyeli: {
+        number: '04 / 04', title: 'Paniyeli Poru',
+        description: 'Discover the beauty of Kerala’s rocky river landscapes and rapids.',
+        distance: 'Plan as a day outing', best: 'River landscapes & monsoon drama', pace: 'Best enjoyed without rushing',
+        image: 'images/paniyeli-poru.webp', alt: 'Rocky river landscape and rapids at Paniyeli Poru',
+        link: 'https://www.google.com/maps/search/?api=1&query=Paniyeli%20Poru%2C%20Kerala'
+      }
+    };
+
+    const image = nearbyExplorer.querySelector('[data-explorer-image]');
+    const fields = {
+      number: nearbyExplorer.querySelector('[data-explorer-number]'),
+      title: nearbyExplorer.querySelector('[data-explorer-title]'),
+      description: nearbyExplorer.querySelector('[data-explorer-description]'),
+      distance: nearbyExplorer.querySelector('[data-explorer-distance]'),
+      best: nearbyExplorer.querySelector('[data-explorer-best]'),
+      pace: nearbyExplorer.querySelector('[data-explorer-pace]'),
+      link: nearbyExplorer.querySelector('[data-explorer-link]')
+    };
+    const pins = [...nearbyExplorer.querySelectorAll('[data-place]')];
+
+    const selectPlace = (key) => {
+      const place = places[key];
+      if (!place) return;
+      pins.forEach((pin) => {
+        const selected = pin.dataset.place === key;
+        pin.classList.toggle('is-active', selected);
+        pin.setAttribute('aria-pressed', String(selected));
+      });
+      image.classList.add('is-changing');
+      window.setTimeout(() => {
+        image.src = place.image;
+        image.alt = place.alt;
+        image.classList.remove('is-changing');
+      }, reducedMotion.matches ? 0 : 140);
+      fields.number.textContent = place.number;
+      fields.title.textContent = place.title;
+      fields.description.textContent = place.description;
+      fields.distance.textContent = place.distance;
+      fields.best.textContent = place.best;
+      fields.pace.textContent = place.pace;
+      fields.link.href = place.link;
+      fields.link.setAttribute('aria-label', `View ${place.title} on Maps`);
+    };
+
+    pins.forEach((pin) => pin.addEventListener('click', () => selectPlace(pin.dataset.place)));
+  }
+
   const loader = document.querySelector('#pageLoader');
   if (loader) {
     const startedAt = performance.now();
