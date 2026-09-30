@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T00:00:00+05:30",
+  "title": "Design System: Padathil Stays — Riparian Ayur Resorts",
+  "extensions": {
+    "colorMeta": {
+      "botanical-ink": { "role": "primary", "displayName": "Botanical Ink", "canonical": "#102c24", "tonalRamp": ["oklch(15% 0.025 155)", "oklch(25% 0.03 155)", "oklch(35% 0.035 155)", "oklch(45% 0.04 155)", "oklch(55% 0.04 155)", "oklch(68% 0.035 155)", "oklch(82% 0.025 155)", "oklch(95% 0.012 155)"] },
+      "botanical-ink-deep": { "role": "neutral", "displayName": "Deep Forest Ink", "canonical": "#071914", "tonalRamp": ["oklch(10% 0.02 155)", "oklch(18% 0.025 155)", "oklch(28% 0.03 155)", "oklch(38% 0.035 155)", "oklch(50% 0.035 155)", "oklch(65% 0.03 155)", "oklch(80% 0.02 155)", "oklch(94% 0.01 155)"] },
+      "mineral-paper": { "role": "neutral", "displayName": "Mineral Paper", "canonical": "#ece5d5", "tonalRamp": ["oklch(25% 0.02 85)", "oklch(35% 0.025 85)", "oklch(45% 0.03 85)", "oklch(55% 0.03 85)", "oklch(66% 0.028 85)", "oklch(77% 0.025 85)", "oklch(87% 0.02 85)", "oklch(95% 0.012 85)"] },
+      "leaf-wash": { "role": "secondary", "displayName": "Leaf Wash", "canonical": "#bbc3a7", "tonalRamp": ["oklch(25% 0.035 120)", "oklch(35% 0.04 120)", "oklch(45% 0.045 120)", "oklch(55% 0.045 120)", "oklch(65% 0.04 120)", "oklch(75% 0.035 120)", "oklch(85% 0.025 120)", "oklch(95% 0.012 120)"] },
+      "moss": { "role": "secondary", "displayName": "Moss", "canonical": "#73816c", "tonalRamp": ["oklch(22% 0.035 135)", "oklch(32% 0.04 135)", "oklch(42% 0.045 135)", "oklch(52% 0.045 135)", "oklch(62% 0.04 135)", "oklch(72% 0.035 135)", "oklch(84% 0.022 135)", "oklch(95% 0.01 135)"] },
+      "silt": { "role": "tertiary", "displayName": "River Silt", "canonical": "#a7623c", "tonalRamp": ["oklch(24% 0.06 48)", "oklch(34% 0.075 48)", "oklch(44% 0.09 48)", "oklch(54% 0.1 48)", "oklch(64% 0.09 48)", "oklch(74% 0.07 48)", "oklch(85% 0.045 48)", "oklch(95% 0.02 48)"] },
+      "route-brass": { "role": "primary", "displayName": "Route Brass", "canonical": "#c9a466", "tonalRamp": ["oklch(25% 0.045 80)", "oklch(35% 0.06 80)", "oklch(45% 0.075 80)", "oklch(55% 0.085 80)", "oklch(66% 0.085 80)", "oklch(76% 0.07 80)", "oklch(86% 0.045 80)", "oklch(95% 0.02 80)"] },
+      "light-paper": { "role": "neutral", "displayName": "Light Paper", "canonical": "#fff8eb", "tonalRamp": ["oklch(25% 0.015 85)", "oklch(35% 0.018 85)", "oklch(45% 0.02 85)", "oklch(55% 0.02 85)", "oklch(66% 0.018 85)", "oklch(77% 0.015 85)", "oklch(88% 0.012 85)", "oklch(98% 0.006 85)"] },
+      "copy-ink": { "role": "neutral", "displayName": "Soft Copy Ink", "canonical": "#34483e", "tonalRamp": ["oklch(20% 0.025 155)", "oklch(30% 0.03 155)", "oklch(40% 0.035 155)", "oklch(50% 0.035 155)", "oklch(60% 0.03 155)", "oklch(70% 0.025 155)", "oklch(84% 0.016 155)", "oklch(95% 0.008 155)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Field Journal Display", "purpose": "Section titles and arrival lede." },
+      "hero-display": { "displayName": "Cinematic Place Name", "purpose": "The Riparian hero title only." },
+      "body": { "displayName": "Reading Copy", "purpose": "Factual destination copy and explorer description." },
+      "label": { "displayName": "Field Label", "purpose": "Locations, facts, controls and enquiry actions." }
+    },
+    "shadows": [
+      { "name": "explorer-map-lift", "value": "0 24px 52px rgba(16,44,36,.14)", "purpose": "Grounds the pale illustrated map within the explorer pair." },
+      { "name": "explorer-detail-lift", "value": "0 24px 52px rgba(16,44,36,.16)", "purpose": "Grounds the dark selected-place detail panel." }
+    ],
+    "motion": [
+      { "name": "route-draw", "value": "3.6s 0.35s cubic-bezier(.16,1,.3,1) forwards", "purpose": "Draw the hero route once." },
+      { "name": "image-drift", "value": "18s ease-in-out infinite alternate", "purpose": "Slowly drift the hero photograph." },
+      { "name": "section-reveal", "value": "0.75s cubic-bezier(.16,1,.3,1)", "purpose": "Reveal an observed section once on entry." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "680px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Riparian Enquiry Action",
+      "kind": "button",
+      "refersTo": "enquiry-action",
+      "description": "The direct WhatsApp enquiry action used in the hero and reading sections.",
+      "html": "<a class=\"ds-riparian-action\" href=\"#\">Enquire about a stay <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-riparian-action{display:inline-flex;gap:1.3rem;align-items:center;justify-content:space-between;min-width:14.5rem;padding:1rem 1.25rem;background:#c9a466;color:#071914;font:700 .72rem/1.1 Manrope,sans-serif;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;transition:transform .28s cubic-bezier(.16,1,.3,1),background-color .28s ease}.ds-riparian-action:hover{transform:translateY(-4px);background:#efd19a}.ds-riparian-action:focus-visible{outline:3px solid #c9a466;outline-offset:4px}.ds-riparian-action span{font-size:1.25rem;line-height:.6}"
+    },
+    {
+      "name": "Light Closing Enquiry Action",
+      "kind": "button",
+      "refersTo": "enquiry-action-light",
+      "description": "The Light Paper enquiry action for the botanical-ink closing section.",
+      "html": "<a class=\"ds-riparian-action-light\" href=\"#\">Enquire now <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-riparian-action-light{display:inline-flex;gap:1.3rem;align-items:center;justify-content:space-between;min-width:14.5rem;padding:1rem 1.25rem;background:#fff8eb;color:#102c24;font:700 .72rem/1.1 Manrope,sans-serif;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;transition:transform .28s cubic-bezier(.16,1,.3,1),background-color .28s ease}.ds-riparian-action-light:hover{transform:translateY(-4px);background:#efd19a}.ds-riparian-action-light:focus-visible{outline:3px solid #c9a466;outline-offset:4px}.ds-riparian-action-light span{font-size:1.25rem;line-height:.6}"
+    },
+    {
+      "name": "Field Text Link",
+      "kind": "nav",
+      "refersTo": "field-link",
+      "description": "A restrained secondary action for directions and deeper exploration.",
+      "html": "<a class=\"ds-field-link\" href=\"#\">Explore the surroundings</a>",
+      "css": ".ds-field-link{color:#102c24;font:700 .72rem/1.3 Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:1px;text-underline-offset:.5rem}.ds-field-link:hover{color:#a7623c}.ds-field-link:focus-visible{outline:3px solid #c9a466;outline-offset:4px}"
+    },
+    {
+      "name": "At a Glance Fact",
+      "kind": "card",
+      "description": "A square, ruled factual entry used to make pre-enquiry details easy to scan.",
+      "html": "<dl class=\"ds-fact\"><div><dt>Stay style</dt><dd>A peaceful base for an unhurried nature getaway.</dd></div></dl>",
+      "css": ".ds-fact{margin:0;border-top:1px solid rgba(16,44,36,.22);border-bottom:1px solid rgba(16,44,36,.22)}.ds-fact div{min-height:10.5rem;padding:1.7rem 2rem}.ds-fact dt{color:#713625;font:700 .69rem/1.2 Manrope,sans-serif;letter-spacing:.13em;text-transform:uppercase}.ds-fact dd{margin:.85rem 0 0;color:#102c24;font:500 1.35rem/1.35 'Cormorant Garamond',Georgia,serif}"
+    },
+    {
+      "name": "Explorer Detail Panel",
+      "kind": "custom",
+      "description": "The dark selected-place pane paired with the illustrated map; it keeps local exploration factual and actionable.",
+      "html": "<article class=\"ds-explorer-detail\"><p>01 / 04</p><h3>Bhoothathankettu</h3><span>Water views &amp; an unhurried outing</span><a href=\"#\">View on Maps ↗</a></article>",
+      "css": ".ds-explorer-detail{padding:2rem;background:#071914;color:#f5eddc;box-shadow:0 24px 52px rgba(16,44,36,.16)}.ds-explorer-detail p{margin:0;color:#c9a466;font:700 .69rem/1.2 Manrope,sans-serif;letter-spacing:.13em}.ds-explorer-detail h3{margin:1rem 0 .75rem;color:#f5eddc;font:500 clamp(2rem,4vw,3.25rem)/.95 'Cormorant Garamond',Georgia,serif}.ds-explorer-detail span{display:block;color:#dce0c8;font:400 1rem/1.7 Manrope,sans-serif}.ds-explorer-detail a{display:inline-block;margin-top:1.5rem;color:#c9a466;font:700 .72rem/1.2 Manrope,sans-serif;letter-spacing:.11em;text-transform:uppercase}.ds-explorer-detail a:hover{color:#fff8eb}.ds-explorer-detail a:focus-visible{outline:3px solid #c9a466;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Forest-Edge Field Journal",
+    "overview": "Riparian is the destination-specific visual world for Padathil Stays' Bhoothathankettu property: quiet, observant and materially grounded. Deep botanical ink and mineral paper make the page feel collected from the landscape, while the brass route line gives the journey one precise, memorable signature. The surface persuades through actual resort and nearby-place imagery rather than invented luxury cues. The page moves with the pace of an unhurried field note: cinematic arrival, calm reading expanses, a tactile illustrated map, then a clear WhatsApp enquiry path. This is a focused property expression layered over the shared Padathil navigation and factual content; it does not change the group-wide product promise.",
+    "keyCharacteristics": [
+      "Cinematic resort imagery sits behind high-contrast editorial type.",
+      "Mineral paper, hairline rules and unrounded blocks replace glossy card language.",
+      "A single brass route line and the map explorer make location tangible.",
+      "Motion is slow, sparse and optional; information remains immediately available with reduced motion."
+    ],
+    "rules": [
+      { "name": "The Single Signal Rule", "body": "Reserve Route Brass for route, response and action. It must not become a general decoration color.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Use Cormorant for a considered invitation or place name; use Manrope for every instruction, fact, control and action.", "section": "typography" },
+      { "name": "The Grounded Surface Rule", "body": "Reading sections stay flat. Elevation is reserved for the map explorer, where it clarifies a connected interactive unit.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use actual Riparian resort and nearby-place photography for the hero and explorer.",
+      "Do keep WhatsApp enquiry links direct and preserve the map explorer's factual place controls.",
+      "Do use the brass route line as the signature journey cue, once per hero.",
+      "Do give Cormorant display copy generous empty space and keep Manrope facts calm and readable."
+    ],
+    "donts": [
+      "Don't add invented stay amenities, rates, availability or destination claims to this surface.",
+      "Don't turn the forest-edge world into generic luxury gradients, glossy tiles or rounded dashboard cards.",
+      "Don't add continuous, attention-seeking motion or hide content behind animation.",
+      "Don't substitute the illustrated explorer for an external map or remove its not-to-scale qualification."
+    ]
+  }
+}
