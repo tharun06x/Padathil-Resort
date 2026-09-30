@@ -1,0 +1,67 @@
+/* Riparian Ayur Resorts — forest-edge field journal. */
+.riparian-page { --riparian-ink: #102c24; --riparian-ink-deep: #071914; --riparian-paper: #ece5d5; --riparian-moss: #73816c; --riparian-silt: #a7623c; --riparian-brass: #c9a466; --riparian-line: rgba(16,44,36,.22); background: var(--riparian-paper) !important; }
+.riparian-page ::selection { background: var(--riparian-silt); color: #fff8eb; }
+.riparian-page .site-header, .riparian-page #siteHeader { background: rgba(7,25,20,.92) !important; border-bottom-color: rgba(232,220,195,.16) !important; }
+.riparian-page .site-brand, .riparian-page .desktop-nav > a, .riparian-page .desktop-nav summary { color: #f5eddc !important; }
+.riparian-page .site-brand span { color: #f5eddc !important; }
+.riparian-page .mobile-menu > summary { color: #f5eddc !important; border-color: rgba(245,237,220,.72) !important; }
+.riparian-page .header-book { background: var(--riparian-brass); color: var(--riparian-ink-deep); }
+.riparian-page .bg-white { background: var(--riparian-paper) !important; }
+.riparian-page .bg-creamalt { background: #d8d5bd !important; }
+.riparian-page h1, .riparian-page h2, .riparian-page h3 { color: var(--riparian-ink) !important; }
+.riparian-page .body-copy { color: #34483e; font-size: clamp(1rem,1.3vw,1.12rem); line-height: 1.85; }
+.riparian-hero { position: relative; isolation: isolate; min-height: min(800px, 100svh); overflow: hidden; display: grid; align-items: end; background: var(--riparian-ink-deep); }
+.riparian-hero-image { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: center; animation: riparian-drift 18s ease-in-out infinite alternate; }
+.riparian-hero-shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg,rgba(5,20,16,.84) 0%,rgba(5,20,16,.44) 44%,rgba(5,20,16,.1) 75%), linear-gradient(0deg,rgba(5,20,16,.58),transparent 46%); }
+.riparian-hero-river { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.riparian-hero-river path { fill: none; stroke: var(--riparian-brass); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 2200; stroke-dashoffset: 2200; animation: riparian-route 3.6s .35s cubic-bezier(.16,1,.3,1) forwards; }
+.riparian-hero-copy { width: min(760px, 100%); padding: clamp(10rem,24vh,15rem) clamp(1.4rem,7vw,8rem) clamp(4.5rem,10vh,7.5rem); color: #fff8eb; }
+.riparian-location { margin: 0 0 1.25rem; color: var(--riparian-brass); font: 700 .72rem/1 Manrope,sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+.riparian-hero h1 { margin: 0; color: #fff8eb !important; font-size: clamp(4.25rem,9vw,8.7rem); line-height: .77; letter-spacing: -.055em !important; font-weight: 500 !important; }
+.riparian-hero h1::before { display: none !important; }
+.riparian-hero h1 em { color: #d9e1c9; font-weight: 400; }
+.riparian-hero-intro { max-width: 37rem; margin: 2.1rem 0 0; font-size: clamp(1rem,1.55vw,1.26rem); line-height: 1.6; color: #f1ebdd; }
+.riparian-hero-actions, .riparian-arrival-actions { display: flex; gap: 1.25rem 2rem; align-items: center; flex-wrap: wrap; margin-top: 2.3rem; }
+.riparian-action { display: inline-flex; gap: 1.3rem; align-items: center; justify-content: space-between; min-width: 14.5rem; padding: 1rem 1.25rem; background: var(--riparian-brass); color: var(--riparian-ink-deep); font: 700 .72rem/1.1 Manrope,sans-serif; letter-spacing: .11em; text-transform: uppercase; transition: transform .28s cubic-bezier(.16,1,.3,1), background-color .28s ease; }
+.riparian-action:hover { transform: translateY(-4px); background: #efd19a; }
+.riparian-action span { font-size: 1.25rem; line-height: .6; }
+.riparian-text-link { color: inherit; font: 700 .72rem/1.3 Manrope,sans-serif; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-decoration-color: currentColor; text-decoration-thickness: 1px; text-underline-offset: .5rem; }
+.riparian-hero-note { position: absolute; right: clamp(1.4rem,4vw,4rem); bottom: 2.3rem; display: grid; gap: .4rem; color: rgba(255,248,235,.78); font: 600 .62rem/1.2 Manrope,sans-serif; letter-spacing: .15em; text-align: right; text-transform: uppercase; }
+.riparian-arrival { padding-block: clamp(6rem,12vw,11rem) !important; text-align: center; }
+.riparian-lede { max-width: 58ch; font-family: 'Cormorant Garamond',Georgia,serif !important; font-size: clamp(2rem,3.3vw,3.25rem) !important; line-height: 1.08 !important; color: var(--riparian-ink) !important; }
+.riparian-arrival-actions { justify-content: center; }
+.riparian-arrival .riparian-text-link { color: var(--riparian-ink); }
+.riparian-story { position: relative; padding-block: clamp(5rem,9vw,8rem) !important; border-block: 1px solid var(--riparian-line); }
+.riparian-story .wrap { max-width: 900px !important; }
+.riparian-story h2, .riparian-facts-section h2, .riparian-explorer h2, .riparian-close h2 { font-size: clamp(2.7rem,5vw,5.2rem) !important; }
+.riparian-story p + p { margin-top: 1.4rem !important; }
+.riparian-facts-section { padding-block: clamp(5rem,8vw,7.5rem) !important; }
+.riparian-facts-section .property-facts { display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 !important; border-top: 1px solid var(--riparian-line); }
+.riparian-facts-section .property-facts > div { min-height: 10.5rem; padding: 1.7rem clamp(1rem,3vw,3rem); border-bottom: 1px solid var(--riparian-line); }
+.riparian-facts-section .property-facts > div:nth-child(odd) { border-right: 1px solid var(--riparian-line); }
+.riparian-facts-section dt, .riparian-explorer dt { font: 700 .69rem/1.2 Manrope,sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.riparian-facts-section dt { color: #713625; }
+.riparian-explorer dt { color: #ead398; }
+.riparian-facts-section dd { margin: .85rem 0 0; color: var(--riparian-ink); font: 500 clamp(1.1rem,1.6vw,1.4rem)/1.35 'Cormorant Garamond',Georgia,serif; }
+.riparian-explorer { padding-block: clamp(5rem,9vw,8.5rem) !important; background: #bbc3a7 !important; }
+.riparian-explorer .explorer-eyebrow { color: #633525; font: 700 .7rem/1 Manrope,sans-serif; letter-spacing: .14em; text-align: center; text-transform: uppercase; }
+.riparian-explorer .nearby-explorer { margin-top: 3.5rem; }
+.riparian-explorer .explorer-map { background: #dce0c8; box-shadow: 0 24px 52px rgba(16,44,36,.14); }
+.riparian-explorer .explorer-detail { background: var(--riparian-ink-deep); color: #f5eddc; box-shadow: 0 24px 52px rgba(16,44,36,.16); }
+.riparian-explorer .explorer-detail h3 { color: #f5eddc !important; }
+.riparian-explorer .explorer-detail .body-copy, .riparian-explorer .explorer-detail dd { color: #dce0c8 !important; }
+.riparian-explorer .explorer-map-link { color: var(--riparian-brass); }
+.riparian-close { position: relative; padding-block: clamp(6rem,11vw,10rem) !important; overflow: hidden; background: var(--riparian-ink) !important; }
+.riparian-close::before { content: ''; position: absolute; inset: 0; opacity: .17; background: url('images/riparian-ayur-hero.webp') center/cover; mix-blend-mode: luminosity; }
+.riparian-close .wrap { position: relative; }
+.riparian-close h2, .riparian-close .body-copy { color: #fff8eb !important; }
+.riparian-close .body-copy { margin-inline: auto; }
+.riparian-action--light { margin-top: 2.25rem; background: #f1eadb; color: var(--riparian-ink); }
+.riparian-page .site-footer { background: var(--riparian-ink-deep); }
+.riparian-page .site-footer::before { background: var(--riparian-brass); }
+.has-riparian-motion [data-riparian-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1); }
+.has-riparian-motion [data-riparian-reveal].is-visible { opacity: 1; transform: none; }
+@keyframes riparian-route { to { stroke-dashoffset: 0; } }
+@keyframes riparian-drift { from { transform: scale(1.02) translate3d(-.45%,0,0); } to { transform: scale(1.1) translate3d(.55%,-.7%,0); } }
+@media (max-width: 680px) { .riparian-hero { min-height: 720px; } .riparian-hero-copy { padding: 12rem 1.4rem 5rem; } .riparian-hero h1 { font-size: clamp(3.25rem,14vw,5.9rem); } .riparian-hero-note { right: 1.4rem; bottom: 1.7rem; } .riparian-facts-section .property-facts { grid-template-columns: 1fr; } .riparian-facts-section .property-facts > div:nth-child(odd) { border-right: 0; } .riparian-action { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .riparian-hero-image, .riparian-hero-river path { animation: none; } .has-riparian-motion [data-riparian-reveal] { opacity: 1; transform: none; transition: none; } }

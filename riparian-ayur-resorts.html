@@ -24,10 +24,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="site.css" />
+<link rel="stylesheet" href="riparian.css" />
 
 <script src="site.js" defer></script>
+<script src="riparian.js" defer></script>
 </head>
-<body class="bg-cream">
+<body class="bg-cream riparian-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- ================= HEADER ================= -->
@@ -80,30 +82,36 @@
 
   <main id="main-content">
   <!-- ================= HERO ================= -->
-  <section class="media-hero relative h-[70vh] min-h-[440px] w-full overflow-hidden">
-    <img src="images/riparian-ayur-hero.webp" alt="Riparian Ayur Resorts wooden villa near Bhoothathankettu" width="1920" height="1321" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover" />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/20"></div>
-    <div class="absolute left-0 bottom-[50px] w-full text-center px-6">
-      <h1 class="text-white text-[34px] md:text-[46px] leading-tight">Riparian Ayur Resorts</h1>
-      <p class="mt-3 font-sans font-light uppercase tracking-[.2em] text-[14px] text-white/90">A Peaceful Nature Retreat Near Bhoothathankettu</p>
+  <section class="riparian-hero" aria-labelledby="riparian-title">
+    <img src="images/riparian-ayur-hero.webp" alt="Riparian Ayur Resorts wooden villa near Bhoothathankettu" width="1920" height="1321" fetchpriority="high" class="riparian-hero-image" />
+    <div class="riparian-hero-shade"></div>
+    <svg class="riparian-hero-river" viewBox="0 0 1440 860" preserveAspectRatio="none" aria-hidden="true"><path d="M-40 630C170 535 260 762 460 662S674 355 871 455s173 234 371 145 188-10 240-85" /></svg>
+    <div class="riparian-hero-copy">
+      <p class="riparian-location">Bhoothathankettu · Kerala</p>
+      <h1 id="riparian-title">Riparian<br /><em>Ayur Resorts</em></h1>
+      <p class="riparian-hero-intro">A peaceful nature retreat where forest edges, river air and unhurried days meet.</p>
+      <div class="riparian-hero-actions">
+        <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Riparian%20Ayur%20Resorts.%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener" class="riparian-action">Enquire about a stay <span aria-hidden="true">→</span></a>
+        <a href="#nearby-title" class="riparian-text-link">Explore the surroundings</a>
+      </div>
     </div>
+    <div class="riparian-hero-note"><span>Forest edge</span><span>River country</span><span>Slow weekends</span></div>
   </section>
 
   <!-- ================= INTRO ================= -->
-  <section class="bg-white py-[60px]">
+  <section class="bg-white py-[60px] riparian-arrival" data-riparian-reveal>
     <div class="wrap max-w-[820px] text-center">
-      <p class="body-copy">
+      <p class="body-copy riparian-lede">
         Reconnect with nature in the peaceful surroundings of Bhoothathankettu. Riparian Ayur Resorts offers a
         relaxing escape for travellers looking to explore the greenery, waterways and natural attractions of
         central Kerala.
       </p>
-      <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Riparian%20Ayur%20Resorts.%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener" class="vbtn mt-8">Book Your Stay</a>
-      <a href="https://maps.app.goo.gl/Bd4BbcQJggXgmTrS7?g_st=ic" target="_blank" rel="noopener" class="mt-5 block text-[11px] uppercase tracking-[.14em] text-nandor underline underline-offset-4">Get Directions</a>
+      <div class="riparian-arrival-actions"><a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Riparian%20Ayur%20Resorts.%0ACheck-in%3A%20%0ACheck-out%3A%20%0AGuests%3A%20%0AQuestions%3A%20" target="_blank" rel="noopener" class="riparian-action">Book your stay <span aria-hidden="true">→</span></a><a href="https://maps.app.goo.gl/Bd4BbcQJggXgmTrS7?g_st=ic" target="_blank" rel="noopener" class="riparian-text-link">Get directions</a></div>
     </div>
   </section>
 
   <!-- ================= ABOUT ================= -->
-  <section class="bg-white py-[60px]">
+  <section class="bg-white py-[60px] riparian-story" data-riparian-reveal>
     <div class="wrap max-w-[900px]">
       <h2 class="text-[26px] md:text-[32px] tracking-[.04em] text-center pb-6">Escape Into Nature</h2>
       <p class="body-copy text-center">
@@ -117,7 +125,7 @@
     </div>
   </section>
 
-  <section class="bg-creamalt py-[50px]" aria-labelledby="riparian-at-a-glance">
+  <section class="bg-creamalt py-[50px] riparian-facts-section" aria-labelledby="riparian-at-a-glance" data-riparian-reveal>
     <div class="wrap max-w-[900px]">
       <h2 id="riparian-at-a-glance" class="text-[26px] md:text-[32px] tracking-[.04em] text-center pb-8">At a Glance</h2>
       <dl class="grid gap-6 sm:grid-cols-2 property-facts">
@@ -130,57 +138,62 @@
   </section>
 
   <!-- ================= EXPLORE NEARBY ================= -->
-  <section class="bg-creamalt py-[60px]">
+  <section class="explorer-section bg-creamalt py-[60px] riparian-explorer" aria-labelledby="nearby-title" data-riparian-reveal>
     <div class="wrap max-w-[1100px]">
-      <h2 class="text-[26px] md:text-[32px] tracking-[.04em] text-center pb-2">Discover the Beauty Around Bhoothathankettu</h2>
-      <p class="body-copy text-center mb-10">Explore Nearby</p>
-      <div class="grid sm:grid-cols-2 gap-8">
-        <div class="bg-white">
-          <figure class="overflow-hidden">
-            <img src="images/bhoothathankettu.webp" alt="Boat cruise on the Bhoothathankettu reservoir surrounded by forest" width="900" height="600" loading="lazy" decoding="async" class="w-full aspect-[3/2] object-cover" />
-          </figure>
-          <div class="p-6">
-            <h3 class="text-[17px] tracking-[.03em] pb-2">Bhoothathankettu</h3>
-            <p class="body-copy">Explore the scenic surroundings and enjoy the natural beauty of the region.</p>
-          </div>
+      <p class="explorer-eyebrow">A local field guide</p>
+      <h2 id="nearby-title" class="text-center pb-2">Discover the Beauty Around Bhoothathankettu</h2>
+      <p class="body-copy text-center explorer-intro">Choose a pin to find a gentle way to spend the day from Riparian.</p>
+
+      <div class="nearby-explorer" data-nearby-explorer>
+        <div class="explorer-map" aria-label="Illustrated guide to places near Riparian Ayur Resorts">
+          <svg class="explorer-map-art" viewBox="0 0 700 530" preserveAspectRatio="none" aria-hidden="true">
+            <path class="map-water" d="M-38 382C78 316 100 472 202 399c95-68 95-200 204-177 105 22 120 143 332 29" />
+            <path class="map-water map-water--fine" d="M-42 409c132-75 152 98 259 5 87-75 105-173 194-141 120 43 137 108 329 22" />
+            <path class="map-contour" d="M27 95c62-50 141-48 188-2 49 47 107 14 148-30M390 80c51 26 98 21 146-20 47-39 99-36 144 6M20 243c64-34 137-13 177 37 39 49 115 47 169-2M398 255c54-56 133-58 192-8 34 28 71 28 104 11M18 481c55-34 116-26 155 11M455 466c58-47 124-42 193 8" />
+            <path class="map-route" d="M346 310 166 177M346 310 505 140M346 310 152 413M346 310 551 386" />
+          </svg>
+          <p class="map-scale">Illustrative guide · not to scale</p>
+          <span class="explorer-home"><span class="explorer-home-mark">R</span><span>Riparian<br />Ayur Resorts</span></span>
+          <button class="explorer-pin explorer-pin--bhoothathankettu is-active" type="button" data-place="bhoothathankettu" aria-pressed="true">
+            <span class="explorer-pin-dot" aria-hidden="true"></span><span>Bhoothathankettu</span>
+          </button>
+          <button class="explorer-pin explorer-pin--thattekad" type="button" data-place="thattekad" aria-pressed="false">
+            <span class="explorer-pin-dot" aria-hidden="true"></span><span>Thattekad</span>
+          </button>
+          <button class="explorer-pin explorer-pin--inchathotty" type="button" data-place="inchathotty" aria-pressed="false">
+            <span class="explorer-pin-dot" aria-hidden="true"></span><span>Inchathotty</span>
+          </button>
+          <button class="explorer-pin explorer-pin--paniyeli" type="button" data-place="paniyeli" aria-pressed="false">
+            <span class="explorer-pin-dot" aria-hidden="true"></span><span>Paniyeli Poru</span>
+          </button>
         </div>
-        <div class="bg-white">
-          <figure class="overflow-hidden">
-            <img src="images/thattekad.webp" alt="River and forested hills at Thattekad Bird Sanctuary" width="900" height="600" loading="lazy" decoding="async" class="w-full aspect-[3/2] object-cover" />
+
+        <article class="explorer-detail" aria-live="polite">
+          <figure class="explorer-detail-image">
+            <img data-explorer-image src="images/bhoothathankettu.webp" alt="Boat cruise on the Bhoothathankettu reservoir surrounded by forest" width="900" height="600" loading="lazy" decoding="async" />
           </figure>
-          <div class="p-6">
-            <h3 class="text-[17px] tracking-[.03em] pb-2">Thattekad Bird Sanctuary</h3>
-            <p class="body-copy">A destination known for its diverse birdlife and peaceful forest environment.</p>
+          <div class="explorer-detail-copy">
+            <p class="explorer-detail-number" data-explorer-number>01 / 04</p>
+            <h3 data-explorer-title>Bhoothathankettu</h3>
+            <p class="body-copy" data-explorer-description>Explore the scenic surroundings and enjoy the natural beauty of the region.</p>
+            <dl class="explorer-facts">
+              <div><dt>From Riparian</dt><dd data-explorer-distance>A short drive away</dd></div>
+              <div><dt>Best for</dt><dd data-explorer-best>Water views &amp; an unhurried outing</dd></div>
+              <div><dt>Take your time</dt><dd data-explorer-pace>A relaxed half-day</dd></div>
+            </dl>
+            <a data-explorer-link class="explorer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bhoothathankettu%2C%20Kerala" target="_blank" rel="noopener">View on Maps <span aria-hidden="true">↗</span></a>
           </div>
-        </div>
-        <div class="bg-white">
-          <figure class="overflow-hidden">
-            <img src="images/inchathotty-bridge.webp" alt="Suspension bridge over a forest river near Inchathotty" width="900" height="675" loading="lazy" decoding="async" class="w-full aspect-[3/2] object-cover" />
-          </figure>
-          <div class="p-6">
-            <h3 class="text-[17px] tracking-[.03em] pb-2">Inchathotty Suspension Bridge</h3>
-            <p class="body-copy">Experience one of the region's scenic attractions surrounded by nature.</p>
-          </div>
-        </div>
-        <div class="bg-white">
-          <figure class="overflow-hidden">
-            <img src="images/paniyeli-poru.webp" alt="Rocky river landscape and rapids at Paniyeli Poru" width="900" height="675" loading="lazy" decoding="async" class="w-full aspect-[3/2] object-cover" />
-          </figure>
-          <div class="p-6">
-            <h3 class="text-[17px] tracking-[.03em] pb-2">Paniyeli Poru</h3>
-            <p class="body-copy">Discover the beauty of Kerala's rocky river landscapes and rapids.</p>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- ================= PLAN YOUR STAY ================= -->
-  <section class="bg-white py-[50px] border-t border-hairline">
+  <section class="bg-white py-[50px] border-t border-hairline riparian-close" data-riparian-reveal>
     <div class="wrap max-w-[900px] text-center">
       <h2 class="text-[26px] md:text-[32px] tracking-[.04em] pb-4">Plan Your Nature Getaway</h2>
       <p class="body-copy">Use Riparian Ayur Resorts as a peaceful base for exploring Bhoothathankettu, Thattekad and the natural side of central Kerala.</p>
-      <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Riparian%20Ayur%20Resorts." target="_blank" rel="noopener" class="vbtn mt-6">Enquire Now</a>
+      <a href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire%20about%20Riparian%20Ayur%20Resorts." target="_blank" rel="noopener" class="riparian-action riparian-action--light">Enquire now <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
