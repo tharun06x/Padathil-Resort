@@ -140,35 +140,46 @@
   <!-- ================= EXPLORE NEARBY ================= -->
   <section class="explorer-section bg-creamalt py-[60px] riparian-explorer" aria-labelledby="nearby-title" data-riparian-reveal>
     <div class="wrap max-w-[1100px]">
-      <p class="explorer-eyebrow">A local field guide</p>
       <h2 id="nearby-title" class="text-center pb-2">Discover the Beauty Around Bhoothathankettu</h2>
-      <p class="body-copy text-center explorer-intro">Choose a pin to find a gentle way to spend the day from Riparian.</p>
+      <p class="body-copy text-center explorer-intro">Find Riparian in the landscape, then choose a nearby place for an unhurried day out.</p>
 
       <div class="nearby-explorer" data-nearby-explorer>
-        <div class="explorer-map" aria-label="Illustrated guide to places near Riparian Ayur Resorts">
-          <svg class="explorer-map-art" viewBox="0 0 700 530" preserveAspectRatio="none" aria-hidden="true">
-            <path class="map-water" d="M-38 382C78 316 100 472 202 399c95-68 95-200 204-177 105 22 120 143 332 29" />
-            <path class="map-water map-water--fine" d="M-42 409c132-75 152 98 259 5 87-75 105-173 194-141 120 43 137 108 329 22" />
-            <path class="map-contour" d="M27 95c62-50 141-48 188-2 49 47 107 14 148-30M390 80c51 26 98 21 146-20 47-39 99-36 144 6M20 243c64-34 137-13 177 37 39 49 115 47 169-2M398 255c54-56 133-58 192-8 34 28 71 28 104 11M18 481c55-34 116-26 155 11M455 466c58-47 124-42 193 8" />
-            <path class="map-route" d="M346 310 166 177M346 310 505 140M346 310 152 413M346 310 551 386" />
-          </svg>
-          <p class="map-scale">Illustrative guide · not to scale</p>
-          <span class="explorer-home"><span class="explorer-home-mark">R</span><span>Riparian<br />Ayur Resorts</span></span>
-          <button class="explorer-pin explorer-pin--bhoothathankettu is-active" type="button" data-place="bhoothathankettu" aria-pressed="true">
+        <div class="explorer-map resort-atlas" aria-label="Resort location and nearby places">
+          <div class="atlas-arrival">
+            <div><h3>Riparian Ayur Resorts</h3><p>Bhoothathankettu, Kerala</p></div>
+            <a href="https://maps.app.goo.gl/kNpSrqVVG5eNfK737" target="_blank" rel="noopener" class="atlas-directions">Get directions <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="local-landscape" data-local-landscape data-selected="bhoothathankettu" aria-label="Custom geographic map of Riparian and four nearby places" aria-describedby="atlas-disclaimer">
+            <img class="local-map-ground" src="images/riparian-local-map.svg" alt="" width="900" height="540" />
+            <svg class="local-connections" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line data-map-connection x1="46.13" y1="54.84" x2="47.29" y2="42.43" /></svg>
+            <span class="local-river-label" aria-hidden="true">Periyar</span>
+            <button class="local-compass" type="button" data-compass aria-label="North is up. Reveal a field note"><svg viewBox="0 0 32 42" aria-hidden="true"><path d="M16 8L8 30l8-5 8 5Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 8v17" stroke="currentColor"/></svg><span>N</span></button>
+            <button class="local-pin local-pin--home" style="--pin-x:46.13%;--pin-y:54.84%" type="button" data-map-home aria-label="Riparian Ayur Resorts, your starting point"><span class="local-marker">R</span><span class="local-pin-label">Riparian<span>Your starting point</span></span></button>
+            <button class="local-pin is-active" style="--pin-x:47.29%;--pin-y:42.43%" type="button" data-place="bhoothathankettu" data-map-x="47.29" data-map-y="42.43" aria-controls="explorer-detail" aria-pressed="true"><span class="local-marker"></span><span class="local-pin-label">Bhoothathankettu</span></button>
+            <button class="local-pin local-pin--east" style="--pin-x:81.64%;--pin-y:64.78%" type="button" data-place="thattekad" data-map-x="81.64" data-map-y="64.78" aria-controls="explorer-detail" aria-pressed="false"><span class="local-marker"></span><span class="local-pin-label">Thattekad</span></button>
+            <button class="local-pin local-pin--east" style="--pin-x:78.97%;--pin-y:77.62%" type="button" data-place="inchathotty" data-map-x="78.97" data-map-y="77.62" aria-controls="explorer-detail" aria-pressed="false"><span class="local-marker"></span><span class="local-pin-label">Inchathotty</span></button>
+            <button class="local-pin" style="--pin-x:14.87%;--pin-y:11.30%" type="button" data-place="paniyeli" data-map-x="14.87" data-map-y="11.30" aria-controls="explorer-detail" aria-pressed="false"><span class="local-marker"></span><span class="local-pin-label">Paniyeli Poru</span></button>
+            <div class="local-distance" aria-live="polite"><strong data-map-distance>1.6 km</strong><span>approx. straight-line distance</span></div>
+          </div>
+          <div class="atlas-caption"><p id="map-status" aria-live="polite">A little time by the water.</p><a href="https://maps.app.goo.gl/kNpSrqVVG5eNfK737" target="_blank" rel="noopener">Resort directions ↗</a></div>
+          <p class="atlas-help" id="atlas-disclaimer">A local field guide. Select a marker to explore. Connections show proximity, not roads; driving distances vary. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>.</p>
+          <div class="atlas-places" role="group" aria-label="Explore nearby places">
+          <button class="explorer-pin explorer-pin--bhoothathankettu is-active" type="button" data-place="bhoothathankettu" aria-controls="explorer-detail" aria-pressed="true">
             <span class="explorer-pin-dot" aria-hidden="true"></span><span>Bhoothathankettu</span>
           </button>
-          <button class="explorer-pin explorer-pin--thattekad" type="button" data-place="thattekad" aria-pressed="false">
+          <button class="explorer-pin explorer-pin--thattekad" type="button" data-place="thattekad" aria-controls="explorer-detail" aria-pressed="false">
             <span class="explorer-pin-dot" aria-hidden="true"></span><span>Thattekad</span>
           </button>
-          <button class="explorer-pin explorer-pin--inchathotty" type="button" data-place="inchathotty" aria-pressed="false">
+          <button class="explorer-pin explorer-pin--inchathotty" type="button" data-place="inchathotty" aria-controls="explorer-detail" aria-pressed="false">
             <span class="explorer-pin-dot" aria-hidden="true"></span><span>Inchathotty</span>
           </button>
-          <button class="explorer-pin explorer-pin--paniyeli" type="button" data-place="paniyeli" aria-pressed="false">
+          <button class="explorer-pin explorer-pin--paniyeli" type="button" data-place="paniyeli" aria-controls="explorer-detail" aria-pressed="false">
             <span class="explorer-pin-dot" aria-hidden="true"></span><span>Paniyeli Poru</span>
           </button>
+          </div>
         </div>
 
-        <article class="explorer-detail" aria-live="polite">
+        <article id="explorer-detail" class="explorer-detail" aria-live="polite">
           <figure class="explorer-detail-image">
             <img data-explorer-image src="images/bhoothathankettu.webp" alt="Boat cruise on the Bhoothathankettu reservoir surrounded by forest" width="900" height="600" loading="lazy" decoding="async" />
           </figure>
@@ -177,7 +188,7 @@
             <h3 data-explorer-title>Bhoothathankettu</h3>
             <p class="body-copy" data-explorer-description>Explore the scenic surroundings and enjoy the natural beauty of the region.</p>
             <dl class="explorer-facts">
-              <div><dt>From Riparian</dt><dd data-explorer-distance>A short drive away</dd></div>
+              <div><dt>From Riparian</dt><dd data-explorer-distance>≈ 1.6 km straight-line</dd></div>
               <div><dt>Best for</dt><dd data-explorer-best>Water views &amp; an unhurried outing</dd></div>
               <div><dt>Take your time</dt><dd data-explorer-pace>A relaxed half-day</dd></div>
             </dl>

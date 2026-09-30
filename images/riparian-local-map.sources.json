@@ -1,0 +1,19 @@
+{
+  "map": {
+    "source": "OpenStreetMap contributors",
+    "license": "ODbL 1.0",
+    "attribution": "https://www.openstreetmap.org/copyright",
+    "date": "2026-09-30",
+    "bounds": [10.07, 76.57, 10.185, 76.765],
+    "projection": "Local equirectangular; presentation adapted to the panel",
+    "note": "Map linework is geographic data. Selected connections are straight-line proximity indicators, not road routes."
+  },
+  "locations": {
+    "riparian": {"coordinates": [10.1219342, 76.6599584], "source": "https://maps.app.goo.gl/kNpSrqVVG5eNfK737"},
+    "bhoothathankettu": {"coordinates": [10.136389, 76.662222], "source": "https://en.wikipedia.org/wiki/Bhoothathankettu"},
+    "thattekad": {"coordinates": [10.1105, 76.7292], "source": "https://www.keybiodiversityareas.org/en/site/factsheet/18258", "note": "Sanctuary central coordinate, not an entrance or driving destination."},
+    "inchathotty": {"coordinates": [10.095736, 76.722999], "source": "https://www.bridgemeister.com/list.php?country=India&format=condensed&type=country"},
+    "paniyeli": {"coordinates": [10.172, 76.599], "source": "https://mapcarta.com/Paniyeli_Poru"}
+  },
+  "distances": "Haversine distance from the user-provided resort coordinate; Earth radius 6371 km; rounded to 0.1 km. Approximate straight-line distances, never travel times or driving distances."
+}
