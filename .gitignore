@@ -4,3 +4,8 @@ node_modules/
 .agents/
 render.png
 render-mobile.png
+.impeccable/atlas-browser*/
+.impeccable/atlas-check.cjs
+.impeccable/local-map-data.xml
+.impeccable/local-map-source.json
+.impeccable/review/
