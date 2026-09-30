@@ -66,6 +66,7 @@
   if (nearbyExplorer) {
     const places = {
       bhoothathankettu: {
+        coordinates: [10.136389, 76.662222], note: 'A little time by the water.',
         number: '01 / 04', title: 'Bhoothathankettu',
         description: 'Explore the scenic surroundings and enjoy the natural beauty of the region.',
         distance: 'A short drive away', best: 'Water views & an unhurried outing', pace: 'A relaxed half-day',
@@ -73,6 +74,7 @@
         link: 'https://www.google.com/maps/search/?api=1&query=Bhoothathankettu%2C%20Kerala'
       },
       thattekad: {
+        coordinates: [10.1105, 76.7292], note: 'A pause for birdsong. Leave a little room for quiet.',
         number: '02 / 04', title: 'Thattekad Bird Sanctuary',
         description: 'A destination known for its diverse birdlife and peaceful forest environment.',
         distance: 'A nearby nature outing', best: 'Birdwatching & quiet forest time', pace: 'Start early and move slowly',
@@ -80,6 +82,7 @@
         link: 'https://www.google.com/maps/search/?api=1&query=Thattekad%20Bird%20Sanctuary%2C%20Kerala'
       },
       inchathotty: {
+        coordinates: [10.095736, 76.722999], note: 'A different perspective, one step at a time.',
         number: '03 / 04', title: 'Inchathotty Suspension Bridge',
         description: 'Experience one of the region’s scenic attractions surrounded by nature.',
         distance: 'Plan as a day outing', best: 'Views, riverside air & a change of pace', pace: 'Leave room to linger',
@@ -87,6 +90,7 @@
         link: 'https://www.google.com/maps/search/?api=1&query=Inchathotty%20Suspension%20Bridge%2C%20Kerala'
       },
       paniyeli: {
+        coordinates: [10.172, 76.599], note: 'Let the river set the pace.',
         number: '04 / 04', title: 'Paniyeli Poru',
         description: 'Discover the beauty of Kerala’s rocky river landscapes and rapids.',
         distance: 'Plan as a day outing', best: 'River landscapes & monsoon drama', pace: 'Best enjoyed without rushing',
@@ -96,6 +100,25 @@
     };
 
     const image = nearbyExplorer.querySelector('[data-explorer-image]');
+    const map = nearbyExplorer.querySelector('.explorer-map');
+    const mapStatus = nearbyExplorer.querySelector('[data-map-status], #map-status');
+    const landscape = nearbyExplorer.querySelector('[data-local-landscape]');
+    const connection = nearbyExplorer.querySelector('[data-map-connection]');
+    const mapDistance = nearbyExplorer.querySelector('[data-map-distance]');
+    let imageTimer;
+    const proximity = ([lat, lon]) => {
+      const radians = value => value * Math.PI / 180;
+      const home = [10.1219342, 76.6599584];
+      const a = Math.sin(radians(lat-home[0])/2)**2 + Math.cos(radians(home[0])) * Math.cos(radians(lat)) * Math.sin(radians(lon-home[1])/2)**2;
+      return (6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(1);
+    };
+    nearbyExplorer.querySelector('[data-map-home]')?.addEventListener('click', () => {
+      if (mapStatus) mapStatus.textContent = 'Every little journey begins here. Welcome back to Riparian.';
+      if (!reducedMotion.matches) landscape?.animate([{boxShadow:'inset 0 0 0 0 rgba(201,164,102,0)'},{boxShadow:'inset 0 0 0 3px rgba(201,164,102,.8)'},{boxShadow:'inset 0 0 0 0 rgba(201,164,102,0)'}],{duration:900});
+    });
+    nearbyExplorer.querySelector('[data-compass]')?.addEventListener('click', () => {
+      if (mapStatus) mapStatus.textContent = 'North is up. There is no hurry to find your way.';
+    });
     const fields = {
       number: nearbyExplorer.querySelector('[data-explorer-number]'),
       title: nearbyExplorer.querySelector('[data-explorer-title]'),
@@ -115,8 +138,21 @@
         pin.classList.toggle('is-active', selected);
         pin.setAttribute('aria-pressed', String(selected));
       });
+      if (map) map.dataset.activePlace = key;
+      if (landscape) {
+        landscape.dataset.selected = key;
+        const marker = pins.find(pin => pin.dataset.place === key && pin.dataset.mapX);
+        if (connection && marker) {
+          connection.setAttribute('x2', marker.dataset.mapX);
+          connection.setAttribute('y2', marker.dataset.mapY);
+          if (!reducedMotion.matches) connection.animate([{strokeDashoffset:120,opacity:.25},{strokeDashoffset:0,opacity:1}],{duration:700,easing:'cubic-bezier(.16,1,.3,1)'});
+        }
+        if (mapDistance) mapDistance.textContent = `${proximity(place.coordinates)} km`;
+        if (mapStatus) mapStatus.textContent = place.note;
+      } else if (mapStatus) mapStatus.textContent = `Selected route: ${place.title}`;
       image.classList.add('is-changing');
-      window.setTimeout(() => {
+      window.clearTimeout(imageTimer);
+      imageTimer = window.setTimeout(() => {
         image.src = place.image;
         image.alt = place.alt;
         image.classList.remove('is-changing');
@@ -124,7 +160,7 @@
       fields.number.textContent = place.number;
       fields.title.textContent = place.title;
       fields.description.textContent = place.description;
-      fields.distance.textContent = place.distance;
+      fields.distance.textContent = landscape ? `≈ ${proximity(place.coordinates)} km straight-line` : place.distance;
       fields.best.textContent = place.best;
       fields.pace.textContent = place.pace;
       fields.link.href = place.link;
@@ -132,6 +168,7 @@
     };
 
     pins.forEach((pin) => pin.addEventListener('click', () => selectPlace(pin.dataset.place)));
+    if (landscape) selectPlace('bhoothathankettu');
   }
 
   const loader = document.querySelector('#pageLoader');
