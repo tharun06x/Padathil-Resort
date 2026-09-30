@@ -1,11 +1,6 @@
 /* Riparian Ayur Resorts — forest-edge field journal. */
 .riparian-page { --riparian-ink: #102c24; --riparian-ink-deep: #071914; --riparian-paper: #ece5d5; --riparian-moss: #73816c; --riparian-silt: #a7623c; --riparian-brass: #c9a466; --riparian-line: rgba(16,44,36,.22); background: var(--riparian-paper) !important; }
 .riparian-page ::selection { background: var(--riparian-silt); color: #fff8eb; }
-.riparian-page .site-header, .riparian-page #siteHeader { background: rgba(7,25,20,.92) !important; border-bottom-color: rgba(232,220,195,.16) !important; }
-.riparian-page .site-brand, .riparian-page .desktop-nav > a, .riparian-page .desktop-nav summary { color: #f5eddc !important; }
-.riparian-page .site-brand span { color: #f5eddc !important; }
-.riparian-page .mobile-menu > summary { color: #f5eddc !important; border-color: rgba(245,237,220,.72) !important; }
-.riparian-page .header-book { background: var(--riparian-brass); color: var(--riparian-ink-deep); }
 .riparian-page .bg-white { background: var(--riparian-paper) !important; }
 .riparian-page .bg-creamalt { background: #d8d5bd !important; }
 .riparian-page h1, .riparian-page h2, .riparian-page h3 { color: var(--riparian-ink) !important; }

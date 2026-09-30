@@ -64,40 +64,9 @@
 
   const nearbyExplorer = document.querySelector('[data-nearby-explorer]');
   if (nearbyExplorer) {
-    const places = {
-      bhoothathankettu: {
-        coordinates: [10.136389, 76.662222], note: 'A little time by the water.',
-        number: '01 / 04', title: 'Bhoothathankettu',
-        description: 'Explore the scenic surroundings and enjoy the natural beauty of the region.',
-        distance: 'A short drive away', best: 'Water views & an unhurried outing', pace: 'A relaxed half-day',
-        image: 'images/bhoothathankettu.webp', alt: 'Boat cruise on the Bhoothathankettu reservoir surrounded by forest',
-        link: 'https://www.google.com/maps/search/?api=1&query=Bhoothathankettu%2C%20Kerala'
-      },
-      thattekad: {
-        coordinates: [10.1105, 76.7292], note: 'A pause for birdsong. Leave a little room for quiet.',
-        number: '02 / 04', title: 'Thattekad Bird Sanctuary',
-        description: 'A destination known for its diverse birdlife and peaceful forest environment.',
-        distance: 'A nearby nature outing', best: 'Birdwatching & quiet forest time', pace: 'Start early and move slowly',
-        image: 'images/thattekad.webp', alt: 'River and forested hills at Thattekad Bird Sanctuary',
-        link: 'https://www.google.com/maps/search/?api=1&query=Thattekad%20Bird%20Sanctuary%2C%20Kerala'
-      },
-      inchathotty: {
-        coordinates: [10.095736, 76.722999], note: 'A different perspective, one step at a time.',
-        number: '03 / 04', title: 'Inchathotty Suspension Bridge',
-        description: 'Experience one of the region’s scenic attractions surrounded by nature.',
-        distance: 'Plan as a day outing', best: 'Views, riverside air & a change of pace', pace: 'Leave room to linger',
-        image: 'images/inchathotty-bridge.webp', alt: 'Suspension bridge over a forest river near Inchathotty',
-        link: 'https://www.google.com/maps/search/?api=1&query=Inchathotty%20Suspension%20Bridge%2C%20Kerala'
-      },
-      paniyeli: {
-        coordinates: [10.172, 76.599], note: 'Let the river set the pace.',
-        number: '04 / 04', title: 'Paniyeli Poru',
-        description: 'Discover the beauty of Kerala’s rocky river landscapes and rapids.',
-        distance: 'Plan as a day outing', best: 'River landscapes & monsoon drama', pace: 'Best enjoyed without rushing',
-        image: 'images/paniyeli-poru.webp', alt: 'Rocky river landscape and rapids at Paniyeli Poru',
-        link: 'https://www.google.com/maps/search/?api=1&query=Paniyeli%20Poru%2C%20Kerala'
-      }
-    };
+    const config = JSON.parse(document.querySelector('#explorer-data').textContent);
+    const places = config.places;
+    const home = config.home;
 
     const image = nearbyExplorer.querySelector('[data-explorer-image]');
     const map = nearbyExplorer.querySelector('.explorer-map');
@@ -108,12 +77,11 @@
     let imageTimer;
     const proximity = ([lat, lon]) => {
       const radians = value => value * Math.PI / 180;
-      const home = [10.1219342, 76.6599584];
       const a = Math.sin(radians(lat-home[0])/2)**2 + Math.cos(radians(home[0])) * Math.cos(radians(lat)) * Math.sin(radians(lon-home[1])/2)**2;
       return (6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(1);
     };
     nearbyExplorer.querySelector('[data-map-home]')?.addEventListener('click', () => {
-      if (mapStatus) mapStatus.textContent = 'Every little journey begins here. Welcome back to Riparian.';
+      if (mapStatus) mapStatus.textContent = config.homeNote;
       if (!reducedMotion.matches) landscape?.animate([{boxShadow:'inset 0 0 0 0 rgba(201,164,102,0)'},{boxShadow:'inset 0 0 0 3px rgba(201,164,102,.8)'},{boxShadow:'inset 0 0 0 0 rgba(201,164,102,0)'}],{duration:900});
     });
     nearbyExplorer.querySelector('[data-compass]')?.addEventListener('click', () => {
@@ -147,7 +115,11 @@
           connection.setAttribute('y2', marker.dataset.mapY);
           if (!reducedMotion.matches) connection.animate([{strokeDashoffset:120,opacity:.25},{strokeDashoffset:0,opacity:1}],{duration:700,easing:'cubic-bezier(.16,1,.3,1)'});
         }
-        if (mapDistance) mapDistance.textContent = `${proximity(place.coordinates)} km`;
+        if (mapDistance) {
+          mapDistance.textContent = `${place.km || proximity(place.coordinates)} km`;
+          const unit = mapDistance.nextElementSibling;
+          if (unit) unit.textContent = place.km ? 'approx. road distance' : 'approx. straight-line distance';
+        }
         if (mapStatus) mapStatus.textContent = place.note;
       } else if (mapStatus) mapStatus.textContent = `Selected route: ${place.title}`;
       image.classList.add('is-changing');
@@ -160,7 +132,7 @@
       fields.number.textContent = place.number;
       fields.title.textContent = place.title;
       fields.description.textContent = place.description;
-      fields.distance.textContent = landscape ? `≈ ${proximity(place.coordinates)} km straight-line` : place.distance;
+      fields.distance.textContent = place.km ? `≈ ${place.km} km by road` : landscape ? `≈ ${proximity(place.coordinates)} km straight-line` : place.distance;
       fields.best.textContent = place.best;
       fields.pace.textContent = place.pace;
       fields.link.href = place.link;
@@ -168,7 +140,7 @@
     };
 
     pins.forEach((pin) => pin.addEventListener('click', () => selectPlace(pin.dataset.place)));
-    if (landscape) selectPlace('bhoothathankettu');
+    if (landscape) selectPlace(config.initial);
   }
 
   const loader = document.querySelector('#pageLoader');
@@ -291,4 +263,107 @@
       first.focus();
     }
   });
+})();
+
+(() => {
+  const cards = document.querySelectorAll('.gallery-card');
+  if (!cards.length || !document.documentElement.classList.contains('reveal-ready')) return;
+  // Replays the reveal every time a card scrolls back into view.
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio >= 0.15) entry.target.classList.add('is-in');
+      else if (!entry.isIntersecting) entry.target.classList.remove('is-in');
+    });
+  }, { threshold: [0, 0.15] });
+  // Start after the page has painted so the first row's reveal is actually seen.
+  const start = () => window.setTimeout(() => cards.forEach((card) => io.observe(card)), 350);
+  if (document.readyState === 'complete') start(); else window.addEventListener('load', start, { once: true });
+})();
+
+// Home and Nature Castle pages: elements pop up as they scroll into view, and again on every pass.
+(() => {
+  const isHome = !!document.getElementById('welcome');
+  const isNature = !!document.querySelector('.nc-page');
+  const isRip = !!document.querySelector('.riparian-page');
+  const isBlog = !!document.querySelector('.blog-grid');
+  const isAbout = !!document.querySelector('.about-hero');
+  const isContact = !!document.querySelector('.contact-hero');
+  const isArticle = document.body.classList.contains('blog-article');
+  if (!(isHome || isNature || isRip || isBlog || isAbout || isContact || isArticle) || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const homeTargets = [
+    '#welcome .wrap > *',
+    '#properties .wrap > div:first-child > *',
+    '#properties .stay-choice',
+    '#properties .property-compass > *',
+    '#why-padathil figure',
+    '#why-padathil .bg-panel',
+    '#experience h2',
+    '#experience .journal-tile',
+    '#experience .wrap > p',
+    '#our-story .wrap > *'
+  ];
+  const natureTargets = [
+    '.nc-intro .wrap > *',
+    '.nc-sig-head > *',
+    '.nc-spec-row',
+    '.nc-facts > div',
+    '.nc-split > div',
+    '.nc-glance h2',
+    '.nc-glance .property-facts > div',
+    '.nc-explore .wrap > :not(.nc-valley)',
+    '.nc-plan .wrap > *'
+  ];
+  const ripTargets = [
+    '.riparian-arrival .wrap > *',
+    '.rp-sec .nc-sig-head > *',
+    '.rp-facts > div',
+    '.rp-perks li',
+    '.riparian-story .nc-split > div > *',
+    '.riparian-facts-section h2',
+    '.riparian-facts-section .property-facts > div',
+    '.riparian-explorer .wrap > *',
+    '.riparian-close .wrap > *'
+  ];
+  const blogTargets = [
+    'main > section:first-child .wrap > *',
+    '.blog-card'
+  ];
+  const aboutTargets = [
+    '.about-hero .wrap > *',
+    '.about-split-text > *',
+    'main section:nth-of-type(3) .wrap > div',
+    '.about-cta .wrap > *'
+  ];
+  const contactTargets = [
+    'main section h1', 'main section h2', 'main section p:not(article p)',
+    'main section article', 'main section form', 'main section dl > div'
+  ];
+  const articleTargets = ['main h1', 'main h2', 'main p', 'main li'];
+  const wipeTargets = ['.nc-photo', '.nc-valley', '.about-photo'];
+  const seen = new Map();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio >= 0.1) entry.target.classList.add('pop-in');
+      else if (!entry.isIntersecting) entry.target.classList.remove('pop-in');
+    });
+  }, { threshold: [0, 0.1] });
+  const watch = (selectors, cls) => document.querySelectorAll(selectors.join(',')).forEach((el) => {
+    const i = seen.get(el.parentNode) || 0;
+    seen.set(el.parentNode, i + 1);
+    el.style.setProperty('--pop-d', `${Math.min(i, 3) * 0.12}s`);
+    el.classList.add(cls);
+    io.observe(el);
+  });
+  watch(isHome ? homeTargets : isRip ? ripTargets : isBlog ? blogTargets : isAbout ? aboutTargets : isContact ? contactTargets : isArticle ? articleTargets : natureTargets, 'pop');
+  if (isNature || isRip || isAbout) watch(wipeTargets, 'wipe');
+})();
+
+// Home and Nature Castle pages: momentum (inertia) scrolling. Skipped for reduced motion or if the CDN script is blocked.
+(() => {
+  if (!(document.getElementById('welcome') || document.querySelector('.nc-page') || document.querySelector('.blog-grid') || document.querySelector('.about-hero') || document.querySelector('.contact-hero')) || !window.Lenis) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, anchors: { offset: -92 } });
+  const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
 })();
