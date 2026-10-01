@@ -287,9 +287,10 @@
   const isRip = !!document.querySelector('.riparian-page');
   const isBlog = !!document.querySelector('.blog-grid');
   const isAbout = !!document.querySelector('.about-hero');
+  const isFaq = !!document.querySelector('.faq-list');
   const isContact = !!document.querySelector('.contact-hero');
   const isArticle = document.body.classList.contains('blog-article');
-  if (!(isHome || isNature || isRip || isBlog || isAbout || isContact || isArticle) || !('IntersectionObserver' in window)) return;
+  if (!(isHome || isNature || isRip || isBlog || isAbout || isContact || isArticle || isFaq) || !('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const homeTargets = [
     '#welcome .wrap > *',
@@ -339,6 +340,7 @@
     'main section h1', 'main section h2', 'main section p:not(article p)',
     'main section article', 'main section form', 'main section dl > div'
   ];
+  const faqTargets = ['main section:first-child .wrap > *', '.faq-list details'];
   const articleTargets = ['main h1', 'main h2', 'main p', 'main li'];
   const wipeTargets = ['.nc-photo', '.nc-valley', '.about-photo'];
   const seen = new Map();
@@ -355,15 +357,40 @@
     el.classList.add(cls);
     io.observe(el);
   });
-  watch(isHome ? homeTargets : isRip ? ripTargets : isBlog ? blogTargets : isAbout ? aboutTargets : isContact ? contactTargets : isArticle ? articleTargets : natureTargets, 'pop');
+  watch(isHome ? homeTargets : isRip ? ripTargets : isBlog ? blogTargets : isAbout ? aboutTargets : isContact ? contactTargets : isFaq ? faqTargets : isArticle ? articleTargets : natureTargets, 'pop');
   if (isNature || isRip || isAbout) watch(wipeTargets, 'wipe');
 })();
 
 // Home and Nature Castle pages: momentum (inertia) scrolling. Skipped for reduced motion or if the CDN script is blocked.
 (() => {
-  if (!(document.getElementById('welcome') || document.querySelector('.nc-page') || document.querySelector('.blog-grid') || document.querySelector('.about-hero') || document.querySelector('.contact-hero')) || !window.Lenis) return;
+  if (!(document.getElementById('welcome') || document.querySelector('.nc-page') || document.querySelector('.blog-grid') || document.querySelector('.about-hero') || document.querySelector('.contact-hero') || document.querySelector('.faq-list')) || !window.Lenis) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, anchors: { offset: -92 } });
   const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
+})();
+
+// FAQ accordion: opening one question closes the others, and answers fade out as they close.
+(() => {
+  const items = [...document.querySelectorAll('.faq-list details')];
+  if (!items.length) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const close = (item) => {
+    if (!item.open || item.dataset.closing) return;
+    const answer = item.querySelector('.body-copy');
+    if (reduced || !answer) { item.open = false; return; }
+    item.dataset.closing = '1';
+    // Collapse and fade together; keep the faded end state until the collapse has finished so the text never flashes back.
+    answer.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: 280, easing: 'ease', fill: 'forwards' });
+    item.open = false;
+    window.setTimeout(() => { answer.getAnimations().forEach((a) => a.cancel()); delete item.dataset.closing; }, 520);
+  };
+  items.forEach((item) => {
+    item.querySelector('summary').addEventListener('click', (event) => {
+      event.preventDefault();
+      if (item.open) { close(item); return; }
+      items.forEach((other) => { if (other !== item) close(other); });
+      item.open = true;
+    });
+  });
 })();
