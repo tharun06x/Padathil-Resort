@@ -1,0 +1,70 @@
+/* Ivory & Gold luxury theme. Loaded after site.css; remove the link to revert. */
+:root {
+  --ivory: #f7f3ea; --ivory-2: #efe9db; --ivory-3: #e6dfcd;
+  --char: #1b1b19; --char-2: #262622; --char-soft: #5d5a52;
+  --gold: #a8854f; --gold-light: #c9ab74;
+  --line: rgba(27, 27, 25, .16);
+  --paper: var(--ivory); --paper-deep: var(--ivory-2); --ink: var(--char); --body: var(--char-soft);
+  --forest: var(--char); --forest-deep: var(--char); --leaf: var(--gold); --brass: var(--gold);
+  --padathil-body: var(--char-soft); --padathil-focus: var(--gold);
+  --riparian-paper: var(--ivory); --riparian-ink: var(--char); --riparian-ink-deep: #0f0f0e; --riparian-brass: var(--gold-light);
+}
+html, body { background: var(--ivory) !important; color: var(--char) !important; }
+h1, h2, h3, h4 { color: var(--char) !important; font-weight: 500 !important; letter-spacing: -.01em; }
+.body-copy, p { color: var(--char-soft); }
+
+/* Surfaces */
+main > section.bg-white, .bg-white { background: var(--ivory) !important; }
+main > section.bg-cream, main > section.bg-creamalt, .bg-cream, .bg-creamalt { background: var(--ivory-2) !important; }
+#properties { background: var(--ivory-2) !important; }
+.riparian-page .bg-white, .riparian-page { background: var(--ivory) !important; }
+.riparian-page .bg-creamalt, .riparian-page .riparian-explorer { background: var(--ivory-2) !important; }
+.nc-signature, .nc-farm, .nc-explore, .rp-strip, .about-roots { background: var(--ivory) !important; }
+.nc-glance, .nc-farm-strip { background: var(--ivory-2) !important; }
+#why-padathil, .contact-enquiry, footer, .site-footer { background: var(--char) !important; }
+.contact-places { background: var(--ivory-2) !important; }
+
+/* Header */
+#siteHeader, .site-header { background: rgba(247, 243, 234, .82) !important; border: 1px solid rgba(168, 133, 79, .35) !important; box-shadow: 0 14px 40px rgba(27, 27, 25, .12) !important; }
+.site-brand, .site-brand span, .desktop-nav a, .desktop-nav summary { color: var(--char) !important; }
+.site-header nav a:hover, .site-header nav a[aria-current='page'], .stay-menu-toggle > summary[aria-current='page'] { color: var(--gold) !important; }
+.site-header nav a::after { background: var(--gold) !important; }
+.header-book { background: var(--char) !important; color: var(--ivory) !important; border-radius: 0 !important; }
+
+/* Buttons: sharp, gold-outline luxury */
+.vbtn, .riparian-action, .contact-primary-action { background: transparent !important; color: var(--char) !important; border: 1px solid var(--gold) !important; border-radius: 0 !important; letter-spacing: .22em !important; font-weight: 600 !important; transition: background .3s ease, color .3s ease !important; }
+.vbtn:hover, .riparian-action:hover { background: var(--char) !important; color: var(--gold-light) !important; border-color: var(--char) !important; transform: none !important; }
+#why-padathil .vbtn, .contact-enquiry .vbtn, .about-cta .vbtn, .riparian-hero .riparian-action { color: var(--ivory) !important; border-color: var(--gold-light) !important; }
+#why-padathil .vbtn:hover, .contact-enquiry .vbtn:hover, .riparian-hero .riparian-action:hover { background: var(--gold) !important; color: var(--char) !important; }
+
+/* Dropdown */
+.stay-menu, .stay-menu--picker { background: var(--ivory) !important; border: 1px solid rgba(168, 133, 79, .4) !important; border-top: 2px solid var(--gold) !important; box-shadow: 0 24px 50px rgba(27, 27, 25, .16) !important; }
+.stay-picker .stay-option-copy b { color: var(--char) !important; }
+.stay-picker .stay-option-copy small { color: var(--gold) !important; }
+.stay-picker .stay-option:hover { background: var(--ivory-2) !important; }
+
+/* Cards: flat, hairline */
+.property-card, .stay-choice, .blog-card, .editorial-card, .contact-place, .faq-list details, .property-facts > div, .nearby-explorer { background: #fbf8f1 !important; border: 1px solid var(--line) !important; box-shadow: none !important; border-radius: 0 !important; }
+.faq-list details[open] { border-color: var(--gold) !important; background: #fff !important; }
+.section-kicker, .property-index, .property-facts dt, .eyebrow { color: var(--gold) !important; letter-spacing: .24em !important; }
+.property-card:hover { box-shadow: 0 24px 50px rgba(27, 27, 25, .1) !important; }
+
+/* Dark bands */
+#why-padathil h2, #why-padathil h3, #why-padathil h4, .contact-enquiry :is(h2, h3, h4, dt, em), footer, footer * { color: var(--ivory) !important; }
+#why-padathil .bg-panel { background: var(--char-2) !important; border-color: rgba(201, 171, 116, .3) !important; }
+#why-padathil .bg-panel p, .contact-enquiry p, .contact-enquiry dd { color: #c9c3b3 !important; }
+#why-padathil .bg-panel h2 { border-color: rgba(201, 171, 116, .35) !important; }
+.contact-enquiry { color: var(--ivory) !important; }
+footer a:hover { color: var(--gold-light) !important; }
+.border-hairline, .border-t, .border-b { border-color: var(--line) !important; }
+.text-nandor, .text-greyt, .text-gold { color: var(--gold) !important; }
+
+/* Hero and page-hero shading */
+.riparian-hero h1, .contact-hero h1, .about-hero h1, .nc-hero h1, .riparian-hero-intro, .riparian-hero-copy p { color: var(--ivory) !important; }
+.riparian-hero h1 em { color: var(--gold-light) !important; }
+.riparian-location, .riparian-hero-note { color: var(--gold-light) !important; }
+.contact-desk a[href^="mailto"] { background: var(--char) !important; color: var(--ivory) !important; }
+.wa-float { box-shadow: 0 10px 28px rgba(27, 27, 25, .28) !important; }
+#siteHeader, .site-header { border-radius: 0 !important; }
+.stay-choice-content .body-copy { margin-bottom: 26px !important; }
+.stay-choice-content h3 { letter-spacing: .01em; }
