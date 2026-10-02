@@ -42,8 +42,12 @@ main > section.bg-cream, main > section.bg-creamalt, .bg-cream, .bg-creamalt { b
 /* Buttons: sharp, gold-outline luxury */
 .vbtn, .riparian-action, .contact-primary-action { background: transparent !important; color: var(--char) !important; border: 1px solid var(--gold) !important; border-radius: 0 !important; letter-spacing: .22em !important; font-weight: 600 !important; transition: background .3s ease, color .3s ease !important; }
 .vbtn:hover, .riparian-action:hover { background: var(--char) !important; color: var(--gold-light) !important; border-color: var(--char) !important; transform: none !important; }
-#why-padathil .vbtn, .contact-enquiry .vbtn, .about-cta .vbtn, .riparian-hero .riparian-action { color: var(--ivory) !important; border-color: var(--gold-light) !important; }
+#why-padathil .vbtn, .contact-enquiry .vbtn, .riparian-hero .riparian-action { color: var(--ivory) !important; border-color: var(--gold-light) !important; }
 #why-padathil .vbtn:hover, .contact-enquiry .vbtn:hover, .riparian-hero .riparian-action:hover { background: var(--gold) !important; color: var(--char) !important; }
+.about-cta .vbtn { background: var(--ivory) !important; color: var(--char) !important; border-color: var(--ivory) !important; }
+.about-cta .vbtn:hover { background: var(--gold-light) !important; color: var(--char) !important; border-color: var(--gold-light) !important; }
+.vbtn:active, .riparian-action:active, .contact-primary-action:active, .quick-enquiry-submit:active { transform: scale(.985) !important; transition-duration: .12s !important; }
+@media (prefers-reduced-motion: reduce) { .vbtn:active, .riparian-action:active, .contact-primary-action:active, .quick-enquiry-submit:active { transform: none !important; } }
 .contact-hero .contact-primary-action {
   color: var(--char) !important;
   background: var(--ivory) !important;
@@ -200,6 +204,13 @@ footer a:hover { color: var(--gold-light) !important; }
   content: '';
   background: linear-gradient(145deg, rgba(255, 250, 240, .18) 0%, transparent 38%, rgba(27, 27, 25, .22) 100%);
   mix-blend-mode: soft-light;
+  opacity: .82;
+  transition: opacity .4s ease;
+}
+:is(.property-card, .journal-tile, .blog-card):is(:hover, :focus-visible) > figure::after,
+.gallery-card a:is(:hover, :focus-visible)::after { opacity: .34; }
+@media (prefers-reduced-motion: reduce) {
+  :is(.property-card, .journal-tile) > figure::after, .blog-card figure::after, .gallery-card a::after { transition: none; }
 }
 :is(.property-card, .journal-tile) > figure > img,
 .blog-card figure > img,

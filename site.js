@@ -2,20 +2,38 @@
   'use strict';
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const imageLoadAnimations = new WeakMap();
 
   // Keep reserved image space useful while the browser fetches and decodes the
   // actual photograph. This is intentionally presentation-only: image sources,
   // lazy-loading and layout dimensions stay untouched.
   const imageLoader = {
     watch(image) {
-      if (!image || image.classList.contains('site-logo') || image.classList.contains('local-map-ground')) return;
+      if (!image || image.matches('.site-logo, .local-map-ground, .hero-slide, .nc-slide')) return;
 
       const expectedSource = image.currentSrc || image.src;
+      const wasAlreadyDecoded = image.complete && image.naturalWidth > 0;
+      imageLoadAnimations.get(image)?.cancel();
       const reveal = () => {
         if ((image.currentSrc || image.src) !== expectedSource) return;
         image.classList.remove('is-image-loading');
         image.classList.add('is-image-ready');
         image.removeAttribute('aria-busy');
+
+        // Let a photograph come gently into focus only if it actually loaded
+        // while visible. Cached and offscreen images never slow down scrolling.
+        const bounds = image.getBoundingClientRect();
+        if (wasAlreadyDecoded || reducedMotion.matches || !image.animate ||
+            bounds.bottom <= 0 || bounds.top >= window.innerHeight) return;
+        const finalStyle = getComputedStyle(image);
+        const animation = image.animate([
+          { opacity: .38, filter: 'blur(8px) saturate(.7)' },
+          { opacity: finalStyle.opacity, filter: finalStyle.filter }
+        ], { duration: 720, easing: 'cubic-bezier(.16, 1, .3, 1)' });
+        imageLoadAnimations.set(image, animation);
+        animation.finished.finally(() => {
+          if (imageLoadAnimations.get(image) === animation) imageLoadAnimations.delete(image);
+        }).catch(() => {});
       };
       const fail = () => {
         if ((image.currentSrc || image.src) !== expectedSource) return;
@@ -380,13 +398,24 @@
   const closeButton = lightbox.querySelector('.lightbox-close');
   let activeIndex = 0;
   let previousFocus = null;
+  let imageRequest = 0;
 
   const renderImage = () => {
     const link = galleryLinks[activeIndex];
     const thumbnail = link.querySelector('img');
+    const request = ++imageRequest;
+    image.classList.remove('is-ready');
     image.src = link.href;
     image.alt = thumbnail?.alt || '';
     caption.textContent = link.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || image.alt;
+    const reveal = () => {
+      if (request !== imageRequest) return;
+      // Let a cached image restart its entrance when the visitor changes photos.
+      void image.offsetWidth;
+      image.classList.add('is-ready');
+    };
+    if (image.complete && image.naturalWidth) reveal();
+    else image.addEventListener('load', reveal, { once: true });
   };
 
   const openLightbox = (index) => {
@@ -400,6 +429,8 @@
 
   const closeLightbox = () => {
     lightbox.hidden = true;
+    imageRequest++;
+    image.classList.remove('is-ready');
     image.removeAttribute('src');
     document.body.classList.remove('lightbox-open');
     previousFocus?.focus();
@@ -444,11 +475,12 @@
 (() => {
   const cards = document.querySelectorAll('.gallery-card');
   if (!cards.length || !document.documentElement.classList.contains('reveal-ready')) return;
-  // Replays the reveal every time a card scrolls back into view.
+  // Reveal each gallery card only on its first visit.
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio >= 0.15) entry.target.classList.add('is-in');
-      else if (!entry.isIntersecting) entry.target.classList.remove('is-in');
+      if (entry.intersectionRatio < 0.15) return;
+      entry.target.classList.add('is-in');
+      io.unobserve(entry.target);
     });
   }, { threshold: [0, 0.15] });
   // Start after the page has painted so the first row's reveal is actually seen.
@@ -456,88 +488,30 @@
   if (document.readyState === 'complete') start(); else window.addEventListener('load', start, { once: true });
 })();
 
-// Home and Nature Castle pages: elements pop up as they scroll into view, and again on every pass.
+// Unveil photographs once as they enter view; text and controls remain steady.
 (() => {
-  const isHome = !!document.getElementById('welcome');
-  const isNature = !!document.querySelector('.nc-page');
-  const isRip = !!document.querySelector('.riparian-page');
-  const isBlog = !!document.querySelector('.blog-grid');
-  const isAbout = !!document.querySelector('.about-hero');
-  const isFaq = !!document.querySelector('.faq-list');
-  const isContact = !!document.querySelector('.contact-hero');
-  const isArticle = document.body.classList.contains('blog-article');
-  if (!(isHome || isNature || isRip || isBlog || isAbout || isContact || isArticle || isFaq) || !('IntersectionObserver' in window)) return;
+  if (!('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const homeTargets = [
-    '#welcome .wrap > *',
-    '#properties .wrap > div:first-child > *',
-    '#properties .stay-choice',
-    '#properties .property-compass > *',
-    '#why-padathil figure',
-    '#why-padathil .bg-panel',
-    '#experience h2',
-    '#experience .journal-tile',
-    '#experience .wrap > p',
-    '#our-story .wrap > *'
-  ];
-  const natureTargets = [
-    '.nc-intro .wrap > *',
-    '.nc-sig-head > *',
-    '.nc-spec-row',
-    '.nc-facts > div',
-    '.nc-split > div',
-    '.nc-glance h2',
-    '.nc-glance .property-facts > div',
-    '.nc-explore .wrap > :not(.nc-valley)',
-    '.nc-plan .wrap > *'
-  ];
-  const ripTargets = [
-    '.riparian-arrival .wrap > *',
-    '.rp-sec .nc-sig-head > *',
-    '.rp-facts > div',
-    '.rp-perks li',
-    '.riparian-story .nc-split > div > *',
-    '.riparian-facts-section h2',
-    '.riparian-facts-section .property-facts > div',
-    '.riparian-explorer .wrap > *',
-    '.riparian-close .wrap > *'
-  ];
-  const blogTargets = [
-    'main > section:first-child .wrap > *',
-    '.blog-card'
-  ];
-  const aboutTargets = [
-    '.about-hero .wrap > *',
-    '.about-split-text > *',
-    'main section:nth-of-type(3) .wrap > div',
-    '.about-cta .wrap > *'
-  ];
-  const contactTargets = [
-    'main section h1', 'main section h2', 'main section p:not(article p)',
-    'main section article', 'main section form', 'main section dl > div'
-  ];
-  const faqTargets = ['main section:first-child .wrap > *', '.faq-list details'];
-  const articleTargets = ['main h1', 'main h2', 'main p', 'main li'];
-  const wipeTargets = ['.nc-photo', '.nc-valley', '.about-photo'];
-  const seen = new Map();
+  const photos = document.querySelectorAll(
+    '#properties .property-card figure, #why-padathil figure, #experience .journal-tile figure, ' +
+    '.nc-page .nc-photo, .nc-page .nc-valley, .riparian-page .nc-photo, ' +
+    '.about-photo, .blog-card figure'
+  );
+  if (!photos.length) return;
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio >= 0.1) entry.target.classList.add('pop-in');
-      else if (!entry.isIntersecting) entry.target.classList.remove('pop-in');
+      if (entry.intersectionRatio < 0.08) return;
+      entry.target.classList.add('is-in');
+      io.unobserve(entry.target);
     });
-  }, { threshold: [0, 0.1] });
-  const watch = (selectors, cls) => document.querySelectorAll(selectors.join(',')).forEach((el) => {
-    const i = seen.get(el.parentNode) || 0;
-    seen.set(el.parentNode, i + 1);
-    el.style.setProperty('--pop-d', `${Math.min(i, 3) * 0.12}s`);
-    el.classList.add(cls);
-    io.observe(el);
+  }, { threshold: [0, 0.08] });
+  photos.forEach((photo) => {
+    photo.classList.add('media-reveal');
+    io.observe(photo);
   });
-  watch(isHome ? homeTargets : isRip ? ripTargets : isBlog ? blogTargets : isAbout ? aboutTargets : isContact ? contactTargets : isFaq ? faqTargets : isArticle ? articleTargets : natureTargets, 'pop');
-  if (isNature || isRip || isAbout) watch(wipeTargets, 'wipe');
 })();
 
-// Home and Nature Castle pages: momentum (inertia) scrolling. Skipped for reduced motion or if the CDN script is blocked.
+// Momentum scrolling is used on the home and selected interior pages.
 (() => {
   if (!(document.getElementById('welcome') || document.querySelector('.nc-page') || document.querySelector('.blog-grid') || document.querySelector('.about-hero') || document.querySelector('.contact-hero') || document.querySelector('.faq-list')) || !window.Lenis) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
