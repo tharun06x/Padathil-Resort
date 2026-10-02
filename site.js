@@ -234,19 +234,12 @@
       link.addEventListener('click', (event) => transitionToStay(event, targetPath));
     });
     const nextStay = staySequence[(stayIndex + 1) % staySequence.length];
-    const actions = document.querySelector('.header-actions');
-    const bookingAction = actions?.querySelector('.header-book');
-    if (actions && bookingAction) {
-      const nextLink = document.createElement('a');
-      nextLink.className = 'stay-next';
-      nextLink.href = nextStay.path;
-      nextLink.setAttribute('aria-label', `Explore the next stay: ${nextStay.name}`);
-      nextLink.innerHTML = `<span>Next stay</span><strong>${nextStay.name}</strong><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>`;
+    const nextLink = document.querySelector('[data-next-stay]');
+    if (nextLink) {
       nextLink.addEventListener('pointerenter', () => warmStay(nextStay.path), { passive: true });
       nextLink.addEventListener('focus', () => warmStay(nextStay.path));
       nextLink.addEventListener('pointerdown', () => warmStay(nextStay.path, true), { passive: true });
       nextLink.addEventListener('click', (event) => transitionToStay(event, nextStay.path));
-      actions.insertBefore(nextLink, bookingAction);
     }
   }
 
