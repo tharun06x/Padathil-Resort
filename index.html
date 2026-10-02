@@ -8,6 +8,7 @@
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://padathilstays.com/" />
 <link rel="icon" type="image/webp" href="images/padathil-symbol-transparent.webp" />
+<link rel="preload" as="image" href="images/banner/hero-landing.webp" fetchpriority="high" imagesrcset="images/banner/hero-landing-480w.webp 480w, images/banner/hero-landing-960w.webp 960w, images/banner/hero-landing.webp 1600w" imagesizes="100vw" />
 <meta name="theme-color" content="#18372d" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Padathil Stays" />
@@ -44,6 +45,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 <script src="site.js" defer></script>
+
 </head>
 <body class="is-loading">
   <div id="pageLoader" class="page-loader" role="status" aria-label="Loading Padathil Stays">
@@ -104,10 +106,10 @@
   <!-- ================= HERO ================= -->
   <section id="top" class="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
     <div class="hero-slides" aria-hidden="false">
-      <img src="images/banner/hero-landing.webp" alt="Traditional Kerala timber homestay lit at dusk" width="1600" height="999" fetchpriority="high" class="hero-slide absolute inset-0 h-full w-full object-cover" />
-      <img src="images/banner/hero-slide-nature-castle.webp" alt="Nature Castle Resort, a tiled-roof timber house under a blue sky in Vattavada" width="1600" height="999" decoding="async" class="hero-slide absolute inset-0 h-full w-full object-cover" />
-      <img src="images/banner/hero-slide-niva.webp" alt="Niva Waterways lakefront in Alleppey" width="1600" height="999" decoding="async" class="hero-slide absolute inset-0 h-full w-full object-cover" />
-      <img src="images/banner/hero-slide-riparian.webp" alt="Riparian Resort wooden villa with a tiled roof and veranda" width="1600" height="999" decoding="async" class="hero-slide absolute inset-0 h-full w-full object-cover" />
+      <img src="images/banner/hero-landing.webp" srcset="images/banner/hero-landing-480w.webp 480w, images/banner/hero-landing-960w.webp 960w, images/banner/hero-landing.webp 1600w" sizes="100vw" alt="Traditional Kerala timber homestay lit at dusk" width="1600" height="999" fetchpriority="high" class="hero-slide absolute inset-0 h-full w-full object-cover" />
+      <img src="images/banner/hero-slide-nature-castle.webp" srcset="images/banner/hero-slide-nature-castle-480w.webp 480w, images/banner/hero-slide-nature-castle-960w.webp 960w, images/banner/hero-slide-nature-castle.webp 1600w" sizes="100vw" alt="Nature Castle Resort, a tiled-roof timber house under a blue sky in Vattavada" width="1600" height="999" decoding="async" class="hero-slide absolute inset-0 h-full w-full object-cover" fetchpriority="low" />
+      <img src="images/banner/hero-slide-niva.webp" srcset="images/banner/hero-slide-niva-480w.webp 480w, images/banner/hero-slide-niva-960w.webp 960w, images/banner/hero-slide-niva.webp 1600w" sizes="100vw" alt="Niva Waterways lakefront in Alleppey" width="1600" height="999" decoding="async" class="hero-slide absolute inset-0 h-full w-full object-cover" fetchpriority="low" />
+      <img src="images/banner/hero-slide-riparian.webp" srcset="images/banner/hero-slide-riparian-480w.webp 480w, images/banner/hero-slide-riparian-960w.webp 960w, images/banner/hero-slide-riparian.webp 1600w" sizes="100vw" alt="Riparian Resort wooden villa with a tiled roof and veranda" width="1600" height="999" decoding="async" class="hero-slide absolute inset-0 h-full w-full object-cover" fetchpriority="low" />
     </div>
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/50"></div>
 
@@ -165,7 +167,7 @@
         </a>
         <a href="niva-waterways.html" class="property-card stay-choice group block bg-white">
           <figure class="overflow-hidden">
-            <img src="images/niva-waterways-card.webp" alt="Niva Waterways lakefront villa in Alleppey" width="900" height="798" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src="images/niva-waterways-card.webp" srcset="images/niva-waterways-card-480w.webp 480w, images/niva-waterways-card.webp 900w" sizes="100vw" alt="Niva Waterways lakefront villa in Alleppey" width="900" height="798" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
           </figure>
           <div class="stay-choice-content p-6">
             <span class="property-index">02 · Alleppey</span>
@@ -176,7 +178,7 @@
         </a>
         <a href="riparian-ayur-resorts.html" class="property-card stay-choice group block bg-white">
           <figure class="overflow-hidden">
-            <img src="images/riparian-resort-card.webp" alt="Riparian Resort traditional wooden villa with tiled roof and veranda" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src="images/riparian-resort-card.webp" srcset="images/riparian-resort-card-480w.webp 480w, images/riparian-resort-card.webp 900w" sizes="100vw" alt="Riparian Resort traditional wooden villa with tiled roof and veranda" width="900" height="700" loading="lazy" decoding="async" class="w-full aspect-[9/7] object-cover transition-transform duration-700 group-hover:scale-105" />
           </figure>
           <div class="stay-choice-content p-6">
             <span class="property-index">03 · Kothamangalam</span>
@@ -204,7 +206,7 @@
   <!-- ================= WHY PADATHIL ================= -->
   <section id="why-padathil" class="relative bg-cream pb-[50px]">
     <figure class="relative">
-      <img src="images/why-padathil-house.webp" alt="Riparian Resort wooden villa in Kothamangalam" width="1600" height="823" class="w-full h-[560px] md:h-auto object-cover" />
+      <img src="images/why-padathil-house.webp" srcset="images/why-padathil-house-480w.webp 480w, images/why-padathil-house-960w.webp 960w, images/why-padathil-house.webp 1600w" sizes="100vw" alt="Riparian Resort wooden villa in Kothamangalam" width="1600" height="823" class="w-full h-[560px] md:h-auto object-cover" loading="lazy" decoding="async" />
     </figure>
 
     <div class="relative md:absolute md:bottom-0 md:right-0 md:w-1/2 bg-panel px-6 md:pl-[45px] md:pr-8 py-[38px] md:py-[45px]">
@@ -239,7 +241,7 @@
           <span class="journal-link">Read the guide</span>
         </a>
         <a href="blog-family-getaways-kerala.html" class="journal-tile group flex flex-col">
-          <figure class="overflow-hidden"><img src="images/riparian-journal.webp" alt="Riparian Resort wooden villa with tiled roof and veranda" width="413" height="542" loading="lazy" decoding="async" class="w-full aspect-[413/542] object-cover transition-transform duration-700 group-hover:scale-105" /></figure>
+          <figure class="overflow-hidden"><img src="images/riparian-journal.webp" srcset="images/riparian-journal-480w.webp 480w, images/riparian-journal.webp 826w" sizes="100vw" alt="Riparian Resort wooden villa with tiled roof and veranda" width="413" height="542" loading="lazy" decoding="async" class="w-full aspect-[413/542] object-cover transition-transform duration-700 group-hover:scale-105" /></figure>
           <h3 class="mt-5 mb-4 text-center text-[20px] leading-snug">Best Family Getaways in Kerala</h3>
           <span class="journal-link">Read the guide</span>
         </a>
