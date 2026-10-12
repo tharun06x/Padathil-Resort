@@ -53,10 +53,10 @@ body.riparian-page .bg-creamalt { background: var(--ivory-2) !important; }
   color: var(--char) !important;
 }
 
-/* Match the compact green facts band and shared field-guide colors. */
+/* Ivory facts band, matching the sections around it; shared field-guide colors. */
 body.riparian-page .riparian-facts-section.glance-premium {
   padding: 0 !important;
-  background: #102c24 !important;
+  background: #efe9db !important;
 }
 body.riparian-page .riparian-explorer.atlas-premium { background: #e8e3d5 !important; }
 .riparian-page .riparian-explorer .explorer-detail { background: #102c24 !important; }
@@ -94,7 +94,7 @@ body.riparian-page .riparian-close {
     border-bottom: 0 !important;
   }
   .riparian-page .glance-premium .property-facts > div:nth-child(2) {
-    border-right: 1px solid rgba(255,248,235,.19) !important;
+    border-right: 1px solid rgba(27,27,25,.12) !important;
   }
 }
 @media (max-width: 680px) {

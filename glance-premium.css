@@ -3,7 +3,8 @@
   position: relative;
   padding: 0 !important;
   overflow: hidden;
-  background: #102c24 !important;
+  background: #efe9db !important;
+  border-block: 1px solid rgba(27,27,25,.1);
 }
 .glance-premium::before { display: none; }
 .glance-premium .wrap {
@@ -21,9 +22,9 @@
   min-height: 154px;
   margin: 0;
   padding: clamp(28px, 3vw, 46px) clamp(22px, 3vw, 46px) !important;
-  border-right: 1px solid rgba(255,248,235,.25);
-  color: #fff8eb !important;
-  font: 500 clamp(1.5rem, 2.1vw, 2rem)/1.05 'Manrope', sans-serif !important;
+  border-right: 1px solid rgba(27,27,25,.14);
+  color: #1b1b19 !important;
+  font: 400 clamp(1.7rem, 2.3vw, 2.2rem)/1.05 'Rosemartin', Georgia, serif !important;
   letter-spacing: -.025em !important;
   text-align: left !important;
 }
@@ -42,7 +43,7 @@
   min-height: 154px;
   padding: clamp(28px, 3vw, 46px) clamp(20px, 2.35vw, 36px);
   border: 0 !important;
-  border-right: 1px solid rgba(255,248,235,.19) !important;
+  border-right: 1px solid rgba(27,27,25,.12) !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -54,7 +55,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #e6c993 !important;
+  color: #a8854f !important;
   font: 800 .62rem/1.2 Manrope, sans-serif !important;
   letter-spacing: .16em !important;
   text-align: left;
@@ -73,7 +74,7 @@
   max-width: 22ch;
   min-height: 0;
   margin: 14px 0 0;
-  color: #fff8eb !important;
+  color: #1b1b19 !important;
   font: 500 clamp(1.08rem, 1.24vw, 1.3rem)/1.32 'Manrope', sans-serif !important;
   text-align: left;
 }
@@ -82,7 +83,7 @@
   .glance-premium .property-facts,
   .riparian-page .glance-premium .property-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .glance-premium .property-facts > div,
-  .riparian-page .glance-premium .property-facts > div { min-height: 126px; padding: 24px 28px; border-bottom: 1px solid rgba(255,248,235,.19) !important; }
+  .riparian-page .glance-premium .property-facts > div { min-height: 126px; padding: 24px 28px; border-bottom: 1px solid rgba(27,27,25,.12) !important; }
   .glance-premium .property-facts > div:nth-child(2n),
   .riparian-page .glance-premium .property-facts > div:nth-child(2n) { border-right: 0 !important; }
   .glance-premium .property-facts > div:nth-last-child(-n+2),
@@ -91,7 +92,7 @@
 @media (max-width: 680px) {
   .glance-premium .wrap { grid-template-columns: 1fr; }
   .glance-premium h2,
-  .riparian-page .glance-premium h2 { min-height: 0; padding: 25px 20px 22px !important; border-right: 0; border-bottom: 1px solid rgba(255,248,235,.25); font-size: 1.45rem !important; }
+  .riparian-page .glance-premium h2 { min-height: 0; padding: 25px 20px 22px !important; border-right: 0; border-bottom: 1px solid rgba(27,27,25,.14); font-size: 1.45rem !important; }
   .glance-premium .property-facts > div,
   .riparian-page .glance-premium .property-facts > div { padding: 22px 20px; }
 }
@@ -99,9 +100,12 @@
   .glance-premium .property-facts,
   .riparian-page .glance-premium .property-facts { grid-template-columns: 1fr; }
   .glance-premium .property-facts > div,
-  .riparian-page .glance-premium .property-facts > div { min-height: 0; border-right: 0 !important; border-bottom: 1px solid rgba(255,248,235,.19) !important; }
+  .riparian-page .glance-premium .property-facts > div { min-height: 0; border-right: 0 !important; border-bottom: 1px solid rgba(27,27,25,.12) !important; }
   .glance-premium .property-facts > div:last-child,
   .riparian-page .glance-premium .property-facts > div:last-child { border-bottom: 0 !important; }
   .glance-premium .property-facts dd,
   .riparian-page .glance-premium .property-facts dd { max-width: 30ch; }
 }
+
+/* Nature Castle: the farm photo strip has no bottom padding, so open a gap before the band. */
+.nc-farm-strip:not(.rp-strip) + .glance-premium { margin-top: clamp(56px, 7vw, 96px); }

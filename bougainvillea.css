@@ -1,0 +1,48 @@
+/* Bougainvillea corners for the top band of Gallery, FAQ and Journal.
+   Composed on a 3416 x 1984 design canvas: 1u = 1% of canvas width, scaled with the viewport.
+   Top-left: canopy past the top/left edges (~28u visible), trailing branches to ~26u (45% of canvas height).
+   Bottom-right: arrangement past the bottom/right edges (~24u x 16u), growing toward the upper-left.
+   Each branch rotates about its own attachment point; nested branches inherit the parent's sway
+   and add their own, so hanging clusters follow with a delay. Cycles vary 4.4-7s; every keyframe
+   set starts and ends at rest, so loops never jump. */
+section:has(> .bougain) { position: relative; overflow: hidden; isolation: isolate; }
+section:has(> .bougain)::after { display: none !important; }
+section:has(> .bougain) > :not(.bougain) { position: relative; z-index: 1; }
+
+.bougain { --u: min(1vw, 16.8px); position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.bougain-filters { position: absolute; width: 0; height: 0; }
+.bougain img { display: block; width: 100%; height: auto; }
+.bg-piece { position: absolute; will-change: transform; animation: bg-sway var(--t) cubic-bezier(.45, .05, .55, .95) var(--d, 0s) infinite; }
+.bg-piece > img { position: relative; z-index: 2; }
+.bg-piece > .bg-piece { z-index: 1; }
+
+/* Top-left */
+.bg-canopy { top: calc(-9 * var(--u)); left: calc(-4 * var(--u)); width: calc(32 * var(--u)); transform-origin: 0 0; --t: 7s; --amp: .9; }
+.bg-trail-long { top: calc(21 * var(--u)); left: calc(7 * var(--u)); width: calc(3.8 * var(--u)); transform-origin: 52% 0; --t: 7s; --d: -6.2s; --amp: 1.6; }
+.bg-trail-long > img { animation: bg-sway 5.6s cubic-bezier(.45, .05, .55, .95) -1.9s infinite; transform-origin: 52% 0; --amp: .9; }
+.bg-trail-short { top: calc(22 * var(--u)); left: calc(15 * var(--u)); width: calc(3.3 * var(--u)); transform-origin: 55% 0; --t: 7s; --d: -6.4s; --amp: 1.4; }
+.bg-trail-short > img { animation: bg-sway 4.4s cubic-bezier(.45, .05, .55, .95) -.8s infinite; transform-origin: 55% 0; --amp: 1; }
+
+/* Bottom-right */
+.bg-corner { right: calc(-2 * var(--u)); bottom: calc(-4.3 * var(--u)); width: calc(26 * var(--u)); transform-origin: 100% 100%; --t: 6.2s; --d: -2.7s; --amp: -1; }
+.bg-spray { right: calc(10 * var(--u)); bottom: calc(11.3 * var(--u)); width: calc(14 * var(--u)); transform-origin: 95% 98%; --t: 6.2s; --d: -2.1s; --amp: -1.2; }
+.bg-spray > img { animation: bg-sway 4.8s cubic-bezier(.45, .05, .55, .95) -3.3s infinite; transform-origin: 95% 98%; --amp: -1.1; }
+
+/* Gentle breeze: lean, partial return, slight counter-lean. --amp scales the angle (deg); sign sets direction. */
+@keyframes bg-sway {
+  0%, 100% { transform: rotate(0deg) translate(0, 0); }
+  28% { transform: rotate(calc(var(--amp) * 1deg)) translate(calc(var(--amp) * 1.4px), 1px); }
+  52% { transform: rotate(calc(var(--amp) * .35deg)) translate(calc(var(--amp) * .5px), .4px); }
+  78% { transform: rotate(calc(var(--amp) * -.75deg)) translate(calc(var(--amp) * -1px), -.6px); }
+}
+
+/* Restrained petal and leaf flutter on the two large masses (desktop only). */
+.bg-canopy > img, .bg-corner > img { filter: url(#bougain-flutter); }
+
+@media (max-width: 760px) {
+  .bg-canopy > img, .bg-corner > img { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bg-piece, .bg-piece > img { animation: none !important; }
+  .bg-canopy > img, .bg-corner > img { filter: none; }
+}

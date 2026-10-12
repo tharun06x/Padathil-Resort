@@ -53,6 +53,6 @@
 }
 .nc-page .glance-premium h2,
 .riparian-page .glance-premium h2 {
-  font-size: clamp(1.25rem, 1.7vw, 1.5rem) !important;
+  font-size: clamp(1.7rem, 2.3vw, 2.2rem) !important;
   line-height: 1.2;
 }

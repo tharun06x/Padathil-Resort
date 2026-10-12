@@ -721,10 +721,10 @@
     const lines = [
       'Hello Padathil Stays,',
       '',
-      'I would like to enquire.',
-      `Stay: ${data.get('property')}`,
-      `Looking for: ${data.get('intent')}`
+      'I would like to enquire.'
     ];
+    if (data.get('property')) lines.push(`Stay: ${data.get('property')}`);
+    if (data.get('intent')) lines.push(`Looking for: ${data.get('intent')}`);
     if (checkIn) lines.push(`Check-in: ${readableDate(checkIn)}`);
     if (checkOut) lines.push(`Check-out: ${readableDate(checkOut)}`);
     if (data.get('guests')) lines.push(`Guests: ${data.get('guests')}`);
