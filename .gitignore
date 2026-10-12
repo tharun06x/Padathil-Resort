@@ -9,3 +9,14 @@ render-mobile.png
 .impeccable/local-map-data.xml
 .impeccable/local-map-source.json
 .impeccable/review/
+
+# Local tooling and downloaded binaries
+.wrangler/
+.impeccable/bin/
+.claude/settings.local.json
+
+# Local environment values; keep example templates available
+.env
+.env.*
+!.env.example
+!.env.*.example

@@ -1,0 +1,66 @@
+/* The homepage keeps its photographic hero. A fuller garden surrounds the
+   welcome copy on ivory; only individual connected branches move. */
+#welcome.botanical-home {
+  position: relative;
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+  min-height: max(880px, 58.0796vw);
+  padding: 230px 0 !important;
+  background: #f1f2ea !important;
+}
+#welcome.botanical-home::after { display: none; }
+.botanical-home__content { position: relative; z-index: 1; width: 100%; }
+.botanical-home__content h2 { text-wrap: balance; }
+.botanical-home__content .body-copy { max-width: 65ch; text-wrap: pretty; }
+.botanical-home .botanical-branch--canopy { width: 34%; }
+.botanical-home .botanical-branch--trailing { width: 16.5%; }
+.botanical-home .botanical-branch--hanging { width: 13.5%; }
+.botanical-home .botanical-branch--diagonal { width: 29%; }
+.botanical-branch--home-canopy {
+  top: -5%; left: -4%; width: 25%;
+  transform-origin: 0% 0%; transform: rotate(12deg); z-index: 2;
+  --breeze-duration: 6.5s; --breeze-phase: -4.1s;
+}
+.botanical-branch--home-corner {
+  right: -3%; bottom: -5%; width: 23%;
+  transform-origin: 100% 100%; transform: rotate(-12deg); z-index: 3;
+  --breeze-duration: 5.8s; --breeze-phase: -1.4s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .botanical-home .botanical-limb { animation-name: botanical-home-breeze; }
+  .botanical-home .botanical-branch--trailing .botanical-limb,
+  .botanical-home .botanical-branch--diagonal .botanical-limb,
+  .botanical-home .botanical-branch--home-corner .botanical-limb {
+    animation-name: botanical-home-breeze-reverse;
+  }
+  .botanical-home .botanical-tip {
+    animation-name: botanical-home-tip-follow;
+    animation-delay: calc(var(--breeze-phase) + .32s);
+  }
+}
+@keyframes botanical-home-breeze {
+  0%, 100% { transform: translate(-.18%, .06%) rotate(-1.1deg); }
+  50% { transform: translate(.24%, -.13%) rotate(1.25deg); }
+}
+@keyframes botanical-home-breeze-reverse {
+  0%, 100% { transform: translate(.18%, -.06%) rotate(1.2deg); }
+  50% { transform: translate(-.24%, .13%) rotate(-1.3deg); }
+}
+@keyframes botanical-home-tip-follow {
+  0%, 100% { transform: rotate(-.22deg); }
+  50% { transform: rotate(.26deg); }
+}
+@media (max-width: 767px) {
+  #welcome.botanical-home { min-height: 800px; padding: 230px 0 210px !important; }
+  .botanical-home .botanical-branch--canopy { width: 275px; }
+  .botanical-home .botanical-branch--trailing { width: 95px; }
+  .botanical-home .botanical-branch--hanging { width: 85px; }
+  .botanical-home .botanical-branch--diagonal { width: 250px; }
+  .botanical-home .botanical-branch--home-canopy { width: 205px; }
+  .botanical-home .botanical-branch--home-corner { width: 190px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .botanical-home .botanical-limb,
+  .botanical-home .botanical-tip { animation: none !important; transform: none; }
+}

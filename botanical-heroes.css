@@ -1,0 +1,286 @@
+/* Reference composition: 3416 x 1984. Percentage placement preserves its
+   proportions at every viewport size; only connected branch layers move. */
+.botanical-page {
+  --paper: #f1f2ea;
+  --paper-deep: #f1f2ea;
+}
+
+.botanical-hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: max(680px, 58.0796vw);
+  padding: 120px 0;
+  isolation: isolate;
+  background: #f1f2ea !important;
+}
+
+.botanical-hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.botanical-hero__content h1 {
+  text-wrap: balance;
+}
+
+.botanical-hero__content p {
+  max-width: 58ch;
+  margin-inline: auto;
+  text-wrap: pretty;
+}
+
+.bougainvillea-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  overflow: clip;
+  isolation: isolate;
+  contain: paint;
+  background: #f1f2ea !important;
+}
+
+.botanical-branch {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.botanical-limb,
+.botanical-tip {
+  display: block;
+  width: 100%;
+  transform-origin: inherit;
+}
+
+.botanical-limb > img,
+.botanical-tip > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Upper-left: about 28% wide, with uneven trails reaching 45% down. Roots
+   disappear behind overlapping growth or sit beyond the top/left edge. */
+.botanical-branch--canopy {
+  top: -7.8125%;
+  left: -3.3665%;
+  width: 31.6159%;
+  transform-origin: 0% 9%;
+  z-index: 3;
+  --breeze-duration: 6.8s;
+  --breeze-phase: -1.7s;
+}
+
+.botanical-branch--crown {
+  top: -11.8448%;
+  left: 4.0984%;
+  width: 22.2482%;
+  transform-origin: 0% 9%;
+  z-index: 4;
+  --breeze-duration: 5.6s;
+  --breeze-phase: -3.1s;
+}
+
+.botanical-branch--trailing {
+  top: 4.2843%;
+  left: -3.6593%;
+  width: 15.5152%;
+  transform-origin: 0% 0%;
+  z-index: 1;
+  --breeze-duration: 6.4s;
+  --breeze-phase: -1.94s;
+}
+
+.botanical-branch--hanging {
+  top: -1.2601%;
+  left: -1.0246%;
+  width: 12.5878%;
+  transform-origin: 51% 0%;
+  z-index: 2;
+  --breeze-duration: 5.1s;
+  --breeze-phase: -2.16s;
+}
+
+/* Lower-right: about 24% visible width and 28% visible height. The connected
+   woody base grows diagonally toward the centre from outside the corner. */
+.botanical-branch--diagonal {
+  right: -3.6593%;
+  bottom: -3.5282%;
+  width: 28.1030%;
+  transform-origin: 98% 97%;
+  z-index: 2;
+  --breeze-duration: 6.1s;
+  --breeze-phase: -2.7s;
+}
+
+.botanical-branch--lower {
+  right: -1.9028%;
+  bottom: -9.3246%;
+  width: 18.7354%;
+  transform-origin: 98% 97%;
+  transform: rotate(-9deg);
+  z-index: 3;
+  --breeze-duration: 4.7s;
+  --breeze-phase: -0.84s;
+}
+
+.botanical-branch--inward {
+  top: 103%;
+  left: 97%;
+  width: 8.7822%;
+  transform-origin: 51% 0%;
+  transform: rotate(125deg);
+  z-index: 1;
+  --breeze-duration: 5.4s;
+  --breeze-phase: -3.48s;
+}
+
+/* Each page has its own generated branches. Repeated layers overlap at the
+   woody attachment, letting the finer growth follow the canopy's motion. */
+.botanical-branch--variant-canopy {
+  top: -3%;
+  left: -3%;
+  width: 34%;
+  transform-origin: 0% 0%;
+  z-index: 3;
+  --breeze-duration: 6.7s;
+  --breeze-phase: -1.8s;
+}
+
+.botanical-branch--variant-trail {
+  top: -5%;
+  left: -5%;
+  width: 25%;
+  transform-origin: 0% 0%;
+  transform: rotate(16deg);
+  z-index: 2;
+  --breeze-duration: 5.3s;
+  --breeze-phase: -2.4s;
+}
+
+.botanical-branch--variant-corner {
+  right: -3%;
+  bottom: -3%;
+  width: 28%;
+  transform-origin: 100% 100%;
+  z-index: 2;
+  --breeze-duration: 6.2s;
+  --breeze-phase: -3.2s;
+}
+
+.botanical-branch--variant-lower {
+  right: -2%;
+  bottom: -6%;
+  width: 20%;
+  transform-origin: 100% 100%;
+  transform: rotate(-12deg);
+  z-index: 3;
+  --breeze-duration: 4.8s;
+  --breeze-phase: -1.2s;
+}
+
+.botanical-hero--mirrored .botanical-branch--variant-canopy,
+.botanical-hero--mirrored .botanical-branch--variant-trail {
+  left: auto;
+  right: -3%;
+  transform-origin: 100% 0%;
+}
+
+.botanical-hero--mirrored .botanical-branch--variant-trail {
+  right: -5%;
+  transform: rotate(-16deg);
+}
+
+.botanical-hero--mirrored .botanical-branch--variant-corner,
+.botanical-hero--mirrored .botanical-branch--variant-lower {
+  right: auto;
+  left: -3%;
+  transform-origin: 0% 100%;
+}
+
+.botanical-hero--mirrored .botanical-branch--variant-lower {
+  left: -2%;
+  transform: rotate(12deg);
+}
+
+@media (max-width: 767px) {
+  .botanical-hero {
+    min-height: 640px;
+    padding: 210px 0;
+  }
+
+  .botanical-hero__content h1 {
+    font-size: clamp(2rem, 7.8vw, 3rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .botanical-branch--canopy,
+  .botanical-branch--variant-canopy { width: 250px; }
+  .botanical-branch--crown { width: 180px; }
+  .botanical-branch--trailing { width: 110px; }
+  .botanical-branch--hanging { width: 90px; }
+  .botanical-branch--variant-trail { width: 185px; }
+  .botanical-branch--diagonal,
+  .botanical-branch--variant-corner { width: 230px; }
+  .botanical-branch--lower,
+  .botanical-branch--variant-lower { width: 160px; }
+  .botanical-branch--inward { width: 70px; }
+}
+
+/* A complete cycle returns to exactly the same pose. The small translations
+   scale with each branch; no stretching, opacity pulses or camera transforms. */
+@media (prefers-reduced-motion: no-preference) {
+  .botanical-limb {
+    animation: botanical-breeze var(--breeze-duration) ease-in-out infinite;
+    animation-delay: var(--breeze-phase);
+  }
+
+  .botanical-branch--trailing .botanical-limb,
+  .botanical-branch--diagonal .botanical-limb,
+  .botanical-branch--variant-corner .botanical-limb {
+    animation-name: botanical-breeze-reverse;
+  }
+
+  /* These lightweight terminal sprigs carry a small delayed secondary motion.
+     Every flower and leaf remains attached to its original generated stem. */
+  .botanical-tip {
+    animation: botanical-tip-follow var(--breeze-duration) ease-in-out infinite;
+    animation-delay: calc(var(--breeze-phase) + .22s);
+  }
+
+  .is-breeze-paused .botanical-limb,
+  .is-breeze-paused .botanical-tip {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes botanical-breeze {
+  0%, 100% { transform: translate(-.1%, .04%) rotate(-.8deg); }
+  50% { transform: translate(.15%, -.08%) rotate(.9deg); }
+}
+
+@keyframes botanical-breeze-reverse {
+  0%, 100% { transform: translate(.12%, -.04%) rotate(.8deg); }
+  50% { transform: translate(-.15%, .09%) rotate(-.9deg); }
+}
+
+@keyframes botanical-tip-follow {
+  0%, 100% { transform: rotate(-.14deg); }
+  50% { transform: rotate(.18deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botanical-limb,
+  .botanical-tip {
+    animation: none !important;
+    transform: none;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "phase": "http_request_dynamic_redirect",
+  "rules": [
+    {
+      "description": "Padathil homepage aliases directly to HTTPS apex",
+      "expression": "(http.host in {\"padathilstays.com\" \"www.padathilstays.com\"}) and (http.request.uri.path in {\"/index.html\" \"/index\"})",
+      "action": "redirect",
+      "action_parameters": {
+        "from_value": {
+          "target_url": { "value": "https://padathilstays.com/" },
+          "status_code": 301,
+          "preserve_query_string": true
+        }
+      }
+    },
+    {
+      "description": "Padathil known HTML pages directly to HTTPS apex clean URLs",
+      "expression": "(http.host in {\"padathilstays.com\" \"www.padathilstays.com\"}) and (http.request.uri.path in {\"/about.html\" \"/contact.html\" \"/faq.html\" \"/gallery.html\" \"/blog.html\" \"/nature-castle-vattavada.html\" \"/niva-waterways.html\" \"/riparian-ayur-resorts.html\" \"/blog-family-getaways-kerala.html\" \"/blog-mountain-nature-getaways-kerala.html\" \"/blog-vembanad-lake-holiday-guide.html\"})",
+      "action": "redirect",
+      "action_parameters": {
+        "from_value": {
+          "target_url": { "expression": "concat(\"https://padathilstays.com\", substring(http.request.uri.path, 0, -5))" },
+          "status_code": 301,
+          "preserve_query_string": true
+        }
+      }
+    }
+  ]
+}

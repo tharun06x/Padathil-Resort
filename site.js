@@ -3,19 +3,30 @@
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const imageLoadAnimations = new WeakMap();
+  const imageLoadRequests = new WeakMap();
+  const routeFile = (value) => {
+    const pathname = new URL(value, location.href).pathname;
+    const name = pathname.split('/').filter(Boolean).pop() || 'index';
+    return name.endsWith('.html') ? name : `${name}.html`;
+  };
 
   // Keep reserved image space useful while the browser fetches and decodes the
   // actual photograph. This is intentionally presentation-only: image sources,
   // lazy-loading and layout dimensions stay untouched.
   const imageLoader = {
     watch(image) {
-      if (!image || image.matches('.site-logo, .local-map-ground, .hero-slide, .nc-slide')) return;
+      if (!image || image.matches('.site-logo, .local-map-ground, .hero-slide, .nc-slide, .botanical-branch img')) return;
 
-      const expectedSource = image.currentSrc || image.src;
+      imageLoadRequests.get(image)?.abort();
+      const request = new AbortController();
+      imageLoadRequests.set(image, request);
+      // Responsive candidate selection may change currentSrc after watch().
+      // A new watch call, rather than a different candidate, invalidates a load.
+      const isCurrent = () => imageLoadRequests.get(image) === request;
       const wasAlreadyDecoded = image.complete && image.naturalWidth > 0;
       imageLoadAnimations.get(image)?.cancel();
       const reveal = () => {
-        if ((image.currentSrc || image.src) !== expectedSource) return;
+        if (!isCurrent()) return;
         image.classList.remove('is-image-loading');
         image.classList.add('is-image-ready');
         image.removeAttribute('aria-busy');
@@ -36,7 +47,7 @@
         }).catch(() => {});
       };
       const fail = () => {
-        if ((image.currentSrc || image.src) !== expectedSource) return;
+        if (!isCurrent()) return;
         image.classList.remove('is-image-loading');
         image.classList.add('is-image-error');
         image.removeAttribute('aria-busy');
@@ -52,8 +63,8 @@
       image.classList.remove('is-image-ready', 'is-image-error');
       image.classList.add('is-image-loading');
       image.setAttribute('aria-busy', 'true');
-      image.addEventListener('load', decodeAndReveal, { once: true });
-      image.addEventListener('error', fail, { once: true });
+      image.addEventListener('load', decodeAndReveal, { signal: request.signal });
+      image.addEventListener('error', fail, { signal: request.signal });
 
       if (image.complete) {
         if (image.naturalWidth) decodeAndReveal(); else if (image.getAttribute('loading') !== 'lazy') fail();
@@ -121,13 +132,14 @@
     lastScrollY = window.scrollY;
   }, { passive: true });
 
-  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  const currentPage = routeFile(location.href);
   document.querySelectorAll('[data-nav-link]').forEach((link) => {
-    const href = link.getAttribute('href')?.split('#')[0] || '';
+    const href = routeFile(link.href);
     if (href === currentPage) link.setAttribute('aria-current', 'page');
+    else if (currentPage.startsWith('blog-') && href === 'blog.html') link.setAttribute('aria-current', 'location');
   });
   document.querySelectorAll('.stay-option').forEach((link) => {
-    const href = link.getAttribute('href')?.split('#')[0] || '';
+    const href = routeFile(link.href);
     if (href === currentPage) link.setAttribute('aria-current', 'page');
   });
   if (['nature-castle-vattavada.html', 'niva-waterways.html', 'riparian-ayur-resorts.html'].includes(currentPage)) {
@@ -171,7 +183,7 @@
 
     const documentPrefetch = document.createElement('link');
     documentPrefetch.rel = 'prefetch';
-    documentPrefetch.href = targetPath;
+    documentPrefetch.href = `/${targetPath.replace(/\.html$/, '')}`;
     documentPrefetch.as = 'document';
     document.head.append(documentPrefetch);
 
@@ -191,13 +203,14 @@
     event.preventDefault();
     if (stayNavigationInProgress) return;
     stayNavigationInProgress = true;
+    const destinationPath = `/${targetPath.replace(/\.html$/, '')}`;
     warmStay(targetPath, true);
     const route = document.querySelector('.riparian-hero-river path');
     const hero = document.querySelector('.riparian-hero');
     const heroBounds = hero?.getBoundingClientRect();
     const heroVisible = heroBounds && heroBounds.top < window.innerHeight * .3 && heroBounds.bottom > window.innerHeight * .7;
     if (!route || !heroVisible || !stayRouteColors[targetPath]) {
-      window.location.href = targetPath;
+      window.location.href = destinationPath;
       return;
     }
 
@@ -216,7 +229,7 @@
       [{ strokeDashoffset: routeLength }, { strokeDashoffset: 0 }],
       { duration: 720, easing: 'cubic-bezier(.45,0,.2,1)', fill: 'forwards' }
     );
-    stayNavigationTimer = window.setTimeout(() => { window.location.href = targetPath; }, 740);
+    stayNavigationTimer = window.setTimeout(() => { window.location.href = destinationPath; }, 740);
   };
   window.addEventListener('pageshow', (event) => {
     if (!event.persisted) return;
@@ -226,7 +239,7 @@
   });
   if (stayIndex !== -1) {
     document.querySelectorAll('.stay-option, .mobile-stay-link').forEach((link) => {
-      const targetPath = link.getAttribute('href')?.split('#')[0];
+      const targetPath = routeFile(link.href);
       if (!targetPath || targetPath === currentPage) return;
       link.addEventListener('pointerenter', () => warmStay(targetPath), { passive: true });
       link.addEventListener('focus', () => warmStay(targetPath));
@@ -250,6 +263,14 @@
     const home = config.home;
 
     const image = nearbyExplorer.querySelector('[data-explorer-image]');
+    if (Object.values(places).some((place) => place.imageNote) &&
+        !nearbyExplorer.querySelector('[data-explorer-image-note]')) {
+      const imageNote = document.createElement('p');
+      imageNote.className = 'explorer-image-note';
+      imageNote.dataset.explorerImageNote = '';
+      imageNote.textContent = places[config.initial]?.imageNote || '';
+      image.parentElement.append(imageNote);
+    }
     const map = nearbyExplorer.querySelector('.explorer-map');
     const mapStatus = nearbyExplorer.querySelector('[data-map-status], #map-status');
     const landscape = nearbyExplorer.querySelector('[data-local-landscape]');
@@ -312,6 +333,10 @@
         image.removeAttribute('srcset');
         image.removeAttribute('sizes');
         image.src = place.image;
+        if (place.width && place.height) {
+          image.width = place.width;
+          image.height = place.height;
+        }
         image.alt = place.alt;
         imageLoader.watch(image);
         image.classList.remove('is-changing');
@@ -324,6 +349,8 @@
       fields.pace.textContent = place.pace;
       fields.link.href = place.link;
       fields.link.setAttribute('aria-label', `View ${place.title} on Maps`);
+      const imageNote = nearbyExplorer.querySelector('[data-explorer-image-note]');
+      if (imageNote) imageNote.textContent = place.imageNote || '';
     };
 
     pins.forEach((pin) => pin.addEventListener('click', () => selectPlace(pin.dataset.place)));
@@ -545,7 +572,7 @@
     'nature-castle-vattavada.html': 'Nature Castle Resort',
     'niva-waterways.html': 'Niva Waterways',
     'riparian-ayur-resorts.html': 'Riparian Resort'
-  }[location.pathname.split('/').pop() || ''];
+  }[`${location.pathname.split('/').filter(Boolean).pop()?.replace(/\.html$/, '') || 'index'}.html`];
 
   const dialog = document.createElement('dialog');
   dialog.className = 'quick-enquiry-dialog';
@@ -577,12 +604,13 @@
           </label>
         </div>
         <div class="quick-enquiry-fields">
-          <label>Check-in <span>optional</span><input type="date" name="checkIn"></label>
-          <label>Check-out <span>optional</span><input type="date" name="checkOut"></label>
-          <label>Guests <span>optional</span><input type="number" name="guests" min="1" inputmode="numeric" placeholder="How many?"></label>
+          <label>Check-in <span>optional</span><input type="date" name="checkIn" aria-describedby="quick-enquiry-error"></label>
+          <label>Check-out <span>optional</span><input type="date" name="checkOut" aria-describedby="quick-enquiry-error"></label>
+          <label>Guests <span>optional</span><input type="number" name="guests" min="1" step="1" inputmode="numeric" placeholder="How many?" aria-describedby="quick-enquiry-error"></label>
         </div>
         <label class="quick-enquiry-note">A note for the team <span>optional</span><textarea name="note" rows="2" placeholder="Questions, occasion, or anything else."></textarea></label>
-        <p class="quick-enquiry-error" role="alert" hidden></p>
+        <p id="quick-enquiry-error" class="quick-enquiry-error" role="alert" hidden></p>
+        <p class="quick-enquiry-handoff">WhatsApp opens with your details. Send the message there; the team will confirm availability and booking steps.</p>
         <div class="quick-enquiry-actions">
           <button type="submit" class="quick-enquiry-submit">Continue to WhatsApp <span aria-hidden="true">→</span></button>
           <a class="quick-enquiry-skip" data-quick-enquiry-bypass href="https://wa.me/919447738990?text=Hello%20Padathil%20Stays%2C%20I%20would%20like%20to%20enquire." target="_blank" rel="noopener">Chat without details</a>
@@ -615,9 +643,16 @@
     trigger = link;
     form.reset();
     error.hidden = true;
+    form.querySelectorAll('[aria-invalid]').forEach((field) => field.removeAttribute('aria-invalid'));
+    const handoff = dialog.querySelector('.quick-enquiry-handoff');
+    handoff.textContent = 'WhatsApp opens with your details. Send the message there; the team will confirm availability and booking steps.';
+    handoff.removeAttribute('role');
     setSelected('property', getPropertyFor(link));
     if (/recommend|help.*choose/i.test(`${link.textContent} ${getMessageText(link)}`)) {
       setSelected('intent', 'Help choosing a stay');
+    }
+    if (/photos|photographs/i.test(getMessageText(link))) {
+      setSelected('note', 'Please share current room photographs.');
     }
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else {
@@ -649,15 +684,37 @@
     error.hidden = true;
     trigger?.focus();
   });
-  form.addEventListener('input', () => { error.hidden = true; });
+  form.addEventListener('input', () => {
+    error.hidden = true;
+    form.querySelectorAll('[aria-invalid]').forEach((field) => field.removeAttribute('aria-invalid'));
+  });
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const data = new FormData(form);
     const checkIn = data.get('checkIn');
     const checkOut = data.get('checkOut');
+    const guests = form.elements.guests;
+    if (guests.validity.badInput || (guests.value !== '' &&
+        (!Number.isSafeInteger(guests.valueAsNumber) || guests.valueAsNumber < 1))) {
+      error.textContent = 'Enter a whole number of guests, at least 1, or leave this optional field blank.';
+      error.hidden = false;
+      guests.setAttribute('aria-invalid', 'true');
+      guests.focus();
+      return;
+    }
+    for (const field of [form.elements.checkIn, form.elements.checkOut]) {
+      if (!field.validity.valid) {
+        error.textContent = 'Enter a valid travel date or leave this optional field blank.';
+        error.hidden = false;
+        field.setAttribute('aria-invalid', 'true');
+        field.focus();
+        return;
+      }
+    }
     if (checkIn && checkOut && checkOut <= checkIn) {
       error.textContent = 'Choose a check-out date after your check-in date.';
       error.hidden = false;
+      form.elements.checkOut.setAttribute('aria-invalid', 'true');
       form.elements.checkOut.focus();
       return;
     }
@@ -673,7 +730,15 @@
     if (data.get('guests')) lines.push(`Guests: ${data.get('guests')}`);
     if (data.get('note')?.trim()) lines.push(`Questions: ${data.get('note').trim()}`);
     const whatsappUrl = `https://wa.me/919447738990?text=${encodeURIComponent(lines.join('\n'))}`;
+    // Keep the draft in the dialog so a blocked popup cannot lose the enquiry.
+    const handoff = dialog.querySelector('.quick-enquiry-handoff');
+    const fallback = document.createElement('a');
+    fallback.href = whatsappUrl;
+    fallback.target = '_blank';
+    fallback.rel = 'noopener';
+    fallback.textContent = 'Open your WhatsApp enquiry';
+    handoff.replaceChildren('Send the message in WhatsApp to complete your enquiry. If it did not open, ', fallback, '.');
+    handoff.setAttribute('role', 'status');
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    closeEnquiry();
   });
 })();

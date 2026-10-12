@@ -1,0 +1,59 @@
+/* Adapter for the destination site's existing typography and gallery layout.
+   The copied branch animation remains unchanged in botanical-heroes.css. */
+.botanical-page {
+  --paper: var(--ivory, #f7f3ea);
+  --paper-deep: var(--ivory-2, #efe9db);
+}
+.botanical-page .botanical-hero {
+  padding: 120px 0 !important;
+  color: var(--ink, #1b1b19);
+}
+.botanical-page .botanical-hero::before,
+.botanical-page .botanical-hero::after { display: none !important; }
+.botanical-page .botanical-hero__content h1 {
+  max-width: 26ch !important;
+  margin-inline: auto !important;
+  color: var(--ink, #1b1b19) !important;
+  font-size: clamp(2.25rem, 3.8vw, 3.5rem) !important;
+  line-height: 1.12 !important;
+}
+.botanical-page .botanical-hero__content p {
+  color: var(--body, #5d5a52) !important;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.botanical-page .botanical-hero__content > p { margin-top: 20px; }
+.botanical-page .contact-hero-copy { max-width: 100%; }
+.botanical-page .contact-hero-copy > p { margin: 24px auto 0; }
+.botanical-page .contact-hero-note { margin: 24px auto 0; text-align: center; }
+.botanical-page .botanical-hero .contact-primary-action {
+  color: var(--ivory, #f7f3ea);
+  background: var(--ink, #1b1b19);
+}
+.botanical-page.gallery-body .gallery-page { padding-top: 0; }
+.botanical-page.gallery-body .botanical-hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-bottom: 64px;
+}
+@media (max-width: 767px) {
+  .botanical-page .botanical-hero { padding: 210px 0 !important; }
+  .botanical-page .botanical-hero__content h1 {
+    font-size: clamp(2rem, 7.8vw, 3rem) !important;
+  }
+  .botanical-page .botanical-hero__content p { font-size: 1rem; }
+  .botanical-page.gallery-body .botanical-hero { margin-bottom: 36px; }
+}
+
+/* Transparent branch layers must never receive the site's rectangular photo
+   loading surface or its blur/fade entrance effect. The breeze runs on limbs. */
+.botanical-page .botanical-branch img {
+  background: transparent !important;
+  filter: none !important;
+  opacity: 1 !important;
+  animation: none !important;
+}
+.botanical-page .botanical-hero .contact-hero-note {
+  font-size: .625rem;
+  line-height: 1.8;
+}

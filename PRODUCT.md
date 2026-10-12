@@ -44,4 +44,4 @@ The repository contains property imagery, logos, site copy, and contact details.
 
 ## Accessibility & Inclusion
 
-No product-specific accessibility requirement has been confirmed. Future interface work should retain the existing semantic navigation, skip link, and descriptive image alternatives, and should establish requirements before making access-related claims.
+The frontend review targets WCAG 2.2 AA. Retain semantic navigation, skip links, descriptive image alternatives, readable contrast, keyboard operation and reduced-motion support. Do not make physical property-accessibility claims without verified information.

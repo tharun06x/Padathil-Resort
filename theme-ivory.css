@@ -9,11 +9,11 @@
 :root {
   --ivory: #f7f3ea; --ivory-2: #efe9db; --ivory-3: #e6dfcd;
   --char: #1b1b19; --char-2: #262622; --char-soft: #5d5a52;
-  --gold: #a8854f; --gold-light: #c9ab74;
+  --gold: #a8854f; --gold-text: #76592f; --gold-light: #c9ab74;
   --nav-current: #315a43;
   --line: rgba(27, 27, 25, .16);
   --paper: var(--ivory); --paper-deep: var(--ivory-2); --ink: var(--char); --body: var(--char-soft);
-  --forest: var(--char); --forest-deep: var(--char); --leaf: var(--gold); --brass: var(--gold);
+  --forest: var(--char); --forest-deep: var(--char); --leaf: var(--gold); --brass: var(--gold-text);
   --padathil-body: var(--char-soft); --padathil-focus: var(--gold);
   --riparian-paper: var(--ivory); --riparian-ink: var(--char); --riparian-ink-deep: #0f0f0e; --riparian-brass: var(--gold-light);
 }
@@ -144,10 +144,10 @@ footer, .site-footer { background: #102820 !important; }
 /* Header */
 #siteHeader, .site-header { background: rgba(247, 243, 234, .82) !important; border: 1px solid rgba(168, 133, 79, .35) !important; box-shadow: 0 14px 40px rgba(27, 27, 25, .12) !important; }
 .site-brand, .site-brand span, .desktop-nav a, .desktop-nav summary { color: var(--char) !important; }
-.site-header nav a:hover { color: var(--gold) !important; }
-.site-header nav a[aria-current='page'], .stay-menu-toggle > summary[aria-current='page'] { color: var(--nav-current) !important; }
+.site-header nav a:hover { color: var(--gold-text) !important; }
+.site-header nav a[aria-current], .stay-menu-toggle > summary[aria-current='page'] { color: var(--nav-current) !important; }
 .site-header nav a::after { background: var(--gold) !important; }
-.site-header nav a[aria-current='page']::after { background: var(--nav-current) !important; }
+.site-header nav a[aria-current]::after { background: var(--nav-current) !important; transform: scaleX(1); }
 .header-book { background: var(--char) !important; color: var(--ivory) !important; border-radius: 0 !important; }
 
 /* Buttons: sharp, gold-outline luxury */
@@ -177,24 +177,25 @@ footer, .site-footer { background: #102820 !important; }
 /* Stays: a small, vertical navigation list—not a destination promo module. */
 .site-header .stay-menu,
 .site-header .stay-menu--picker {
-  width: 248px !important;
+  width: 400px !important;
   overflow: hidden;
-  border: 1px solid rgba(247, 243, 234, .64) !important;
-  border-radius: 8px !important;
+  border: 1px solid rgba(168, 133, 79, .32) !important;
+  border-top: 2px solid var(--gold) !important;
+  border-radius: 4px !important;
   background: rgba(247, 243, 234, .9) !important;
   -webkit-backdrop-filter: blur(9px) saturate(.9);
   backdrop-filter: blur(9px) saturate(.9);
-  box-shadow: 0 14px 26px rgba(27, 27, 25, .14) !important;
+  box-shadow: 0 22px 48px rgba(27, 27, 25, .16) !important;
 }
-.site-header .stay-picker { padding: 5px 17px !important; }
+.site-header .stay-picker { padding: 6px 26px !important; }
 .site-header .stay-picker .stay-option {
   display: flex;
-  min-height: 47px;
+  min-height: 66px;
   align-items: center;
   padding: 0 !important;
   color: var(--char) !important;
   background: transparent !important;
-  transition: color .18s ease;
+  transition: color .2s ease;
 }
 .site-header .stay-picker .stay-option + .stay-option { border-top: 1px solid rgba(27, 27, 25, .12) !important; }
 .site-header .stay-picker .stay-option::before,
@@ -210,19 +211,20 @@ footer, .site-footer { background: #102820 !important; }
 .site-header .stay-picker .stay-option-copy b {
   color: var(--char) !important;
   font-family: 'Manrope', sans-serif;
-  font-size: 1.08rem;
+  font-size: 1.12rem;
   font-weight: 500;
-  letter-spacing: -.015em;
+  letter-spacing: -.01em;
   line-height: 1.1;
+  white-space: nowrap;
 }
 .site-header .stay-picker .stay-option-copy small {
   display: block;
   margin: 0;
   color: var(--char-soft) !important;
   font-family: 'Manrope', sans-serif;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: .09em;
+  letter-spacing: .18em;
   line-height: 1;
   text-align: right;
   text-transform: uppercase;
@@ -230,19 +232,19 @@ footer, .site-footer { background: #102820 !important; }
 }
 .site-header .stay-picker .stay-option:hover,
 .site-header .stay-picker .stay-option:focus-visible,
-.site-header .stay-picker .stay-option[aria-current='page'] { background: transparent !important; color: var(--gold) !important; }
+.site-header .stay-picker .stay-option[aria-current='page'] { background: transparent !important; color: var(--gold-text) !important; }
 .site-header .stay-picker .stay-option:hover .stay-option-copy b,
 .site-header .stay-picker .stay-option:focus-visible .stay-option-copy b,
-.site-header .stay-picker .stay-option[aria-current='page'] .stay-option-copy b { color: var(--gold) !important; }
+.site-header .stay-picker .stay-option[aria-current='page'] .stay-option-copy b { color: var(--gold-text) !important; }
 .site-header .stay-picker .stay-option:hover .stay-option-copy small,
 .site-header .stay-picker .stay-option:focus-visible .stay-option-copy small,
-.site-header .stay-picker .stay-option[aria-current='page'] .stay-option-copy small { color: var(--gold) !important; }
+.site-header .stay-picker .stay-option[aria-current='page'] .stay-option-copy small { color: var(--gold-text) !important; }
 .site-header .stay-picker .stay-option:focus-visible { outline: 1px solid var(--gold); outline-offset: -3px; }
 
 /* Cards: flat, hairline */
 .property-card, .stay-choice, .blog-card, .editorial-card, .contact-place, .faq-list details, .property-facts > div, .nearby-explorer { background: #fbf8f1 !important; border: 1px solid var(--line) !important; box-shadow: none !important; border-radius: 0 !important; }
 .faq-list details[open] { border-color: var(--gold) !important; background: #fff !important; }
-.section-kicker, .property-index, .property-facts dt, .eyebrow { color: var(--gold) !important; letter-spacing: .24em !important; }
+.section-kicker, .property-index, .property-facts dt, .eyebrow { color: var(--gold-text) !important; letter-spacing: .24em !important; }
 .property-card:hover { box-shadow: 0 24px 50px rgba(27, 27, 25, .1) !important; }
 
 /* Dark bands */
@@ -253,7 +255,7 @@ footer, .site-footer { background: #102820 !important; }
 .contact-enquiry { color: var(--ivory) !important; }
 footer a:hover { color: var(--gold-light) !important; }
 .border-hairline, .border-t, .border-b { border-color: var(--line) !important; }
-.text-nandor, .text-greyt, .text-gold { color: var(--gold) !important; }
+.text-nandor, .text-greyt, .text-gold { color: var(--gold-text) !important; }
 
 /* Hero and page-hero shading */
 .riparian-hero h1, .contact-hero h1, .about-hero h1, .nc-hero h1, .riparian-hero-intro, .riparian-hero-copy p { color: var(--ivory) !important; }
@@ -434,8 +436,73 @@ footer a:hover { color: var(--gold-light) !important; }
 .site-header .stay-next { display: inline-flex; align-items: center; gap: 12px; height: 42px; padding: 0 8px 0 16px; border: 1px solid rgba(168, 133, 79, .55); border-bottom-width: 1px; background: transparent; color: var(--char); transition: background .3s ease, border-color .3s ease, color .3s ease; }
 .site-header .stay-next span { display: none; }
 .site-header .stay-next strong { font: 600 10px/1 'Manrope', sans-serif; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
-.site-header .stay-next strong::before { content: 'Next \2014\00a0'; color: var(--gold); }
+.site-header .stay-next strong::before { content: 'Next \2014\00a0'; color: var(--gold-text); }
 .site-header .stay-next svg { box-sizing: content-box; width: 12px; height: 12px; padding: 7px; border-radius: 50%; background: var(--gold); stroke: #fff; stroke-width: 1.6; transition: transform .3s ease, background .3s ease; }
 .site-header .stay-next:hover { background: var(--char); border-color: var(--char); color: var(--ivory); }
 .site-header .stay-next:hover svg { transform: translateX(3px); background: var(--gold-light); }
 @media (max-width: 1100px) { .site-header .stay-next { display: none; } }
+
+/* Footer: deep forest green instead of charcoal. */
+footer, .site-footer { background: #102820 !important; }
+
+/* Stays dropdown: same curved frosted glass as the header bar. */
+.site-header .stay-menu,
+.site-header .stay-menu--picker {
+  border: 1px solid rgba(168, 133, 79, .28) !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(110% 150% at 4% -42%, rgba(255, 255, 255, .7) 0, rgba(255, 255, 255, .7) 27%, transparent 50%),
+    radial-gradient(70% 120% at 100% 160%, rgba(187, 195, 167, .45), transparent 56%),
+    rgba(247, 243, 234, .66) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.42);
+  backdrop-filter: blur(18px) saturate(1.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .72), 0 16px 38px rgba(27, 27, 25, .16) !important;
+}
+
+/* About "Stay With Us": warm charcoal over the photo, gold-outline button, distinct from the green footer. */
+.about-cta > img { filter: saturate(.8) contrast(1.05) !important; }
+.about-cta::after { background: linear-gradient(180deg, rgba(27, 27, 25, .66), rgba(27, 27, 25, .8)) !important; }
+.about-cta h2 { color: var(--ivory) !important; }
+.about-cta .body-copy, .about-cta p { color: #e6e0d2 !important; }
+.about-cta .vbtn { background: transparent !important; color: var(--ivory) !important; border-color: var(--gold-light) !important; }
+.about-cta .vbtn:hover { background: var(--gold-light) !important; color: var(--char) !important; border-color: var(--gold-light) !important; }
+
+/* Contact "A few details": light band like the rest of the page, numbers aligned in their own column. */
+.contact-page .contact-enquiry { background: var(--ivory-2) !important; color: var(--char) !important; }
+.contact-page .contact-enquiry h2, .contact-page .contact-enquiry h2 em { color: var(--char) !important; }
+.contact-page .contact-enquiry-list { border-top: 1px solid var(--gold) !important; }
+.contact-page .contact-enquiry-list li { grid-template-columns: 3.25rem minmax(150px, .75fr) minmax(0, 1.25fr); align-items: baseline; gap: 22px; padding: 28px 0; border-bottom: 1px solid var(--line) !important; }
+.contact-page .contact-enquiry-list li::before { content: counter(enquiry, decimal-leading-zero); color: var(--gold); font: 400 1.6rem/1 'Rosemartin', Georgia, serif; }
+.contact-page .contact-enquiry-list strong { display: block; color: var(--char) !important; font-size: 1.15rem !important; font-weight: 600; line-height: 1.35; }
+.contact-page .contact-enquiry-list strong::before { content: none; display: none; }
+.contact-page .contact-enquiry-list span { color: var(--char-soft) !important; font-size: 1rem !important; line-height: 1.7; }
+@media (max-width: 760px) {
+  .contact-page .contact-enquiry-list li { grid-template-columns: 2.6rem minmax(0, 1fr); row-gap: 8px; }
+  .contact-page .contact-enquiry-list span { grid-column: 2; }
+}
+
+/* Contact "Find your way": three matching stay cards instead of boxed rows. */
+.contact-page .contact-places { background: var(--ivory) !important; }
+.contact-page .contact-place-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.2vw, 32px); border: 0 !important; counter-reset: place; }
+.contact-page .contact-place { display: flex !important; flex-direction: column; align-items: flex-start; gap: 14px; padding: clamp(28px, 3vw, 40px) !important; border: 1px solid var(--line) !important; border-top: 2px solid var(--gold) !important; border-radius: 0 !important; background: #fbf8f1 !important; counter-increment: place; transition: box-shadow .3s ease, transform .3s ease; }
+.contact-page .contact-place + .contact-place { border-top: 2px solid var(--gold) !important; }
+.contact-page .contact-place::before { content: counter(place, decimal-leading-zero); color: var(--gold); font: 400 1.5rem/1 'Rosemartin', Georgia, serif; }
+.contact-page .contact-place h3 { margin: 0; color: var(--char) !important; font: 400 clamp(1.7rem, 2.3vw, 2.2rem)/1.08 'Rosemartin', Georgia, serif !important; letter-spacing: -.02em !important; transform: none !important; }
+.contact-page .contact-place-setting { font-size: 11px !important; letter-spacing: .18em; }
+.contact-page .contact-place-address { max-width: none; color: var(--char-soft); font-size: 1rem !important; line-height: 1.7; }
+.contact-page .contact-place a { justify-self: auto; margin-top: auto; padding-top: 8px; font-size: 11px !important; letter-spacing: .18em; }
+.contact-page .contact-place:is(:hover, :focus-within) { box-shadow: 0 22px 44px rgba(27, 27, 25, .1); transform: translateY(-3px); }
+.contact-page .contact-place:is(:hover, :focus-within) h3 { color: var(--gold-text) !important; }
+@media (max-width: 900px) { .contact-page .contact-place-list { grid-template-columns: 1fr; } }
+
+/* FAQ: keep every question on the same left edge (no hover nudge); larger, centred +/– marker. */
+.faq-list summary:hover { padding-left: 0 !important; }
+.faq-list summary::after { font-size: 1.4rem !important; line-height: 1; transform: translateY(-50%) !important; }
+
+/* Stays dropdown: solid ivory panel (no see-through), keeping the curved edge and soft shadow. */
+.site-header .stay-menu,
+.site-header .stay-menu--picker {
+  background: linear-gradient(180deg, #fbf8f1, #f4efe3) !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}

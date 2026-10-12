@@ -11,23 +11,23 @@ colors:
   route-brass: "#c9a466"
   light-paper: "#fff8eb"
   copy-ink: "#34483e"
-  gallery-white: "#ffffff"
-  gallery-charcoal: "#222222"
+  gallery-white: "#f7f3ea"
+  gallery-charcoal: "#1b1b19"
   gallery-copy: "#636363"
   gallery-rule: "#e6e6e3"
 typography:
   gallery-title:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(58px, 7.2vw, 96px)"
+    fontFamily: "Rosemartin, Georgia, serif"
+    fontSize: "clamp(2.25rem, 3.8vw, 3.5rem)"
     fontWeight: 400
-    lineHeight: 0.98
-    letterSpacing: "-0.035em"
+    lineHeight: 1.12
+    letterSpacing: "-0.02em"
   gallery-title-mobile:
-    fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(54px, 15vw, 68px)"
+    fontFamily: "Rosemartin, Georgia, serif"
+    fontSize: "clamp(2rem, 7.8vw, 3rem)"
     fontWeight: 400
-    lineHeight: 0.98
-    letterSpacing: "-0.035em"
+    lineHeight: 1.12
+    letterSpacing: "-0.02em"
   gallery-caption:
     fontFamily: "Manrope, sans-serif"
     fontSize: "13px"
@@ -170,12 +170,13 @@ The form language is square and editorial: no softened card corners, pill contro
 
 ### Gallery (gallery.html only)
 
-**Character:** a minimal, aesthetically premium photographic collection. These route-specific rules take precedence over the Riparian palette and shared Rosemartin heading guidance on the gallery; they do not redefine other routes.
+The gallery shares the current ivory and botanical identity with About and Contact. Preserve its asymmetric photographic chapters and the existing shared navigation; use Rosemartin for the page and chapter titles and Manrope for captions, filters and controls.
 
-- **Palette and type:** white ground, charcoal title and selection, muted copy and pale hairline divisions use the `gallery-*` tokens. Manrope is used at all levels, including the page title and local navigation wordmark. The title is weight 400, `clamp(58px, 7.2vw, 96px)`, line-height .98 and tracking -.035em; at 600px and below it is `clamp(54px, 15vw, 68px)`. Chapter headings are weight 500 and grow to 38px. Primary captions are 13px, weight 600; secondary captions are 12px, weight 400.
-- **Composition:** a maximum 1320px container has 48px side gutters, reduced to 24px at 900px and 18px at 600px. The property chapters use a 12-column photo grid with 22px column gaps and 46px row gaps. Asymmetric pairs give landscape and portrait images distinct widths and aspect ratios; the first Nature Castle pair spans eight and four columns. At 900px the gaps become 16px and 34px. At 600px and below, one column shows images at their natural aspect ratios with 29px row gaps. Photographs remain free of card shells, shadows, grain and decorative overlays. Desktop thumbnails use cover cropping; the viewer contains the uncropped photograph.
-- **Collections:** All stays opens with three factual property chapters: Nature Castle Resort (six photographs), Niva Waterways (two) and Riparian Ayur Resorts (two). Six representative or promotional photographs remain separately available under More moments with honest captions. Desktop text filters mark selection with a charcoal underline; at 600px and below, a labeled native select replaces them. Keep both controls synchronized and announce the result count.
-- **Viewer and enquiry:** keep previous/next navigation within the selected collection, with wraparound, arrow keys, Escape, swipe, contained focus, inert background and focus return. Show loading feedback and an image-error retry. Retain descriptive alternatives, direct photo links without JavaScript and the WhatsApp request for current room photographs. Honor reduced motion.
+- The content container is at most 1168px wide with 24px side gutters. Desktop photographs use the established 12-column layout and deliberate cover crops. At 600px and below, photographs stack in one column at their natural proportions. The viewer shows the uncropped photograph.
+- The botanical introduction keeps the original full composition and responsive proportions. Transparent branch images use optimized WebP files and responsive candidates; exclude them from the rectangular photograph loading treatment.
+- All stays shows six Nature Castle photographs, two Niva photographs and two Riparian photographs. More moments contains separately labeled representative imagery. Desktop filters and the native mobile select remain synchronized and announce the visible count.
+- Retain viewer arrow keys, Escape, swipe, focus containment, inert background, focus return, loading feedback and image-error retry. Direct photograph links remain useful without JavaScript.
+- Current room photographs are requested through the existing enquiry channel when no verified property-specific interior photographs are available. Do not substitute generic room imagery as factual property photography.
 
 ### Buttons
 
@@ -238,3 +239,15 @@ The form language is square and editorial: no softened card corners, pill contro
 ## Shared typography update — October 2026
 
 Use self-hosted Rosemartin Regular for h1, h2 and display text. Use Manrope for paragraphs, h3–h6, navigation, buttons, property facts and other supporting information. Preserve Cormorant Garamond Bold for the Padathil Stays wordmark in the top bar. Rosemartin ships only in its supplied regular style: avoid synthetic bold or italic. Heading line-height is at least 1.08 and tracking is -0.02em; balance headings and allow natural wrapping. Property hero headings use a responsive maximum of 5rem with a 2.5rem mobile starting size. The homepage heading uses clamp(1.4rem, 7.2vw, 5rem) and 1.14 line-height to keep its two phrases proportional across screen sizes. Keep the established body reading measures and responsive layout. The original Rosemartin OTF and its license are in fonts/; do not modify the font software.
+
+## Audit implementation ? October 2026
+
+The checkout includes the deployed botanical surfaces and their source styles. The four botanical assets files are `botanical-heroes.css`, `botanical-transfer.css`, `botanical-home.css` and `botanical-heroes.js`.
+
+- Keep decorative gold (#a8854f) distinct from readable gold text (#76592f). Small labels must meet 4.5:1 contrast against their actual surface.
+- Ambient motion respects reduced-motion preferences, which render a static scene with immediately available content. The visible pause/resume controls are removed at the user's request.
+- Use actual asset dimensions and accurate responsive width descriptors. CSS determines intentional thumbnail crops; HTML reserves the intrinsic proportions.
+- Article pages have static breadcrumbs, organization attribution and contents links. Do not fabricate publication or review dates.
+- Public links, canonicals, schema URLs and sitemap locations use extensionless paths; the home path is `/`.
+- Keep ordinary stay enquiries and help choosing a stay available. Optional guest counts accept only positive whole numbers. The WhatsApp handoff retains the draft and gives a direct link if the new window does not open.
+- Unconfirmed villa totals, measurement units, policies, inclusion details and unavailable room photographs remain outside this implementation, at the user's request.

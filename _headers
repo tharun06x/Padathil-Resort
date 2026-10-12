@@ -1,0 +1,6 @@
+# Exclude development and preview hosts without excluding the production domain.
+https://padathil-resort.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.padathil-resort.pages.dev/*
+  X-Robots-Tag: noindex
