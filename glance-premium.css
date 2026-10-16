@@ -15,6 +15,15 @@
   padding: 0 !important;
   border: 0;
 }
+.glance-premium .room-photo-request {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin: 0;
+  padding: 22px clamp(20px, 3vw, 46px);
+  border-top: 1px solid rgba(27,27,25,.12);
+  font-size: 1rem;
+  line-height: 1.7;
+}
 .glance-premium h2,
 .riparian-page .glance-premium h2 {
   display: grid;
@@ -55,9 +64,9 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #a8854f !important;
-  font: 800 .62rem/1.2 Manrope, sans-serif !important;
-  letter-spacing: .16em !important;
+  color: var(--gold-text, #76592f) !important;
+  font: 800 .75rem/1.5 Manrope, sans-serif !important;
+  letter-spacing: .1em !important;
   text-align: left;
   text-transform: uppercase;
 }

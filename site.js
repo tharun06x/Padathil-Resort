@@ -192,7 +192,7 @@
     heroPreload.as = 'image';
     heroPreload.href = hero.src;
     heroPreload.imageSrcset = hero.srcset;
-    heroPreload.imageSizes = '100vw';
+    heroPreload.imageSizes = '(max-width: 680px) 1600px, (max-aspect-ratio: 1600/999) 160.16svh, 100vw';
     heroPreload.fetchPriority = 'high';
     document.head.append(heroPreload);
   };

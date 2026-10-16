@@ -129,6 +129,30 @@ const server = http.createServer((request, response) => {
         const layout = await evaluate('({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight})');
         check(`${route}: no overflow at ${width}`, layout.scrollWidth <= width);
         page.layouts.push(layout);
+        if (['nature-castle-vattavada.html', 'niva-waterways.html', 'riparian-ayur-resorts.html'].includes(file)) {
+          await evaluate('window.scrollTo({top:0,behavior:"instant"});document.querySelector(".nc-slide").decode().catch(()=>{})');
+          const refinement = await evaluate(`(() => {
+            const image = document.querySelector('.nc-slide');
+            const requiredWidth = Math.max(image.clientWidth, image.clientHeight * image.naturalWidth / image.naturalHeight);
+            // naturalWidth is density-corrected; use the selected width descriptor
+            // to measure the actual bitmap resolution available to the crop.
+            const candidate = image.srcset.split(',').map(value => value.trim().split(' ').filter(Boolean))
+              .find(([url]) => new URL(url, location.href).href === image.currentSrc);
+            const sourceWidth = candidate ? parseFloat(candidate[1]) : image.naturalWidth;
+            const actions = document.querySelector('.riparian-hero-actions').getBoundingClientRect();
+            const wave = document.querySelector('.riparian-hero-river').getBoundingClientRect();
+            const notes = document.querySelector('.riparian-hero-note').getBoundingClientRect();
+            const chat = document.querySelector('a[aria-label="Chat on WhatsApp"]').getBoundingClientRect();
+            const request = document.querySelector('.room-photo-request')?.getBoundingClientRect();
+            return { sharp: sourceWidth >= Math.min(1600, requiredWidth), waveClear: actions.bottom <= wave.top,
+              chatClear: notes.right <= chat.left || notes.left >= chat.right || notes.bottom <= chat.top || notes.top >= chat.bottom,
+              requestAligned: !request || (request.width >= Math.min(300, innerWidth - 40) && request.left >= 0 && request.right <= innerWidth) };
+          })()`);
+          check(`${route}: portrait hero uses sufficient source resolution at ${width}`, refinement.sharp);
+          check(`${route}: decorative wave stays below actions at ${width}`, refinement.waveClear);
+          check(`${route}: WhatsApp stays clear of hero notes at ${width}`, refinement.chatClear);
+          check(`${route}: room-photo request spans the facts band at ${width}`, refinement.requestAligned);
+        }
         if (capture && (width === 390 || width === 1440)) {
           await evaluate('window.scrollTo({top:0,behavior:"instant"})');
           // Bounded viewport captures avoid Chrome hanging on very tall, vh-based pages.
@@ -139,6 +163,11 @@ const server = http.createServer((request, response) => {
             await pause(250);
             const detail = await call('Page.captureScreenshot', { format: 'png' });
             fs.writeFileSync(path.join(output, `${file.slice(0, -5)}-${width}-detail.png`), Buffer.from(detail.data, 'base64'));
+          }
+          const glance = await evaluate('(() => { const target=document.querySelector(".glance-premium"); if (!target) return false; window.scrollTo({top:target.getBoundingClientRect().top+scrollY-112,behavior:"instant"}); return true; })()');
+          if (glance) {
+            const image = await call('Page.captureScreenshot', { format: 'png' });
+            fs.writeFileSync(path.join(output, `${file.slice(0, -5)}-${width}-glance.png`), Buffer.from(image.data, 'base64'));
           }
         }
       }
@@ -159,6 +188,8 @@ const server = http.createServer((request, response) => {
     await evaluate('document.querySelector(".contact-primary-action").focus()');
     await key('Enter', 13);
     check('enquiry opens by keyboard', await evaluate('document.querySelector("dialog").open'));
+    check('enquiry labels remain readable', await evaluate('[...document.querySelectorAll(".quick-enquiry-form label")].every(label=>parseFloat(getComputedStyle(label).fontSize)>=12)'));
+    check('enquiry close button has a full touch target', await evaluate('document.querySelector(".quick-enquiry-close").getBoundingClientRect().width>=44'));
     for (const width of [320, 390, 430, 768, 1280, 1440, 1920]) {
       await viewport(width, width < 600 ? 844 : 900);
       check(`enquiry dialog has no inner overflow at ${width}`, await evaluate('document.querySelector("dialog").scrollWidth <= document.querySelector("dialog").clientWidth'));

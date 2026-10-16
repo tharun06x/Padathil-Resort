@@ -870,7 +870,7 @@ footer a:hover { color: #dfb97a !important; }
 .site-header .site-brand { gap: 9px; }
 .site-header .site-brand span { font-size: 1.08rem; }
 .site-header .desktop-nav { gap: clamp(14px, 1.65vw, 25px); }
-.site-header .desktop-nav > a, .site-header .desktop-nav summary { font-size: 9px; }
+.site-header .desktop-nav > a, .site-header .desktop-nav summary { font-size: 11px; }
 .site-header .header-book { min-height: 38px !important; padding-right: 15px !important; padding-left: 15px !important; border: 0 !important; border-radius: 16px; color: var(--paper) !important; background: var(--forest) !important; }
 .site-header .header-book:hover { color: var(--paper) !important; background: var(--brass) !important; }
 .site-header .stay-menu {
@@ -1293,7 +1293,7 @@ body:not(.contact-page):not(.blog-article):not(.riparian-page) main > section:fi
   backdrop-filter: blur(4px) saturate(.82);
 }
 .quick-enquiry-shell { position: relative; }
-.quick-enquiry-lead { padding: 29px 34px 27px; background: #102c24; color: #fff8eb; }
+.quick-enquiry-lead { padding: 29px 76px 27px 34px; background: #102c24; color: #fff8eb; }
 .quick-enquiry-lead h2 {
   margin: 0;
   color: #fff8eb !important;
@@ -1306,8 +1306,8 @@ body:not(.contact-page):not(.blog-article):not(.riparian-page) main > section:fi
   top: 15px;
   right: 15px;
   display: grid;
-  width: 33px;
-  height: 33px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   padding: 0;
   border: 1px solid rgba(255,248,235,.44);
@@ -1324,8 +1324,8 @@ body:not(.contact-page):not(.blog-article):not(.riparian-page) main > section:fi
   display: block;
   min-width: 0;
   color: #34483e;
-  font: 700 9px/1.3 'Manrope', sans-serif;
-  letter-spacing: .12em;
+  font: 700 .75rem/1.5 'Manrope', sans-serif;
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 .quick-enquiry-form span { color: #46594c; font-weight: 600; letter-spacing: .08em; }
@@ -1341,7 +1341,7 @@ body:not(.contact-page):not(.blog-article):not(.riparian-page) main > section:fi
   color: #102c24;
   font: 600 .86rem/1.35 'Manrope', sans-serif;
 }
-.quick-enquiry-selects select, .quick-enquiry-fields input { min-height: 36px; padding: 0 0 8px; }
+.quick-enquiry-selects select, .quick-enquiry-fields input { min-height: 44px; padding: 0 0 8px; }
 .quick-enquiry-selects select { cursor: pointer; }
 .quick-enquiry-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .72fr); gap: 14px; margin-top: 26px; padding-top: 21px; border-top: 1px solid rgba(16,44,36,.23); }
 .quick-enquiry-fields input[type='date'] { min-width: 0; }
@@ -1360,7 +1360,7 @@ body:not(.contact-page):not(.blog-article):not(.riparian-page) main > section:fi
   border-radius: 0;
   background: #c9a466;
   color: #071914;
-  font: 800 10px/1.2 'Manrope', sans-serif;
+  font: 800 11px/1.4 'Manrope', sans-serif;
   letter-spacing: .15em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1368,17 +1368,17 @@ body:not(.contact-page):not(.blog-article):not(.riparian-page) main > section:fi
 }
 .quick-enquiry-submit:hover { background: #d7b77a; transform: translateY(-2px); }
 .quick-enquiry-submit span { margin-left: 8px; color: inherit; font-size: 1rem; }
-.quick-enquiry-skip { display: inline-block; margin-top: 17px; padding-bottom: 3px; border-bottom: 1px solid #c9a466; color: #102c24; font: 800 9px/1.2 'Manrope', sans-serif; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
+.quick-enquiry-skip { display: inline-flex; min-height: 44px; align-items: center; margin-top: 12px; padding-bottom: 3px; border-bottom: 1px solid #c9a466; color: #102c24; font: 800 11px/1.4 'Manrope', sans-serif; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
 .quick-enquiry-skip:hover { color: #a7623c; }
 @media (max-width: 580px) {
   .quick-enquiry-dialog { width: min(calc(100% - 24px), 528px); max-height: 88svh; }
-  .quick-enquiry-lead { padding: 25px 25px 23px; }
+  .quick-enquiry-lead { padding: 25px 72px 23px 25px; }
   .quick-enquiry-form { padding: 22px 25px 26px; }
   .quick-enquiry-selects { grid-template-columns: minmax(0, 1fr); gap: 19px; }
   .quick-enquiry-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 14px; }
   .quick-enquiry-fields label:last-child { grid-column: span 2; }
 }
-@media (max-width: 400px) {
+@media (max-width: 359px) {
   .quick-enquiry-fields { grid-template-columns: minmax(0, 1fr); }
   .quick-enquiry-fields label:last-child { grid-column: auto; }
 }

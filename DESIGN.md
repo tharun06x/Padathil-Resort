@@ -251,3 +251,11 @@ The checkout includes the deployed botanical surfaces and their source styles. T
 - Public links, canonicals, schema URLs and sitemap locations use extensionless paths; the home path is `/`.
 - Keep ordinary stay enquiries and help choosing a stay available. Optional guest counts accept only positive whole numbers. The WhatsApp handoff retains the draft and gives a direct link if the new window does not open.
 - Unconfirmed villa totals, measurement units, policies, inclusion details and unavailable room photographs remain outside this implementation, at the user's request.
+
+## Resort-page refinements
+
+Keep the three resort pages in the existing ivory, Rosemartin and Manrope visual world. Mobile heroes use the largest available source to support tall cover crops; preloads and next-stay image warming use the same responsive sizing as the displayed slides. Nature Castle, Niva and Riparian retain their own photographic focal points. The animated route stays within the bottom 56px of each hero, with notes offset from the floating WhatsApp action.
+
+Desktop navigation is 11px; enquiry labels and resort fact labels are 12px. Enquiry inputs and close/secondary actions have at least 44px touch targets. The room-photo request spans the full facts band with the same inset as its facts, rather than occupying the heading column. From 360px to 699px, activity photographs and Nature Castle's accommodation photographs use two columns; narrower phones retain one column. Mobile reading sections use 48px vertical padding while the botanical sections retain their original proportions.
+
+Use “Enquire about a stay” for property actions that open the enquiry flow. Keep repeated descriptive copy concise and use existing confirmed facts in Riparian's summary. The four-villa/three-description discrepancy, unclear measurement units and unavailable room photographs still require confirmed information; do not infer replacements.

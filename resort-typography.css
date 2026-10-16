@@ -56,3 +56,56 @@
   font-size: clamp(1.7rem, 2.3vw, 2.2rem) !important;
   line-height: 1.2;
 }
+
+/* Keep the route drawing in the lower edge, clear of the reading area. */
+.nc-page > section.riparian-hero {
+  min-height: 100svh;
+  padding: 0 !important;
+}
+:is(.nc-page, .riparian-page) .riparian-hero-river {
+  inset: auto 0 0;
+  height: 56px;
+  opacity: .7;
+}
+:is(.nc-page, .riparian-page) .riparian-hero-note {
+  right: 96px;
+  bottom: 88px;
+  font-size: .75rem;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
+:is(.nc-page, .riparian-page) .nc-facts dt,
+.nc-page .nc-spec-head,
+.nc-page .nc-spec-row > div[data-label]::before,
+:is(.nc-page, .riparian-page) .nc-strip figcaption {
+  font-size: .75rem;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
+:is(.nc-page, .riparian-page) .nc-count {
+  font-size: .75rem;
+  line-height: 1.5;
+}
+@media (max-width: 680px) {
+  :is(.nc-page, .riparian-page) .riparian-hero-copy { padding-bottom: 10rem; }
+  .nc-page--nature .nc-slide:first-child { object-position: 53% center; }
+  .nc-page--niva .nc-slide:first-child { object-position: 67% center; }
+  .riparian-page .nc-slide:first-child { object-position: 44% center; }
+  :is(.nc-page, .riparian-page main) > section:not(.riparian-hero):not(.glance-premium):not(.nc-farm-strip) {
+    padding-block: 48px !important;
+  }
+  .nc-page .nc-spec-row { gap: 16px 20px; padding-block: 24px; }
+}
+@media (min-width: 360px) and (max-width: 699px) {
+  :is(.nc-page, .riparian-page) .nc-acts,
+  .nc-page--nature .nc-stay-gallery .nc-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  :is(.nc-page, .riparian-page) .nc-acts figcaption {
+    padding-top: 10px;
+    font-size: .875rem;
+    line-height: 1.5;
+  }
+  .nc-page--nature .nc-stay-gallery .nc-strip .nc-photo img { aspect-ratio: 4 / 5; }
+}

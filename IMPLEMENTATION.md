@@ -32,3 +32,14 @@ Run `node scripts/verify-site.cjs --screenshots` with Node 22 or newer and Chrom
 The script serves an isolated local preview with extensionless routing, checks all thirteen pages at seven viewport widths, exercises keyboard controls and enquiry validation, and saves results and previews under `.impeccable/review/implementation-verification/`. WhatsApp calls are intercepted in the test; no enquiry is delivered.
 
 Cloudflare applies `_headers` when these files are deployed. Host-specific header rules still require a deployment check. This implementation does not certify field Core Web Vitals, physical-device behavior or complete WCAG conformance.
+
+## Resort-page refinement pass
+
+- Corrected responsive hero source selection and preloads for tall cover crops; adjusted the first photograph's mobile focus on each resort page.
+- Kept the animated route below the hero copy and reserved space between the hero notes and floating WhatsApp action. Removed inherited reading-section padding from the Nature Castle and Niva heroes.
+- Increased navigation, enquiry and fact-label readability; enlarged enquiry input and close-button touch targets and kept date fields side by side where space allows.
+- Made room-photo requests span the facts band, tightened repetitive copy, and made Riparian's summary use its existing bedroom, pool and guest-capacity facts.
+- Added two-column mobile activity and Nature Castle accommodation photo rows, with reduced spacing in reading sections. Botanical composition sizes and the removed motion button remain as requested.
+- Standardized property enquiry actions to “Enquire about a stay.” Unconfirmed villa details, units and unavailable room photographs were not inferred.
+
+Verification: 2,164 static SEO checks and 339 browser checks passed across all 13 pages at seven viewport widths. Desktop/mobile screenshots and the enquiry dialog were inspected. The browser checks explicitly cover image-source resolution, hero-wave and WhatsApp clearance, facts-band alignment, readable enquiry labels and close-button size, alongside the existing navigation, gallery, validation and no-JavaScript checks. Changes are local and have not been committed, pushed or deployed in this refinement pass.
